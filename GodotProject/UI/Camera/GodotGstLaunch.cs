@@ -1,7 +1,8 @@
 using Godot;
 using System;
 using System.Text.Json;
-
+using System.Diagnostics;
+using Newtonsoft.Json.Linq;
 
 public partial class GodotGstLaunch : TextureRect
 {
@@ -9,9 +10,10 @@ public partial class GodotGstLaunch : TextureRect
     private string sourcePort;
     private string sourceFramerate;
     private Process gStreamerProcess;
-    public TMP_Dropdown dropdown;
+    public OptionButton dropdown;
 
-
+    [Export]
+    public Json setBoolServiceJson { get; set; }
 
     private string mulitcastAddr = "239.0.0.1";
     private string tcpAddr = "192.168.1.11";
@@ -34,6 +36,27 @@ public partial class GodotGstLaunch : TextureRect
 
     private CameraEntry activeEntry;
 
+    public int defaultCameraIndex = 3;
+
+    public override void _Ready()
+    {
+        // Camera toggles now go through the custom UDP ROS bridge (UdpController) rather
+        // than a per-camera ROS2 client, so there is no client setup to do here.
+
+        // Select the default camera port at startup, but keep launching manual through the UI.
+        if (dropdown != null)
+        {
+            dropdown.Select(defaultCameraIndex);
+            dropdown.ItemSelected += OnDropdownChanged;
+        }
+
+        if (string.IsNullOrWhiteSpace(sourcePort) && cameraPortMap.ContainsKey(defaultCameraIndex))
+        {
+            sourcePort = cameraPortMap[defaultCameraIndex].port.ToString();
+            sourceFramerate = cameraPortMap[defaultCameraIndex].framerate;
+        }
+    }
+
     // ROS service name the UDP bridge forwards each camera toggle to.
     private static string ToggleServiceName(CameraEntry entry) => $"/{entry.serviceNamespace}/toggle_camera";
 
@@ -54,7 +77,7 @@ public partial class GodotGstLaunch : TextureRect
     // Resolve the camera the UI currently has selected (dropdown wins, else the default).
     private CameraEntry GetSelectedEntry()
     {
-        int index = (dropdown != null) ? dropdown.value : defaultCameraIndex;
+        int index = (dropdown != null) ? dropdown.GetIndex() : defaultCameraIndex;
         if (cameraPortMap.TryGetValue(index, out CameraEntry entry))
         {
             return entry;
@@ -78,11 +101,11 @@ public partial class GodotGstLaunch : TextureRect
             return;
         }
 
-        JObject msg = JObject.Parse(setBoolServiceJson.text);
+        JObject msg = JObject.Parse(setBoolServiceJson.ToString());
         msg["service"] = ToggleServiceName(entry);
         msg["request"]["data"] = state;
 
-        print($"[{entry.serviceNamespace}] toggle_camera({state}) sent (no wait).");
+        GD.Print($"[{entry.serviceNamespace}] toggle_camera({state}) sent (no wait).");
         UdpController.inst.SendClientReq(msg.ToString());
     }
 
@@ -98,38 +121,19 @@ public partial class GodotGstLaunch : TextureRect
         {7, new CameraEntry("Chassis",       42075, "30/1", "d455")} //Not Used?
     };
 
-    public int defaultCameraIndex = 3;
+    
 
-    void Start()
+    public void OnDropdownChanged(long idx)
     {
-        // Camera toggles now go through the custom UDP ROS bridge (UdpController) rather
-        // than a per-camera ROS2 client, so there is no client setup to do here.
-
-        // Select the default camera port at startup, but keep launching manual through the UI.
-        if (dropdown != null)
-        {
-            dropdown.value = defaultCameraIndex;
-            dropdown.RefreshShownValue();
-            dropdown.onValueChanged.AddListener(OnDropdownChanged);
-        }
-
-        if (string.IsNullOrWhiteSpace(sourcePort) && cameraPortMap.ContainsKey(defaultCameraIndex))
-        {
-            sourcePort = cameraPortMap[defaultCameraIndex].port.ToString();
-            sourceFramerate = cameraPortMap[defaultCameraIndex].framerate;
-        }
-    }
-
-    public void OnDropdownChanged(int index)
-    {
-        GD.Print($"[OnDropdownChanged] index={index}, GameObject={gameObject.name}, instanceID={GetInstanceID()}");
+        int index = (int) idx;
+        GD.Print($"[OnDropdownChanged] index={index}, GameObject={Name}, instanceID={GetInstanceId()}");
         if (cameraPortMap.ContainsKey(index))
         {
             StopGStreamer();
             CameraEntry entry = cameraPortMap[index];
             sourcePort = entry.port.ToString();
             sourceFramerate = entry.framerate;
-            GD.Print($"[OnDropdownChanged] set sourcePort={sourcePort}, sourceFramerate={sourceFramerate} on instanceID={GetInstanceID()}");
+            GD.Print($"[OnDropdownChanged] set sourcePort={sourcePort}, sourceFramerate={sourceFramerate} on instanceID={GetInstanceId()}");
             ToggleCameraThenLaunch(entry);
         }
         else
@@ -155,7 +159,7 @@ public partial class GodotGstLaunch : TextureRect
 
     private void StartGStreamerProcess()
     {
-        GD.Print($"[LaunchGStreamer] called on GameObject={gameObject.name}, instanceID={GetInstanceID()}, sourcePort='{sourcePort}', portNum='{portNum}'");
+        GD.Print($"[LaunchGStreamer] called on GameObject={Name}, instanceID={GetInstanceId()}, sourcePort='{sourcePort}', portNum='{portNum}'");
         // If the last gst-launch process already exited, clear it so the button can restart it.
         if (gStreamerProcess != null && gStreamerProcess.HasExited)
         {
@@ -197,17 +201,17 @@ public partial class GodotGstLaunch : TextureRect
         gStreamerProcess.StartInfo = startInfo;
         gStreamerProcess.OutputDataReceived += (sender, args) =>
         {
-            if (!string.IsNullOrEmpty(args.Data)) UnityEngine.Debug.Log(args.Data);
+            if (!string.IsNullOrEmpty(args.Data)) GD.Print(args.Data);
         };
         gStreamerProcess.ErrorDataReceived += (sender, args) =>
         {
-            if (!string.IsNullOrEmpty(args.Data)) UnityEngine.Debug.Log(args.Data);
+            if (!string.IsNullOrEmpty(args.Data)) GD.Print(args.Data);
         };
         gStreamerProcess.Start();
         gStreamerProcess.BeginOutputReadLine();
         gStreamerProcess.BeginErrorReadLine();
 
-        UnityEngine.Debug.Log($"GStreamer launched from UDP {sourcePort} to TCP {portNum}");
+        GD.Print($"GStreamer launched from UDP {sourcePort} to TCP {portNum}");
     }
  
     public void StopGStreamer()
