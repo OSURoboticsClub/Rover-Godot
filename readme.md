@@ -10,7 +10,22 @@ Download the .Net SDK from https://dotnet.microsoft.com/en-us/download
 Run `dotnet --list-sdks` in the terminal to make sure that you installed correctly
 
 ## Step Three:
-In .vscode/launch.json, change the value of "program" to the path to your .Net godot executable
+Create a .vscode/launch.json, change the value of "program" to the path to your .Net godot executable
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Play",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "YOUR PATH HERE",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "stopAtEntry": false,
+        }
+    ]
+}
 
 ## Step Four:
 Open the GodotProject folder inside this directory in Godot
