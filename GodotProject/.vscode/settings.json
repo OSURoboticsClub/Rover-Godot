@@ -5,6 +5,7 @@
     "**/*.import":true,
     "**/*.tres":true,
     "**/*.editorconfig":true,
-    "project.godot":true
+    "project.godot":true,
+    "**/*.*.meta":true
   }
 }

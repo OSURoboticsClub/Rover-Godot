@@ -1,11 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+using Godot;
 using System.IO;
 using System;
 
-public class PhotoTaker : MonoBehaviour
+public class PhotoTaker : TextureRect
 {
     public RawImage cameraImage;
     public string deviceDirectory;
