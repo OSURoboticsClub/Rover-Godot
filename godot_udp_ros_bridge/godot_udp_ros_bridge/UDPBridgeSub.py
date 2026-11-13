@@ -2,7 +2,7 @@ import rclpy
 from rclpy.node import Node
 from rover2_control_interface.msg import DriveCommandMessage
 from rosidl_runtime_py.utilities import get_message
-from unity_udp_ros_bridge.UDPServer import UDPServer
+from godot_udp_ros_bridge.UDPServer import UDPServer
 from threading import Thread
 from time import time
 import array

@@ -1,6 +1,6 @@
 import rclpy
 from rclpy.node import Node
-from unity_udp_ros_bridge.UDPServer import UDPServer
+from godot_udp_ros_bridge.UDPServer import UDPServer
 from threading import Thread, Lock
 from rosidl_runtime_py.utilities import get_service
 import json
