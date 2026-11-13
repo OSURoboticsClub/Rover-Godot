@@ -1,0 +1,13 @@
+78098b89c88a74ebe8c20117b8754620
+::res://::1794604816
+icon.svg::CompressedTexture2D::4966320124388337601::1794094206::1794094209::1::::<><><>0<>0<>fdaa9dd725f66b1589db7f40cd7942a3<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
+readme.md::TextFile::-1::1794600939::0::1::::<><><>0<>0<><>::
+::res://UI/::1794599007
+CameraFeed.tscn::PackedScene::6106164420819838663::1794599007::0::1::::<><><>0<>0<><>::
+driver.tscn::PackedScene::5325613977906125118::1794599007::0::1::::<><><>0<>0<><>::
+GUI.tscn::PackedScene::927499528052389367::1794599007::0::1::::<><><>0<>0<><>::uid://blh0ffj3rh4ht::::res://UI/GUITheme.tres<>uid://ch41c4i2r4sty::::res://UI/driver.tscn
+GUITheme.tres::Theme::3174475739593770749::1794104232::0::1::::<><><>0<>0<><>::
+UdpController.cs::CSharpScript::5777738733347906292::1794598996::0::1::::<><><>0<>0<><>::
+::res://UI/Camera/::1794598996
+PhotoTaker.cs::CSharpScript::6367825163696399485::1794598996::0::1::::<><><>0<>0<><>::
+UnityGstLaunch.cs::CSharpScript::4721162540146349933::1794598996::0::1::::<><><>0<>0<><>::

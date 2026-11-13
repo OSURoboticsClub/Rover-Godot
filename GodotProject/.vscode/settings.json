@@ -1,0 +1,10 @@
+{
+  // "files.exclude": {
+  //   "**/*.cs.uid": true,
+  //   "**/*.tscn": true,
+  //   "**/*.import":true,
+  //   "**/*.tres":true,
+  //   "**/*.editorconfig":true,
+  //   "project.godot":true
+  }
+}
