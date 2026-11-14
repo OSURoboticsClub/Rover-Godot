@@ -1,14 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+using Godot;
 using System.Net.Sockets;
 using System.Net;
 using System.Text;
 using Newtonsoft.Json.Linq;
 using System;
-using Cysharp.Threading.Tasks;
+using GodotTask;
 
-public class UdpController : MonoBehaviour
+public partial class UdpController : Node
 {
     public static UdpController inst;
     private UdpClient udpClient;           // for sending
@@ -32,8 +32,8 @@ public class UdpController : MonoBehaviour
     private bool isConnected;
     public bool disconnected;
 
-    [Header("UDP Configuration")]
-    public string serverIP = "127.0.0.1";
+    [ExportCategory("UDP Configuration")]
+    [Export] public string serverIP = "127.0.0.1";
     private int UDPSendPort = 65434;
     private int UDPReceivePort = 65435;
 
@@ -45,8 +45,8 @@ public class UdpController : MonoBehaviour
 
     
 
-    [Header("Connection Status")]
-    public bool showDebugLogs = true;
+    [ExportCategory("Connection Status")]
+    [Export] public bool showDebugLogs = true;
 
     // Store latest messages per topic
     private Dictionary<string, JObject> latestMessages = new Dictionary<string, JObject>();
@@ -87,11 +87,11 @@ public class UdpController : MonoBehaviour
             disconnected = false;
 
             if (showDebugLogs)
-                Debug.Log($"UDP Controller initialized: send:{serverIP}:{UDPSendPort}, receive:{UDPReceivePort}, client:{UDPConfigPort}");
+                GD.Print($"UDP Controller initialized: send:{serverIP}:{UDPSendPort}, receive:{UDPReceivePort}, client:{UDPConfigPort}");
         }
         catch (System.Exception e)
         {
-            Debug.LogError($"Could not initialize UDP Controller: {e.Message}");
+            GD.Print($"Could not initialize UDP Controller: {e.Message}");
             disconnected = true;
             isConnected = false;
         }
@@ -121,7 +121,7 @@ public class UdpController : MonoBehaviour
             }
             catch (Exception e)
             {
-                Debug.LogWarning($"Failed to receive or parse UDP message: {e.Message}");
+                GD.Print($"Failed to receive or parse UDP message: {e.Message}");
             }
         }
         
@@ -136,46 +136,46 @@ public class UdpController : MonoBehaviour
 
                 // Update latest service responses dictionary
                 string serviceKey = message["service"]?.ToString();
-                Debug.Log(message);
-                Debug.Log(serviceKey);
+                GD.Print(message);
+                GD.Print(serviceKey);
                 if (!string.IsNullOrEmpty(serviceKey))
                 {
                     latestServiceResponses[serviceKey] = message;
                     if (showDebugLogs)
-                        Debug.Log($"Updated service response for key: {serviceKey}");
+                        GD.Print($"Updated service response for key: {serviceKey}");
                 }
             }
             catch (Exception e)
             {
-                Debug.LogWarning($"Failed to receive or parse service UDP message: {e.Message}");
+                GD.PushWarning($"Failed to receive or parse service UDP message: {e.Message}");
             }
         } 
     }
 
 
     // Wait for a service response with a specific key
-    public async UniTask<JObject> WaitForServiceResponse(string serviceKey, int maxAttempts = 50, float delayBetweenAttempts = 0.1f)
+    public async GDTask<JObject> WaitForServiceResponse(string serviceKey, int maxAttempts = 50, float delayBetweenAttempts = 0.1f)
     {
         for (int i = 0; i < maxAttempts; i++)
         {   
 foreach (var key in latestServiceResponses.Keys)
 {
-    Debug.Log("Key: " + key);
+    GD.Print("Key: " + key);
 }            // Check if the response has been received
             if (latestServiceResponses.TryGetValue(serviceKey, out JObject response))
             {
                 // Remove from dictionary after reading (optional, depending on your use case)
                 latestServiceResponses.Remove(serviceKey);
                 if (showDebugLogs)
-                    Debug.Log($"Service response found for key: {serviceKey}");
+                    GD.Print($"Service response found for key: {serviceKey}");
                 
                 return response;
             }
 
-            await UniTask.Delay(TimeSpan.FromSeconds(delayBetweenAttempts));
+            await GDTask.Delay(TimeSpan.FromSeconds(delayBetweenAttempts));
         }
 
-        Debug.LogWarning($"WaitForServiceResponse timed out for key: {serviceKey}");
+        GD.PushWarning($"WaitForServiceResponse timed out for key: {serviceKey}");
         return new JObject();
     }
 
@@ -184,15 +184,15 @@ foreach (var key in latestServiceResponses.Keys)
     {
         string message = topic + ";" + msgType;
         if (showDebugLogs)
-            Debug.Log($"Sending config UDP Message: {message}");
+            GD.Print($"Sending config UDP Message: {message}");
 
         if (!isConnected || configClient == null)
         {
-            Debug.LogWarning("UDP config connection is not established. Attempting reconnect.");
+            GD.PushWarning("UDP config connection is not established. Attempting reconnect.");
             Start();
             if (!isConnected || configClient == null)
             {
-                Debug.LogWarning("UDP config reconnect failed. Canceling publish.");
+                GD.PushWarning("UDP config reconnect failed. Canceling publish.");
                 return;
             }
         }
@@ -206,7 +206,7 @@ foreach (var key in latestServiceResponses.Keys)
         }
         catch (System.Exception e)
         {
-            Debug.LogWarning($"Error while sending UDP config data: {e.Message}");
+            GD.PushWarning($"Error while sending UDP config data: {e.Message}");
             disconnected = true;
             isConnected = false;
         }
@@ -217,15 +217,15 @@ foreach (var key in latestServiceResponses.Keys)
     public void PublishMessage(string message)
     {
         if (showDebugLogs)
-            Debug.Log($"Sending UDP Message: {message}");
+            GD.Print($"Sending UDP Message: {message}");
 
         if (!isConnected || udpClient == null)
         {
-            Debug.LogWarning("UDP connection is not established. Attempting reconnect.");
+            GD.PushWarning("UDP connection is not established. Attempting reconnect.");
             Start();
             if (!isConnected || udpClient == null)
             {
-                Debug.LogWarning("UDP reconnect failed. Canceling publish.");
+                GD.PushWarning("UDP reconnect failed. Canceling publish.");
                 return;
             } 
         }
@@ -239,26 +239,26 @@ foreach (var key in latestServiceResponses.Keys)
         }
         catch (System.Exception e)
         {
-            Debug.LogWarning($"Error while sending UDP control data: {e.Message}");
+            GD.PushWarning($"Error while sending UDP control data: {e.Message}");
             disconnected = true;
             isConnected = false;
         }
     }
 
-    public async UniTask<JObject> PublishClientReq(string message, string serviceKey = null)
+    public async GDTask<JObject> PublishClientReq(string message, string serviceKey = null)
     {
         if (showDebugLogs)
-            Debug.Log($"Sending UDP Client Req: {message}");
+            GD.Print($"Sending UDP Client Req: {message}");
         
         JObject SrvReturn = new JObject();
 
         if (!isConnected || srvClient == null)
         {
-            Debug.Log("UDP connection is not established. Attempting reconnect.");
+            GD.Print("UDP connection is not established. Attempting reconnect.");
             Start();
             if (!isConnected || srvClient == null)
             {
-                Debug.Log("UDP reconnect failed. Canceling publish.");
+                GD.Print("UDP reconnect failed. Canceling publish.");
                 return SrvReturn;
             }
         }
@@ -286,7 +286,7 @@ foreach (var key in latestServiceResponses.Keys)
         }
         catch (System.Exception e)
         {
-            Debug.LogWarning($"Error while sending UDP client req: {e.Message}");
+            GD.PushWarning($"Error while sending UDP client req: {e.Message}");
             disconnected = true;
             isConnected = false;
             return SrvReturn;
@@ -299,15 +299,15 @@ foreach (var key in latestServiceResponses.Keys)
     public void SendClientReq(string message)
     {
         if (showDebugLogs)
-            Debug.Log($"Sending UDP Client Req (no wait): {message}");
+            GD.Print($"Sending UDP Client Req (no wait): {message}");
 
         if (!isConnected || srvClient == null)
         {
-            Debug.Log("UDP connection is not established. Attempting reconnect.");
+            GD.Print("UDP connection is not established. Attempting reconnect.");
             Start();
             if (!isConnected || srvClient == null)
             {
-                Debug.Log("UDP reconnect failed. Canceling send.");
+                GD.Print("UDP reconnect failed. Canceling send.");
                 return;
             }
         }
@@ -320,7 +320,7 @@ foreach (var key in latestServiceResponses.Keys)
         }
         catch (System.Exception e)
         {
-            Debug.LogWarning($"Error while sending UDP client req: {e.Message}");
+            GD.PushWarning($"Error while sending UDP client req: {e.Message}");
             disconnected = true;
             isConnected = false;
         }
@@ -348,30 +348,30 @@ foreach (var key in latestServiceResponses.Keys)
 
         if (udpClient != null)
         {
-            try { udpClient.Close(); } catch (Exception e) { Debug.LogWarning($"Error closing UDP client: {e.Message}"); }
+            try { udpClient.Close(); } catch (Exception e) { GD.PushWarning($"Error closing UDP client: {e.Message}"); }
             udpClient = null;
         }
 
         if (udpReceiveClient != null)
         {
-            try { udpReceiveClient.Close(); } catch (Exception e) { Debug.LogWarning($"Error closing UDP receive client: {e.Message}"); }
+            try { udpReceiveClient.Close(); } catch (Exception e) { GD.PushWarning($"Error closing UDP receive client: {e.Message}"); }
             udpReceiveClient = null;
         }
         
         if (srvClient != null)
         {
-            try { srvClient.Close(); } catch (Exception e) { Debug.LogWarning($"Error closing service client: {e.Message}"); }
+            try { srvClient.Close(); } catch (Exception e) { GD.PushWarning($"Error closing service client: {e.Message}"); }
             srvClient = null;
         }
         
         if (srvServer != null)
         {
-            try { srvServer.Close(); } catch (Exception e) { Debug.LogWarning($"Error closing service server: {e.Message}"); }
+            try { srvServer.Close(); } catch (Exception e) { GD.PushWarning($"Error closing service server: {e.Message}"); }
             srvServer = null;
         }
 
         if (showDebugLogs)
-            Debug.Log("UDP Control Controller closed.");
+            GD.Print("UDP Control Controller closed.");
     }
 
     void OnApplicationPause(bool pauseStatus)

@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://ciyyek6fbnacm"]
+
+[ext_resource type="Script" uid="uid://cok1ro2dfsvxs" path="res://UdpController.cs" id="1_lwgpk"]
+
+[node name="UdpController" type="Node2D" unique_id=1927414039]
+script = ExtResource("1_lwgpk")
