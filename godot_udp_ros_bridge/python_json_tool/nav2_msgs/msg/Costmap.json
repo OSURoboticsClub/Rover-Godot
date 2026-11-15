@@ -1,0 +1,41 @@
+{
+    "topic": "",
+    "msgType": "nav2_msgs/msg/Costmap",
+    "data": {
+        "header": {
+            "stamp": {
+                "sec": 0,
+                "nanosec": 0
+            },
+            "frame_id": ""
+        },
+        "metadata": {
+            "map_load_time": {
+                "sec": 0,
+                "nanosec": 0
+            },
+            "update_time": {
+                "sec": 0,
+                "nanosec": 0
+            },
+            "layer": "",
+            "resolution": 0.0,
+            "size_x": 0,
+            "size_y": 0,
+            "origin": {
+                "position": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "orientation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 0.0
+                }
+            }
+        },
+        "data": []
+    }
+}

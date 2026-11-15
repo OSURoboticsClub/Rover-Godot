@@ -1,0 +1,28 @@
+{
+    "action": "",
+    "actionType": "visualization_msgs/srv/GetInteractiveMarkers",
+    "goal": {
+        "time_allowance": {
+            "sec": 0,
+            "nanosec": 0
+        }
+    },
+    "result": {
+        "NONE=0": 0,
+        "UNKNOWN=730": 0,
+        "TIMEOUT=731": 0,
+        "TF_ERROR=732": 0,
+        "total_elapsed_time": {
+            "sec": 0,
+            "nanosec": 0
+        },
+        "error_code": 0,
+        "error_msg": ""
+    },
+    "feedback": {
+        "current_teleop_duration": {
+            "sec": 0,
+            "nanosec": 0
+        }
+    }
+}

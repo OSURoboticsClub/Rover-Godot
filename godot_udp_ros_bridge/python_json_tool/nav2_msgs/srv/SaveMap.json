@@ -1,0 +1,15 @@
+{
+    "service": "",
+    "srvType": "nav2_msgs/srv/SaveMap",
+    "request": {
+        "map_topic": "",
+        "map_url": "",
+        "image_format": "",
+        "map_mode": "",
+        "free_thresh": 0.0,
+        "occupied_thresh": 0.0
+    },
+    "response": {
+        "result": false
+    }
+}

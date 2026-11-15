@@ -1,0 +1,32 @@
+{
+    "service": "",
+    "srvType": "nav2_msgs/srv/ClearCostmapAroundPose",
+    "request": {
+        "pose": {
+            "header": {
+                "stamp": {
+                    "sec": 0,
+                    "nanosec": 0
+                },
+                "frame_id": ""
+            },
+            "pose": {
+                "position": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "orientation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 0.0
+                }
+            }
+        },
+        "reset_distance": 0.0
+    },
+    "response": {
+        "response": {}
+    }
+}

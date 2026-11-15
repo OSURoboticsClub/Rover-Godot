@@ -1,0 +1,8 @@
+{
+    "topic": "",
+    "msgType": "rosgraph_msgs/msg/TypeHash",
+    "data": {
+        "version": 0,
+        "value": []
+    }
+}

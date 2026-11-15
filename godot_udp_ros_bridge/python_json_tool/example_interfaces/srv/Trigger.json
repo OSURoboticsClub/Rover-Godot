@@ -1,0 +1,9 @@
+{
+    "service": "",
+    "srvType": "example_interfaces/srv/Trigger",
+    "request": {},
+    "response": {
+        "success": false,
+        "message": ""
+    }
+}

@@ -1,0 +1,7 @@
+{
+    "topic": "",
+    "msgType": "example_interfaces/msg/Bool",
+    "data": {
+        "data": false
+    }
+}

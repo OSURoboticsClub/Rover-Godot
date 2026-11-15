@@ -1,0 +1,10 @@
+{
+    "topic": "",
+    "msgType": "rosgraph_msgs/msg/Clock",
+    "data": {
+        "clock": {
+            "sec": 0,
+            "nanosec": 0
+        }
+    }
+}

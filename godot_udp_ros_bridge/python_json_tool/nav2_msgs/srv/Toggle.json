@@ -1,0 +1,11 @@
+{
+    "service": "",
+    "srvType": "nav2_msgs/srv/Toggle",
+    "request": {
+        "enable": false
+    },
+    "response": {
+        "success": false,
+        "message": ""
+    }
+}

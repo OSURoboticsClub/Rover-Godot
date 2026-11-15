@@ -1,0 +1,15 @@
+{
+    "topic": "",
+    "msgType": "example_interfaces/msg/UInt64MultiArray",
+    "data": {
+        "layout": {
+            "dim": {
+                "label": "",
+                "size": 0,
+                "stride": 0
+            },
+            "data_offset": 0
+        },
+        "data": []
+    }
+}

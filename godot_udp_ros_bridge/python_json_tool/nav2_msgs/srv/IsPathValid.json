@@ -1,0 +1,41 @@
+{
+    "service": "",
+    "srvType": "nav2_msgs/srv/IsPathValid",
+    "request": {
+        "path": {
+            "header": {
+                "stamp": {
+                    "sec": 0,
+                    "nanosec": 0
+                },
+                "frame_id": ""
+            },
+            "poses": {
+                "header": {
+                    "stamp": {
+                        "sec": 0,
+                        "nanosec": 0
+                    },
+                    "frame_id": ""
+                },
+                "pose": {
+                    "position": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "orientation": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0,
+                        "w": 0.0
+                    }
+                }
+            }
+        }
+    },
+    "response": {
+        "is_valid": false,
+        "invalid_pose_indices": []
+    }
+}

@@ -1,0 +1,13 @@
+{
+    "service": "",
+    "srvType": "nav2_msgs/srv/GetCost",
+    "request": {
+        "use_footprint": false,
+        "x": 0.0,
+        "y": 0.0,
+        "theta": 0.0
+    },
+    "response": {
+        "cost": 0.0
+    }
+}

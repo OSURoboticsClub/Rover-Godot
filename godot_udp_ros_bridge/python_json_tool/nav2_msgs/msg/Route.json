@@ -1,0 +1,35 @@
+{
+    "topic": "",
+    "msgType": "nav2_msgs/msg/Route",
+    "data": {
+        "header": {
+            "stamp": {
+                "sec": 0,
+                "nanosec": 0
+            },
+            "frame_id": ""
+        },
+        "route_cost": 0.0,
+        "nodes": {
+            "nodeid": 0,
+            "position": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            }
+        },
+        "edges": {
+            "edgeid": 0,
+            "start": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "end": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            }
+        }
+    }
+}

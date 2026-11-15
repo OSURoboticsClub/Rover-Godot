@@ -1,0 +1,1075 @@
+{
+    "topic": "",
+    "msgType": "rosgraph_msgs/msg/Node",
+    "data": {
+        "name": "",
+        "parameters": {
+            "name": "",
+            "type": 0,
+            "description": "",
+            "additional_constraints": "",
+            "read_only": false,
+            "dynamic_typing": false,
+            "floating_point_range": {
+                "from_value": 0.0,
+                "to_value": 0.0,
+                "step": 0.0
+            },
+            "integer_range": {
+                "from_value": 0,
+                "to_value": 0,
+                "step": 0
+            }
+        },
+        "parameter_values": {
+            "type": 0,
+            "bool_value": false,
+            "integer_value": 0,
+            "double_value": 0.0,
+            "string_value": "",
+            "byte_array_value": [],
+            "bool_array_value": [],
+            "integer_array_value": [],
+            "double_array_value": [],
+            "string_array_value": []
+        },
+        "publishers": {
+            "name": "",
+            "type": {
+                "name": "",
+                "hash": {
+                    "version": 0,
+                    "value": []
+                }
+            },
+            "qos": {
+                "depth": 0,
+                "deadline": {
+                    "sec": 0,
+                    "nanosec": 0
+                },
+                "lifespan": {
+                    "sec": 0,
+                    "nanosec": 0
+                },
+                "HISTORY_SYSTEM_DEFAULT=0": 0,
+                "HISTORY_KEEP_LAST=1": 0,
+                "HISTORY_KEEP_ALL=2": 0,
+                "HISTORY_UNKNOWN=3": 0,
+                "history": 0,
+                "RELIABILITY_SYSTEM_DEFAULT=0": 0,
+                "RELIABILITY_RELIABLE=1": 0,
+                "RELIABILITY_BEST_EFFORT=2": 0,
+                "RELIABILITY_UNKNOWN=3": 0,
+                "RELIABILITY_BEST_AVAILABLE=4": 0,
+                "reliability": 0,
+                "DURABILITY_SYSTEM_DEFAULT=0": 0,
+                "DURABILITY_TRANSIENT_LOCAL=1": 0,
+                "DURABILITY_VOLATILE=2": 0,
+                "DURABILITY_UNKNOWN=3": 0,
+                "DURABILITY_BEST_AVAILABLE=4": 0,
+                "durability": 0,
+                "LIVELINESS_SYSTEM_DEFAULT=0": 0,
+                "LIVELINESS_AUTOMATIC=1": 0,
+                "LIVELINESS_MANUAL_BY_TOPIC=3": 0,
+                "LIVELINESS_UNKNOWN=4": 0,
+                "LIVELINESS_BEST_AVAILABLE=5": 0,
+                "liveliness": 0,
+                "liveliness_lease_duration": {
+                    "sec": 0,
+                    "nanosec": 0
+                }
+            }
+        },
+        "subscriptions": {
+            "name": "",
+            "type": {
+                "name": "",
+                "hash": {
+                    "version": 0,
+                    "value": []
+                }
+            },
+            "qos": {
+                "depth": 0,
+                "deadline": {
+                    "sec": 0,
+                    "nanosec": 0
+                },
+                "lifespan": {
+                    "sec": 0,
+                    "nanosec": 0
+                },
+                "HISTORY_SYSTEM_DEFAULT=0": 0,
+                "HISTORY_KEEP_LAST=1": 0,
+                "HISTORY_KEEP_ALL=2": 0,
+                "HISTORY_UNKNOWN=3": 0,
+                "history": 0,
+                "RELIABILITY_SYSTEM_DEFAULT=0": 0,
+                "RELIABILITY_RELIABLE=1": 0,
+                "RELIABILITY_BEST_EFFORT=2": 0,
+                "RELIABILITY_UNKNOWN=3": 0,
+                "RELIABILITY_BEST_AVAILABLE=4": 0,
+                "reliability": 0,
+                "DURABILITY_SYSTEM_DEFAULT=0": 0,
+                "DURABILITY_TRANSIENT_LOCAL=1": 0,
+                "DURABILITY_VOLATILE=2": 0,
+                "DURABILITY_UNKNOWN=3": 0,
+                "DURABILITY_BEST_AVAILABLE=4": 0,
+                "durability": 0,
+                "LIVELINESS_SYSTEM_DEFAULT=0": 0,
+                "LIVELINESS_AUTOMATIC=1": 0,
+                "LIVELINESS_MANUAL_BY_TOPIC=3": 0,
+                "LIVELINESS_UNKNOWN=4": 0,
+                "LIVELINESS_BEST_AVAILABLE=5": 0,
+                "liveliness": 0,
+                "liveliness_lease_duration": {
+                    "sec": 0,
+                    "nanosec": 0
+                }
+            }
+        },
+        "service_clients": {
+            "name": "",
+            "request_type": {
+                "name": "",
+                "hash": {
+                    "version": 0,
+                    "value": []
+                }
+            },
+            "request_qos": {
+                "depth": 0,
+                "deadline": {
+                    "sec": 0,
+                    "nanosec": 0
+                },
+                "lifespan": {
+                    "sec": 0,
+                    "nanosec": 0
+                },
+                "HISTORY_SYSTEM_DEFAULT=0": 0,
+                "HISTORY_KEEP_LAST=1": 0,
+                "HISTORY_KEEP_ALL=2": 0,
+                "HISTORY_UNKNOWN=3": 0,
+                "history": 0,
+                "RELIABILITY_SYSTEM_DEFAULT=0": 0,
+                "RELIABILITY_RELIABLE=1": 0,
+                "RELIABILITY_BEST_EFFORT=2": 0,
+                "RELIABILITY_UNKNOWN=3": 0,
+                "RELIABILITY_BEST_AVAILABLE=4": 0,
+                "reliability": 0,
+                "DURABILITY_SYSTEM_DEFAULT=0": 0,
+                "DURABILITY_TRANSIENT_LOCAL=1": 0,
+                "DURABILITY_VOLATILE=2": 0,
+                "DURABILITY_UNKNOWN=3": 0,
+                "DURABILITY_BEST_AVAILABLE=4": 0,
+                "durability": 0,
+                "LIVELINESS_SYSTEM_DEFAULT=0": 0,
+                "LIVELINESS_AUTOMATIC=1": 0,
+                "LIVELINESS_MANUAL_BY_TOPIC=3": 0,
+                "LIVELINESS_UNKNOWN=4": 0,
+                "LIVELINESS_BEST_AVAILABLE=5": 0,
+                "liveliness": 0,
+                "liveliness_lease_duration": {
+                    "sec": 0,
+                    "nanosec": 0
+                }
+            },
+            "response_type": {
+                "name": "",
+                "hash": {
+                    "version": 0,
+                    "value": []
+                }
+            },
+            "response_qos": {
+                "depth": 0,
+                "deadline": {
+                    "sec": 0,
+                    "nanosec": 0
+                },
+                "lifespan": {
+                    "sec": 0,
+                    "nanosec": 0
+                },
+                "HISTORY_SYSTEM_DEFAULT=0": 0,
+                "HISTORY_KEEP_LAST=1": 0,
+                "HISTORY_KEEP_ALL=2": 0,
+                "HISTORY_UNKNOWN=3": 0,
+                "history": 0,
+                "RELIABILITY_SYSTEM_DEFAULT=0": 0,
+                "RELIABILITY_RELIABLE=1": 0,
+                "RELIABILITY_BEST_EFFORT=2": 0,
+                "RELIABILITY_UNKNOWN=3": 0,
+                "RELIABILITY_BEST_AVAILABLE=4": 0,
+                "reliability": 0,
+                "DURABILITY_SYSTEM_DEFAULT=0": 0,
+                "DURABILITY_TRANSIENT_LOCAL=1": 0,
+                "DURABILITY_VOLATILE=2": 0,
+                "DURABILITY_UNKNOWN=3": 0,
+                "DURABILITY_BEST_AVAILABLE=4": 0,
+                "durability": 0,
+                "LIVELINESS_SYSTEM_DEFAULT=0": 0,
+                "LIVELINESS_AUTOMATIC=1": 0,
+                "LIVELINESS_MANUAL_BY_TOPIC=3": 0,
+                "LIVELINESS_UNKNOWN=4": 0,
+                "LIVELINESS_BEST_AVAILABLE=5": 0,
+                "liveliness": 0,
+                "liveliness_lease_duration": {
+                    "sec": 0,
+                    "nanosec": 0
+                }
+            }
+        },
+        "service_servers": {
+            "name": "",
+            "request_type": {
+                "name": "",
+                "hash": {
+                    "version": 0,
+                    "value": []
+                }
+            },
+            "request_qos": {
+                "depth": 0,
+                "deadline": {
+                    "sec": 0,
+                    "nanosec": 0
+                },
+                "lifespan": {
+                    "sec": 0,
+                    "nanosec": 0
+                },
+                "HISTORY_SYSTEM_DEFAULT=0": 0,
+                "HISTORY_KEEP_LAST=1": 0,
+                "HISTORY_KEEP_ALL=2": 0,
+                "HISTORY_UNKNOWN=3": 0,
+                "history": 0,
+                "RELIABILITY_SYSTEM_DEFAULT=0": 0,
+                "RELIABILITY_RELIABLE=1": 0,
+                "RELIABILITY_BEST_EFFORT=2": 0,
+                "RELIABILITY_UNKNOWN=3": 0,
+                "RELIABILITY_BEST_AVAILABLE=4": 0,
+                "reliability": 0,
+                "DURABILITY_SYSTEM_DEFAULT=0": 0,
+                "DURABILITY_TRANSIENT_LOCAL=1": 0,
+                "DURABILITY_VOLATILE=2": 0,
+                "DURABILITY_UNKNOWN=3": 0,
+                "DURABILITY_BEST_AVAILABLE=4": 0,
+                "durability": 0,
+                "LIVELINESS_SYSTEM_DEFAULT=0": 0,
+                "LIVELINESS_AUTOMATIC=1": 0,
+                "LIVELINESS_MANUAL_BY_TOPIC=3": 0,
+                "LIVELINESS_UNKNOWN=4": 0,
+                "LIVELINESS_BEST_AVAILABLE=5": 0,
+                "liveliness": 0,
+                "liveliness_lease_duration": {
+                    "sec": 0,
+                    "nanosec": 0
+                }
+            },
+            "response_type": {
+                "name": "",
+                "hash": {
+                    "version": 0,
+                    "value": []
+                }
+            },
+            "response_qos": {
+                "depth": 0,
+                "deadline": {
+                    "sec": 0,
+                    "nanosec": 0
+                },
+                "lifespan": {
+                    "sec": 0,
+                    "nanosec": 0
+                },
+                "HISTORY_SYSTEM_DEFAULT=0": 0,
+                "HISTORY_KEEP_LAST=1": 0,
+                "HISTORY_KEEP_ALL=2": 0,
+                "HISTORY_UNKNOWN=3": 0,
+                "history": 0,
+                "RELIABILITY_SYSTEM_DEFAULT=0": 0,
+                "RELIABILITY_RELIABLE=1": 0,
+                "RELIABILITY_BEST_EFFORT=2": 0,
+                "RELIABILITY_UNKNOWN=3": 0,
+                "RELIABILITY_BEST_AVAILABLE=4": 0,
+                "reliability": 0,
+                "DURABILITY_SYSTEM_DEFAULT=0": 0,
+                "DURABILITY_TRANSIENT_LOCAL=1": 0,
+                "DURABILITY_VOLATILE=2": 0,
+                "DURABILITY_UNKNOWN=3": 0,
+                "DURABILITY_BEST_AVAILABLE=4": 0,
+                "durability": 0,
+                "LIVELINESS_SYSTEM_DEFAULT=0": 0,
+                "LIVELINESS_AUTOMATIC=1": 0,
+                "LIVELINESS_MANUAL_BY_TOPIC=3": 0,
+                "LIVELINESS_UNKNOWN=4": 0,
+                "LIVELINESS_BEST_AVAILABLE=5": 0,
+                "liveliness": 0,
+                "liveliness_lease_duration": {
+                    "sec": 0,
+                    "nanosec": 0
+                }
+            }
+        },
+        "action_clients": {
+            "name": "",
+            "send_goal": {
+                "name": "",
+                "request_type": {
+                    "name": "",
+                    "hash": {
+                        "version": 0,
+                        "value": []
+                    }
+                },
+                "request_qos": {
+                    "depth": 0,
+                    "deadline": {
+                        "sec": 0,
+                        "nanosec": 0
+                    },
+                    "lifespan": {
+                        "sec": 0,
+                        "nanosec": 0
+                    },
+                    "HISTORY_SYSTEM_DEFAULT=0": 0,
+                    "HISTORY_KEEP_LAST=1": 0,
+                    "HISTORY_KEEP_ALL=2": 0,
+                    "HISTORY_UNKNOWN=3": 0,
+                    "history": 0,
+                    "RELIABILITY_SYSTEM_DEFAULT=0": 0,
+                    "RELIABILITY_RELIABLE=1": 0,
+                    "RELIABILITY_BEST_EFFORT=2": 0,
+                    "RELIABILITY_UNKNOWN=3": 0,
+                    "RELIABILITY_BEST_AVAILABLE=4": 0,
+                    "reliability": 0,
+                    "DURABILITY_SYSTEM_DEFAULT=0": 0,
+                    "DURABILITY_TRANSIENT_LOCAL=1": 0,
+                    "DURABILITY_VOLATILE=2": 0,
+                    "DURABILITY_UNKNOWN=3": 0,
+                    "DURABILITY_BEST_AVAILABLE=4": 0,
+                    "durability": 0,
+                    "LIVELINESS_SYSTEM_DEFAULT=0": 0,
+                    "LIVELINESS_AUTOMATIC=1": 0,
+                    "LIVELINESS_MANUAL_BY_TOPIC=3": 0,
+                    "LIVELINESS_UNKNOWN=4": 0,
+                    "LIVELINESS_BEST_AVAILABLE=5": 0,
+                    "liveliness": 0,
+                    "liveliness_lease_duration": {
+                        "sec": 0,
+                        "nanosec": 0
+                    }
+                },
+                "response_type": {
+                    "name": "",
+                    "hash": {
+                        "version": 0,
+                        "value": []
+                    }
+                },
+                "response_qos": {
+                    "depth": 0,
+                    "deadline": {
+                        "sec": 0,
+                        "nanosec": 0
+                    },
+                    "lifespan": {
+                        "sec": 0,
+                        "nanosec": 0
+                    },
+                    "HISTORY_SYSTEM_DEFAULT=0": 0,
+                    "HISTORY_KEEP_LAST=1": 0,
+                    "HISTORY_KEEP_ALL=2": 0,
+                    "HISTORY_UNKNOWN=3": 0,
+                    "history": 0,
+                    "RELIABILITY_SYSTEM_DEFAULT=0": 0,
+                    "RELIABILITY_RELIABLE=1": 0,
+                    "RELIABILITY_BEST_EFFORT=2": 0,
+                    "RELIABILITY_UNKNOWN=3": 0,
+                    "RELIABILITY_BEST_AVAILABLE=4": 0,
+                    "reliability": 0,
+                    "DURABILITY_SYSTEM_DEFAULT=0": 0,
+                    "DURABILITY_TRANSIENT_LOCAL=1": 0,
+                    "DURABILITY_VOLATILE=2": 0,
+                    "DURABILITY_UNKNOWN=3": 0,
+                    "DURABILITY_BEST_AVAILABLE=4": 0,
+                    "durability": 0,
+                    "LIVELINESS_SYSTEM_DEFAULT=0": 0,
+                    "LIVELINESS_AUTOMATIC=1": 0,
+                    "LIVELINESS_MANUAL_BY_TOPIC=3": 0,
+                    "LIVELINESS_UNKNOWN=4": 0,
+                    "LIVELINESS_BEST_AVAILABLE=5": 0,
+                    "liveliness": 0,
+                    "liveliness_lease_duration": {
+                        "sec": 0,
+                        "nanosec": 0
+                    }
+                }
+            },
+            "get_result": {
+                "name": "",
+                "request_type": {
+                    "name": "",
+                    "hash": {
+                        "version": 0,
+                        "value": []
+                    }
+                },
+                "request_qos": {
+                    "depth": 0,
+                    "deadline": {
+                        "sec": 0,
+                        "nanosec": 0
+                    },
+                    "lifespan": {
+                        "sec": 0,
+                        "nanosec": 0
+                    },
+                    "HISTORY_SYSTEM_DEFAULT=0": 0,
+                    "HISTORY_KEEP_LAST=1": 0,
+                    "HISTORY_KEEP_ALL=2": 0,
+                    "HISTORY_UNKNOWN=3": 0,
+                    "history": 0,
+                    "RELIABILITY_SYSTEM_DEFAULT=0": 0,
+                    "RELIABILITY_RELIABLE=1": 0,
+                    "RELIABILITY_BEST_EFFORT=2": 0,
+                    "RELIABILITY_UNKNOWN=3": 0,
+                    "RELIABILITY_BEST_AVAILABLE=4": 0,
+                    "reliability": 0,
+                    "DURABILITY_SYSTEM_DEFAULT=0": 0,
+                    "DURABILITY_TRANSIENT_LOCAL=1": 0,
+                    "DURABILITY_VOLATILE=2": 0,
+                    "DURABILITY_UNKNOWN=3": 0,
+                    "DURABILITY_BEST_AVAILABLE=4": 0,
+                    "durability": 0,
+                    "LIVELINESS_SYSTEM_DEFAULT=0": 0,
+                    "LIVELINESS_AUTOMATIC=1": 0,
+                    "LIVELINESS_MANUAL_BY_TOPIC=3": 0,
+                    "LIVELINESS_UNKNOWN=4": 0,
+                    "LIVELINESS_BEST_AVAILABLE=5": 0,
+                    "liveliness": 0,
+                    "liveliness_lease_duration": {
+                        "sec": 0,
+                        "nanosec": 0
+                    }
+                },
+                "response_type": {
+                    "name": "",
+                    "hash": {
+                        "version": 0,
+                        "value": []
+                    }
+                },
+                "response_qos": {
+                    "depth": 0,
+                    "deadline": {
+                        "sec": 0,
+                        "nanosec": 0
+                    },
+                    "lifespan": {
+                        "sec": 0,
+                        "nanosec": 0
+                    },
+                    "HISTORY_SYSTEM_DEFAULT=0": 0,
+                    "HISTORY_KEEP_LAST=1": 0,
+                    "HISTORY_KEEP_ALL=2": 0,
+                    "HISTORY_UNKNOWN=3": 0,
+                    "history": 0,
+                    "RELIABILITY_SYSTEM_DEFAULT=0": 0,
+                    "RELIABILITY_RELIABLE=1": 0,
+                    "RELIABILITY_BEST_EFFORT=2": 0,
+                    "RELIABILITY_UNKNOWN=3": 0,
+                    "RELIABILITY_BEST_AVAILABLE=4": 0,
+                    "reliability": 0,
+                    "DURABILITY_SYSTEM_DEFAULT=0": 0,
+                    "DURABILITY_TRANSIENT_LOCAL=1": 0,
+                    "DURABILITY_VOLATILE=2": 0,
+                    "DURABILITY_UNKNOWN=3": 0,
+                    "DURABILITY_BEST_AVAILABLE=4": 0,
+                    "durability": 0,
+                    "LIVELINESS_SYSTEM_DEFAULT=0": 0,
+                    "LIVELINESS_AUTOMATIC=1": 0,
+                    "LIVELINESS_MANUAL_BY_TOPIC=3": 0,
+                    "LIVELINESS_UNKNOWN=4": 0,
+                    "LIVELINESS_BEST_AVAILABLE=5": 0,
+                    "liveliness": 0,
+                    "liveliness_lease_duration": {
+                        "sec": 0,
+                        "nanosec": 0
+                    }
+                }
+            },
+            "cancel_goal": {
+                "name": "",
+                "request_type": {
+                    "name": "",
+                    "hash": {
+                        "version": 0,
+                        "value": []
+                    }
+                },
+                "request_qos": {
+                    "depth": 0,
+                    "deadline": {
+                        "sec": 0,
+                        "nanosec": 0
+                    },
+                    "lifespan": {
+                        "sec": 0,
+                        "nanosec": 0
+                    },
+                    "HISTORY_SYSTEM_DEFAULT=0": 0,
+                    "HISTORY_KEEP_LAST=1": 0,
+                    "HISTORY_KEEP_ALL=2": 0,
+                    "HISTORY_UNKNOWN=3": 0,
+                    "history": 0,
+                    "RELIABILITY_SYSTEM_DEFAULT=0": 0,
+                    "RELIABILITY_RELIABLE=1": 0,
+                    "RELIABILITY_BEST_EFFORT=2": 0,
+                    "RELIABILITY_UNKNOWN=3": 0,
+                    "RELIABILITY_BEST_AVAILABLE=4": 0,
+                    "reliability": 0,
+                    "DURABILITY_SYSTEM_DEFAULT=0": 0,
+                    "DURABILITY_TRANSIENT_LOCAL=1": 0,
+                    "DURABILITY_VOLATILE=2": 0,
+                    "DURABILITY_UNKNOWN=3": 0,
+                    "DURABILITY_BEST_AVAILABLE=4": 0,
+                    "durability": 0,
+                    "LIVELINESS_SYSTEM_DEFAULT=0": 0,
+                    "LIVELINESS_AUTOMATIC=1": 0,
+                    "LIVELINESS_MANUAL_BY_TOPIC=3": 0,
+                    "LIVELINESS_UNKNOWN=4": 0,
+                    "LIVELINESS_BEST_AVAILABLE=5": 0,
+                    "liveliness": 0,
+                    "liveliness_lease_duration": {
+                        "sec": 0,
+                        "nanosec": 0
+                    }
+                },
+                "response_type": {
+                    "name": "",
+                    "hash": {
+                        "version": 0,
+                        "value": []
+                    }
+                },
+                "response_qos": {
+                    "depth": 0,
+                    "deadline": {
+                        "sec": 0,
+                        "nanosec": 0
+                    },
+                    "lifespan": {
+                        "sec": 0,
+                        "nanosec": 0
+                    },
+                    "HISTORY_SYSTEM_DEFAULT=0": 0,
+                    "HISTORY_KEEP_LAST=1": 0,
+                    "HISTORY_KEEP_ALL=2": 0,
+                    "HISTORY_UNKNOWN=3": 0,
+                    "history": 0,
+                    "RELIABILITY_SYSTEM_DEFAULT=0": 0,
+                    "RELIABILITY_RELIABLE=1": 0,
+                    "RELIABILITY_BEST_EFFORT=2": 0,
+                    "RELIABILITY_UNKNOWN=3": 0,
+                    "RELIABILITY_BEST_AVAILABLE=4": 0,
+                    "reliability": 0,
+                    "DURABILITY_SYSTEM_DEFAULT=0": 0,
+                    "DURABILITY_TRANSIENT_LOCAL=1": 0,
+                    "DURABILITY_VOLATILE=2": 0,
+                    "DURABILITY_UNKNOWN=3": 0,
+                    "DURABILITY_BEST_AVAILABLE=4": 0,
+                    "durability": 0,
+                    "LIVELINESS_SYSTEM_DEFAULT=0": 0,
+                    "LIVELINESS_AUTOMATIC=1": 0,
+                    "LIVELINESS_MANUAL_BY_TOPIC=3": 0,
+                    "LIVELINESS_UNKNOWN=4": 0,
+                    "LIVELINESS_BEST_AVAILABLE=5": 0,
+                    "liveliness": 0,
+                    "liveliness_lease_duration": {
+                        "sec": 0,
+                        "nanosec": 0
+                    }
+                }
+            },
+            "feedback": {
+                "name": "",
+                "type": {
+                    "name": "",
+                    "hash": {
+                        "version": 0,
+                        "value": []
+                    }
+                },
+                "qos": {
+                    "depth": 0,
+                    "deadline": {
+                        "sec": 0,
+                        "nanosec": 0
+                    },
+                    "lifespan": {
+                        "sec": 0,
+                        "nanosec": 0
+                    },
+                    "HISTORY_SYSTEM_DEFAULT=0": 0,
+                    "HISTORY_KEEP_LAST=1": 0,
+                    "HISTORY_KEEP_ALL=2": 0,
+                    "HISTORY_UNKNOWN=3": 0,
+                    "history": 0,
+                    "RELIABILITY_SYSTEM_DEFAULT=0": 0,
+                    "RELIABILITY_RELIABLE=1": 0,
+                    "RELIABILITY_BEST_EFFORT=2": 0,
+                    "RELIABILITY_UNKNOWN=3": 0,
+                    "RELIABILITY_BEST_AVAILABLE=4": 0,
+                    "reliability": 0,
+                    "DURABILITY_SYSTEM_DEFAULT=0": 0,
+                    "DURABILITY_TRANSIENT_LOCAL=1": 0,
+                    "DURABILITY_VOLATILE=2": 0,
+                    "DURABILITY_UNKNOWN=3": 0,
+                    "DURABILITY_BEST_AVAILABLE=4": 0,
+                    "durability": 0,
+                    "LIVELINESS_SYSTEM_DEFAULT=0": 0,
+                    "LIVELINESS_AUTOMATIC=1": 0,
+                    "LIVELINESS_MANUAL_BY_TOPIC=3": 0,
+                    "LIVELINESS_UNKNOWN=4": 0,
+                    "LIVELINESS_BEST_AVAILABLE=5": 0,
+                    "liveliness": 0,
+                    "liveliness_lease_duration": {
+                        "sec": 0,
+                        "nanosec": 0
+                    }
+                }
+            },
+            "status": {
+                "name": "",
+                "type": {
+                    "name": "",
+                    "hash": {
+                        "version": 0,
+                        "value": []
+                    }
+                },
+                "qos": {
+                    "depth": 0,
+                    "deadline": {
+                        "sec": 0,
+                        "nanosec": 0
+                    },
+                    "lifespan": {
+                        "sec": 0,
+                        "nanosec": 0
+                    },
+                    "HISTORY_SYSTEM_DEFAULT=0": 0,
+                    "HISTORY_KEEP_LAST=1": 0,
+                    "HISTORY_KEEP_ALL=2": 0,
+                    "HISTORY_UNKNOWN=3": 0,
+                    "history": 0,
+                    "RELIABILITY_SYSTEM_DEFAULT=0": 0,
+                    "RELIABILITY_RELIABLE=1": 0,
+                    "RELIABILITY_BEST_EFFORT=2": 0,
+                    "RELIABILITY_UNKNOWN=3": 0,
+                    "RELIABILITY_BEST_AVAILABLE=4": 0,
+                    "reliability": 0,
+                    "DURABILITY_SYSTEM_DEFAULT=0": 0,
+                    "DURABILITY_TRANSIENT_LOCAL=1": 0,
+                    "DURABILITY_VOLATILE=2": 0,
+                    "DURABILITY_UNKNOWN=3": 0,
+                    "DURABILITY_BEST_AVAILABLE=4": 0,
+                    "durability": 0,
+                    "LIVELINESS_SYSTEM_DEFAULT=0": 0,
+                    "LIVELINESS_AUTOMATIC=1": 0,
+                    "LIVELINESS_MANUAL_BY_TOPIC=3": 0,
+                    "LIVELINESS_UNKNOWN=4": 0,
+                    "LIVELINESS_BEST_AVAILABLE=5": 0,
+                    "liveliness": 0,
+                    "liveliness_lease_duration": {
+                        "sec": 0,
+                        "nanosec": 0
+                    }
+                }
+            }
+        },
+        "action_servers": {
+            "name": "",
+            "send_goal": {
+                "name": "",
+                "request_type": {
+                    "name": "",
+                    "hash": {
+                        "version": 0,
+                        "value": []
+                    }
+                },
+                "request_qos": {
+                    "depth": 0,
+                    "deadline": {
+                        "sec": 0,
+                        "nanosec": 0
+                    },
+                    "lifespan": {
+                        "sec": 0,
+                        "nanosec": 0
+                    },
+                    "HISTORY_SYSTEM_DEFAULT=0": 0,
+                    "HISTORY_KEEP_LAST=1": 0,
+                    "HISTORY_KEEP_ALL=2": 0,
+                    "HISTORY_UNKNOWN=3": 0,
+                    "history": 0,
+                    "RELIABILITY_SYSTEM_DEFAULT=0": 0,
+                    "RELIABILITY_RELIABLE=1": 0,
+                    "RELIABILITY_BEST_EFFORT=2": 0,
+                    "RELIABILITY_UNKNOWN=3": 0,
+                    "RELIABILITY_BEST_AVAILABLE=4": 0,
+                    "reliability": 0,
+                    "DURABILITY_SYSTEM_DEFAULT=0": 0,
+                    "DURABILITY_TRANSIENT_LOCAL=1": 0,
+                    "DURABILITY_VOLATILE=2": 0,
+                    "DURABILITY_UNKNOWN=3": 0,
+                    "DURABILITY_BEST_AVAILABLE=4": 0,
+                    "durability": 0,
+                    "LIVELINESS_SYSTEM_DEFAULT=0": 0,
+                    "LIVELINESS_AUTOMATIC=1": 0,
+                    "LIVELINESS_MANUAL_BY_TOPIC=3": 0,
+                    "LIVELINESS_UNKNOWN=4": 0,
+                    "LIVELINESS_BEST_AVAILABLE=5": 0,
+                    "liveliness": 0,
+                    "liveliness_lease_duration": {
+                        "sec": 0,
+                        "nanosec": 0
+                    }
+                },
+                "response_type": {
+                    "name": "",
+                    "hash": {
+                        "version": 0,
+                        "value": []
+                    }
+                },
+                "response_qos": {
+                    "depth": 0,
+                    "deadline": {
+                        "sec": 0,
+                        "nanosec": 0
+                    },
+                    "lifespan": {
+                        "sec": 0,
+                        "nanosec": 0
+                    },
+                    "HISTORY_SYSTEM_DEFAULT=0": 0,
+                    "HISTORY_KEEP_LAST=1": 0,
+                    "HISTORY_KEEP_ALL=2": 0,
+                    "HISTORY_UNKNOWN=3": 0,
+                    "history": 0,
+                    "RELIABILITY_SYSTEM_DEFAULT=0": 0,
+                    "RELIABILITY_RELIABLE=1": 0,
+                    "RELIABILITY_BEST_EFFORT=2": 0,
+                    "RELIABILITY_UNKNOWN=3": 0,
+                    "RELIABILITY_BEST_AVAILABLE=4": 0,
+                    "reliability": 0,
+                    "DURABILITY_SYSTEM_DEFAULT=0": 0,
+                    "DURABILITY_TRANSIENT_LOCAL=1": 0,
+                    "DURABILITY_VOLATILE=2": 0,
+                    "DURABILITY_UNKNOWN=3": 0,
+                    "DURABILITY_BEST_AVAILABLE=4": 0,
+                    "durability": 0,
+                    "LIVELINESS_SYSTEM_DEFAULT=0": 0,
+                    "LIVELINESS_AUTOMATIC=1": 0,
+                    "LIVELINESS_MANUAL_BY_TOPIC=3": 0,
+                    "LIVELINESS_UNKNOWN=4": 0,
+                    "LIVELINESS_BEST_AVAILABLE=5": 0,
+                    "liveliness": 0,
+                    "liveliness_lease_duration": {
+                        "sec": 0,
+                        "nanosec": 0
+                    }
+                }
+            },
+            "get_result": {
+                "name": "",
+                "request_type": {
+                    "name": "",
+                    "hash": {
+                        "version": 0,
+                        "value": []
+                    }
+                },
+                "request_qos": {
+                    "depth": 0,
+                    "deadline": {
+                        "sec": 0,
+                        "nanosec": 0
+                    },
+                    "lifespan": {
+                        "sec": 0,
+                        "nanosec": 0
+                    },
+                    "HISTORY_SYSTEM_DEFAULT=0": 0,
+                    "HISTORY_KEEP_LAST=1": 0,
+                    "HISTORY_KEEP_ALL=2": 0,
+                    "HISTORY_UNKNOWN=3": 0,
+                    "history": 0,
+                    "RELIABILITY_SYSTEM_DEFAULT=0": 0,
+                    "RELIABILITY_RELIABLE=1": 0,
+                    "RELIABILITY_BEST_EFFORT=2": 0,
+                    "RELIABILITY_UNKNOWN=3": 0,
+                    "RELIABILITY_BEST_AVAILABLE=4": 0,
+                    "reliability": 0,
+                    "DURABILITY_SYSTEM_DEFAULT=0": 0,
+                    "DURABILITY_TRANSIENT_LOCAL=1": 0,
+                    "DURABILITY_VOLATILE=2": 0,
+                    "DURABILITY_UNKNOWN=3": 0,
+                    "DURABILITY_BEST_AVAILABLE=4": 0,
+                    "durability": 0,
+                    "LIVELINESS_SYSTEM_DEFAULT=0": 0,
+                    "LIVELINESS_AUTOMATIC=1": 0,
+                    "LIVELINESS_MANUAL_BY_TOPIC=3": 0,
+                    "LIVELINESS_UNKNOWN=4": 0,
+                    "LIVELINESS_BEST_AVAILABLE=5": 0,
+                    "liveliness": 0,
+                    "liveliness_lease_duration": {
+                        "sec": 0,
+                        "nanosec": 0
+                    }
+                },
+                "response_type": {
+                    "name": "",
+                    "hash": {
+                        "version": 0,
+                        "value": []
+                    }
+                },
+                "response_qos": {
+                    "depth": 0,
+                    "deadline": {
+                        "sec": 0,
+                        "nanosec": 0
+                    },
+                    "lifespan": {
+                        "sec": 0,
+                        "nanosec": 0
+                    },
+                    "HISTORY_SYSTEM_DEFAULT=0": 0,
+                    "HISTORY_KEEP_LAST=1": 0,
+                    "HISTORY_KEEP_ALL=2": 0,
+                    "HISTORY_UNKNOWN=3": 0,
+                    "history": 0,
+                    "RELIABILITY_SYSTEM_DEFAULT=0": 0,
+                    "RELIABILITY_RELIABLE=1": 0,
+                    "RELIABILITY_BEST_EFFORT=2": 0,
+                    "RELIABILITY_UNKNOWN=3": 0,
+                    "RELIABILITY_BEST_AVAILABLE=4": 0,
+                    "reliability": 0,
+                    "DURABILITY_SYSTEM_DEFAULT=0": 0,
+                    "DURABILITY_TRANSIENT_LOCAL=1": 0,
+                    "DURABILITY_VOLATILE=2": 0,
+                    "DURABILITY_UNKNOWN=3": 0,
+                    "DURABILITY_BEST_AVAILABLE=4": 0,
+                    "durability": 0,
+                    "LIVELINESS_SYSTEM_DEFAULT=0": 0,
+                    "LIVELINESS_AUTOMATIC=1": 0,
+                    "LIVELINESS_MANUAL_BY_TOPIC=3": 0,
+                    "LIVELINESS_UNKNOWN=4": 0,
+                    "LIVELINESS_BEST_AVAILABLE=5": 0,
+                    "liveliness": 0,
+                    "liveliness_lease_duration": {
+                        "sec": 0,
+                        "nanosec": 0
+                    }
+                }
+            },
+            "cancel_goal": {
+                "name": "",
+                "request_type": {
+                    "name": "",
+                    "hash": {
+                        "version": 0,
+                        "value": []
+                    }
+                },
+                "request_qos": {
+                    "depth": 0,
+                    "deadline": {
+                        "sec": 0,
+                        "nanosec": 0
+                    },
+                    "lifespan": {
+                        "sec": 0,
+                        "nanosec": 0
+                    },
+                    "HISTORY_SYSTEM_DEFAULT=0": 0,
+                    "HISTORY_KEEP_LAST=1": 0,
+                    "HISTORY_KEEP_ALL=2": 0,
+                    "HISTORY_UNKNOWN=3": 0,
+                    "history": 0,
+                    "RELIABILITY_SYSTEM_DEFAULT=0": 0,
+                    "RELIABILITY_RELIABLE=1": 0,
+                    "RELIABILITY_BEST_EFFORT=2": 0,
+                    "RELIABILITY_UNKNOWN=3": 0,
+                    "RELIABILITY_BEST_AVAILABLE=4": 0,
+                    "reliability": 0,
+                    "DURABILITY_SYSTEM_DEFAULT=0": 0,
+                    "DURABILITY_TRANSIENT_LOCAL=1": 0,
+                    "DURABILITY_VOLATILE=2": 0,
+                    "DURABILITY_UNKNOWN=3": 0,
+                    "DURABILITY_BEST_AVAILABLE=4": 0,
+                    "durability": 0,
+                    "LIVELINESS_SYSTEM_DEFAULT=0": 0,
+                    "LIVELINESS_AUTOMATIC=1": 0,
+                    "LIVELINESS_MANUAL_BY_TOPIC=3": 0,
+                    "LIVELINESS_UNKNOWN=4": 0,
+                    "LIVELINESS_BEST_AVAILABLE=5": 0,
+                    "liveliness": 0,
+                    "liveliness_lease_duration": {
+                        "sec": 0,
+                        "nanosec": 0
+                    }
+                },
+                "response_type": {
+                    "name": "",
+                    "hash": {
+                        "version": 0,
+                        "value": []
+                    }
+                },
+                "response_qos": {
+                    "depth": 0,
+                    "deadline": {
+                        "sec": 0,
+                        "nanosec": 0
+                    },
+                    "lifespan": {
+                        "sec": 0,
+                        "nanosec": 0
+                    },
+                    "HISTORY_SYSTEM_DEFAULT=0": 0,
+                    "HISTORY_KEEP_LAST=1": 0,
+                    "HISTORY_KEEP_ALL=2": 0,
+                    "HISTORY_UNKNOWN=3": 0,
+                    "history": 0,
+                    "RELIABILITY_SYSTEM_DEFAULT=0": 0,
+                    "RELIABILITY_RELIABLE=1": 0,
+                    "RELIABILITY_BEST_EFFORT=2": 0,
+                    "RELIABILITY_UNKNOWN=3": 0,
+                    "RELIABILITY_BEST_AVAILABLE=4": 0,
+                    "reliability": 0,
+                    "DURABILITY_SYSTEM_DEFAULT=0": 0,
+                    "DURABILITY_TRANSIENT_LOCAL=1": 0,
+                    "DURABILITY_VOLATILE=2": 0,
+                    "DURABILITY_UNKNOWN=3": 0,
+                    "DURABILITY_BEST_AVAILABLE=4": 0,
+                    "durability": 0,
+                    "LIVELINESS_SYSTEM_DEFAULT=0": 0,
+                    "LIVELINESS_AUTOMATIC=1": 0,
+                    "LIVELINESS_MANUAL_BY_TOPIC=3": 0,
+                    "LIVELINESS_UNKNOWN=4": 0,
+                    "LIVELINESS_BEST_AVAILABLE=5": 0,
+                    "liveliness": 0,
+                    "liveliness_lease_duration": {
+                        "sec": 0,
+                        "nanosec": 0
+                    }
+                }
+            },
+            "feedback": {
+                "name": "",
+                "type": {
+                    "name": "",
+                    "hash": {
+                        "version": 0,
+                        "value": []
+                    }
+                },
+                "qos": {
+                    "depth": 0,
+                    "deadline": {
+                        "sec": 0,
+                        "nanosec": 0
+                    },
+                    "lifespan": {
+                        "sec": 0,
+                        "nanosec": 0
+                    },
+                    "HISTORY_SYSTEM_DEFAULT=0": 0,
+                    "HISTORY_KEEP_LAST=1": 0,
+                    "HISTORY_KEEP_ALL=2": 0,
+                    "HISTORY_UNKNOWN=3": 0,
+                    "history": 0,
+                    "RELIABILITY_SYSTEM_DEFAULT=0": 0,
+                    "RELIABILITY_RELIABLE=1": 0,
+                    "RELIABILITY_BEST_EFFORT=2": 0,
+                    "RELIABILITY_UNKNOWN=3": 0,
+                    "RELIABILITY_BEST_AVAILABLE=4": 0,
+                    "reliability": 0,
+                    "DURABILITY_SYSTEM_DEFAULT=0": 0,
+                    "DURABILITY_TRANSIENT_LOCAL=1": 0,
+                    "DURABILITY_VOLATILE=2": 0,
+                    "DURABILITY_UNKNOWN=3": 0,
+                    "DURABILITY_BEST_AVAILABLE=4": 0,
+                    "durability": 0,
+                    "LIVELINESS_SYSTEM_DEFAULT=0": 0,
+                    "LIVELINESS_AUTOMATIC=1": 0,
+                    "LIVELINESS_MANUAL_BY_TOPIC=3": 0,
+                    "LIVELINESS_UNKNOWN=4": 0,
+                    "LIVELINESS_BEST_AVAILABLE=5": 0,
+                    "liveliness": 0,
+                    "liveliness_lease_duration": {
+                        "sec": 0,
+                        "nanosec": 0
+                    }
+                }
+            },
+            "status": {
+                "name": "",
+                "type": {
+                    "name": "",
+                    "hash": {
+                        "version": 0,
+                        "value": []
+                    }
+                },
+                "qos": {
+                    "depth": 0,
+                    "deadline": {
+                        "sec": 0,
+                        "nanosec": 0
+                    },
+                    "lifespan": {
+                        "sec": 0,
+                        "nanosec": 0
+                    },
+                    "HISTORY_SYSTEM_DEFAULT=0": 0,
+                    "HISTORY_KEEP_LAST=1": 0,
+                    "HISTORY_KEEP_ALL=2": 0,
+                    "HISTORY_UNKNOWN=3": 0,
+                    "history": 0,
+                    "RELIABILITY_SYSTEM_DEFAULT=0": 0,
+                    "RELIABILITY_RELIABLE=1": 0,
+                    "RELIABILITY_BEST_EFFORT=2": 0,
+                    "RELIABILITY_UNKNOWN=3": 0,
+                    "RELIABILITY_BEST_AVAILABLE=4": 0,
+                    "reliability": 0,
+                    "DURABILITY_SYSTEM_DEFAULT=0": 0,
+                    "DURABILITY_TRANSIENT_LOCAL=1": 0,
+                    "DURABILITY_VOLATILE=2": 0,
+                    "DURABILITY_UNKNOWN=3": 0,
+                    "DURABILITY_BEST_AVAILABLE=4": 0,
+                    "durability": 0,
+                    "LIVELINESS_SYSTEM_DEFAULT=0": 0,
+                    "LIVELINESS_AUTOMATIC=1": 0,
+                    "LIVELINESS_MANUAL_BY_TOPIC=3": 0,
+                    "LIVELINESS_UNKNOWN=4": 0,
+                    "LIVELINESS_BEST_AVAILABLE=5": 0,
+                    "liveliness": 0,
+                    "liveliness_lease_duration": {
+                        "sec": 0,
+                        "nanosec": 0
+                    }
+                }
+            }
+        }
+    }
+}

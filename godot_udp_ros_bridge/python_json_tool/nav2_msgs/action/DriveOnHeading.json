@@ -1,0 +1,33 @@
+{
+    "action": "",
+    "actionType": "visualization_msgs/srv/GetInteractiveMarkers",
+    "goal": {
+        "target": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        },
+        "speed": 0.0,
+        "time_allowance": {
+            "sec": 0,
+            "nanosec": 0
+        }
+    },
+    "result": {
+        "NONE=0": 0,
+        "UNKNOWN=720": 0,
+        "TIMEOUT=721": 0,
+        "TF_ERROR=722": 0,
+        "COLLISION_AHEAD=723": 0,
+        "INVALID_INPUT=724": 0,
+        "total_elapsed_time": {
+            "sec": 0,
+            "nanosec": 0
+        },
+        "error_code": 0,
+        "error_msg": ""
+    },
+    "feedback": {
+        "distance_traveled": 0.0
+    }
+}

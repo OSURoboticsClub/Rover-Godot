@@ -1,0 +1,7 @@
+{
+    "topic": "",
+    "msgType": "example_interfaces/msg/Float32",
+    "data": {
+        "data": 0.0
+    }
+}

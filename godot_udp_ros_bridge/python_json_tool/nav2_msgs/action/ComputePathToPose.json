@@ -1,0 +1,102 @@
+{
+    "action": "",
+    "actionType": "visualization_msgs/srv/GetInteractiveMarkers",
+    "goal": {
+        "goal": {
+            "header": {
+                "stamp": {
+                    "sec": 0,
+                    "nanosec": 0
+                },
+                "frame_id": ""
+            },
+            "pose": {
+                "position": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "orientation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 0.0
+                }
+            }
+        },
+        "start": {
+            "header": {
+                "stamp": {
+                    "sec": 0,
+                    "nanosec": 0
+                },
+                "frame_id": ""
+            },
+            "pose": {
+                "position": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "orientation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 0.0
+                }
+            }
+        },
+        "planner_id": "",
+        "use_start": false
+    },
+    "result": {
+        "NONE=0": 0,
+        "UNKNOWN=200": 0,
+        "INVALID_PLANNER=201": 0,
+        "TF_ERROR=202": 0,
+        "START_OUTSIDE_MAP=203": 0,
+        "GOAL_OUTSIDE_MAP=204": 0,
+        "START_OCCUPIED=205": 0,
+        "GOAL_OCCUPIED=206": 0,
+        "TIMEOUT=207": 0,
+        "NO_VALID_PATH=208": 0,
+        "path": {
+            "header": {
+                "stamp": {
+                    "sec": 0,
+                    "nanosec": 0
+                },
+                "frame_id": ""
+            },
+            "poses": {
+                "header": {
+                    "stamp": {
+                        "sec": 0,
+                        "nanosec": 0
+                    },
+                    "frame_id": ""
+                },
+                "pose": {
+                    "position": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "orientation": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0,
+                        "w": 0.0
+                    }
+                }
+            }
+        },
+        "planning_time": {
+            "sec": 0,
+            "nanosec": 0
+        },
+        "error_code": 0,
+        "error_msg": ""
+    },
+    "feedback": {}
+}

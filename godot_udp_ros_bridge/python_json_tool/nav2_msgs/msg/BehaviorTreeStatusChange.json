@@ -1,0 +1,14 @@
+{
+    "topic": "",
+    "msgType": "nav2_msgs/msg/BehaviorTreeStatusChange",
+    "data": {
+        "timestamp": {
+            "sec": 0,
+            "nanosec": 0
+        },
+        "node_name": "",
+        "uid": 0,
+        "previous_status": "",
+        "current_status": ""
+    }
+}

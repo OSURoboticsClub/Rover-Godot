@@ -1,0 +1,58 @@
+{
+    "action": "",
+    "actionType": "visualization_msgs/srv/GetInteractiveMarkers",
+    "goal": {
+        "path": {
+            "header": {
+                "stamp": {
+                    "sec": 0,
+                    "nanosec": 0
+                },
+                "frame_id": ""
+            },
+            "poses": {
+                "header": {
+                    "stamp": {
+                        "sec": 0,
+                        "nanosec": 0
+                    },
+                    "frame_id": ""
+                },
+                "pose": {
+                    "position": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "orientation": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0,
+                        "w": 0.0
+                    }
+                }
+            }
+        },
+        "controller_id": "",
+        "goal_checker_id": "",
+        "progress_checker_id": ""
+    },
+    "result": {
+        "NONE=0": 0,
+        "UNKNOWN=100": 0,
+        "INVALID_CONTROLLER=101": 0,
+        "TF_ERROR=102": 0,
+        "INVALID_PATH=103": 0,
+        "PATIENCE_EXCEEDED=104": 0,
+        "FAILED_TO_MAKE_PROGRESS=105": 0,
+        "NO_VALID_CONTROL=106": 0,
+        "CONTROLLER_TIMED_OUT=107": 0,
+        "result": {},
+        "error_code": 0,
+        "error_msg": ""
+    },
+    "feedback": {
+        "distance_to_goal": 0.0,
+        "speed": 0.0
+    }
+}

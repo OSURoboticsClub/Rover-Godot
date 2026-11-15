@@ -1,0 +1,15 @@
+{
+    "topic": "",
+    "msgType": "nav2_msgs/msg/SpeedLimit",
+    "data": {
+        "header": {
+            "stamp": {
+                "sec": 0,
+                "nanosec": 0
+            },
+            "frame_id": ""
+        },
+        "percentage": false,
+        "speed_limit": 0.0
+    }
+}

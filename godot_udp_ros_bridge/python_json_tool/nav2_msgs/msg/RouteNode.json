@@ -1,0 +1,12 @@
+{
+    "topic": "",
+    "msgType": "nav2_msgs/msg/RouteNode",
+    "data": {
+        "nodeid": 0,
+        "position": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    }
+}

@@ -1,0 +1,10 @@
+{
+    "service": "",
+    "srvType": "nav2_msgs/srv/ClearEntireCostmap",
+    "request": {
+        "request": {}
+    },
+    "response": {
+        "response": {}
+    }
+}

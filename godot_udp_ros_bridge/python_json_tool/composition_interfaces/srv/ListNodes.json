@@ -1,0 +1,9 @@
+{
+    "service": "",
+    "srvType": "composition_interfaces/srv/ListNodes",
+    "request": {},
+    "response": {
+        "full_node_names": [],
+        "unique_ids": []
+    }
+}

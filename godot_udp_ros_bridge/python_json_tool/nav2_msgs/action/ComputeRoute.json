@@ -1,0 +1,132 @@
+{
+    "action": "",
+    "actionType": "visualization_msgs/srv/GetInteractiveMarkers",
+    "goal": {
+        "start_id": 0,
+        "start": {
+            "header": {
+                "stamp": {
+                    "sec": 0,
+                    "nanosec": 0
+                },
+                "frame_id": ""
+            },
+            "pose": {
+                "position": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "orientation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 0.0
+                }
+            }
+        },
+        "goal_id": 0,
+        "goal": {
+            "header": {
+                "stamp": {
+                    "sec": 0,
+                    "nanosec": 0
+                },
+                "frame_id": ""
+            },
+            "pose": {
+                "position": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "orientation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 0.0
+                }
+            }
+        },
+        "use_start": false,
+        "use_poses": false
+    },
+    "result": {
+        "NONE=0": 0,
+        "UNKNOWN=400": 0,
+        "TF_ERROR=401": 0,
+        "NO_VALID_GRAPH=402": 0,
+        "INDETERMINANT_NODES_ON_GRAPH=403": 0,
+        "TIMEOUT=404": 0,
+        "NO_VALID_ROUTE=405": 0,
+        "INVALID_EDGE_SCORER_USE=407": 0,
+        "planning_time": {
+            "sec": 0,
+            "nanosec": 0
+        },
+        "path": {
+            "header": {
+                "stamp": {
+                    "sec": 0,
+                    "nanosec": 0
+                },
+                "frame_id": ""
+            },
+            "poses": {
+                "header": {
+                    "stamp": {
+                        "sec": 0,
+                        "nanosec": 0
+                    },
+                    "frame_id": ""
+                },
+                "pose": {
+                    "position": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "orientation": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0,
+                        "w": 0.0
+                    }
+                }
+            }
+        },
+        "route": {
+            "header": {
+                "stamp": {
+                    "sec": 0,
+                    "nanosec": 0
+                },
+                "frame_id": ""
+            },
+            "route_cost": 0.0,
+            "nodes": {
+                "nodeid": 0,
+                "position": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                }
+            },
+            "edges": {
+                "edgeid": 0,
+                "start": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "end": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                }
+            }
+        },
+        "error_code": 0
+    },
+    "feedback": {}
+}

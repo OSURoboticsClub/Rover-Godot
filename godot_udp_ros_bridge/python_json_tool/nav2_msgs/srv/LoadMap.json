@@ -1,0 +1,47 @@
+{
+    "service": "",
+    "srvType": "nav2_msgs/srv/LoadMap",
+    "request": {
+        "map_url": ""
+    },
+    "response": {
+        "RESULT_SUCCESS=0": 0,
+        "RESULT_MAP_DOES_NOT_EXIST=1": 0,
+        "RESULT_INVALID_MAP_DATA=2": 0,
+        "RESULT_INVALID_MAP_METADATA=3": 0,
+        "RESULT_UNDEFINED_FAILURE=255": 0,
+        "map": {
+            "header": {
+                "stamp": {
+                    "sec": 0,
+                    "nanosec": 0
+                },
+                "frame_id": ""
+            },
+            "info": {
+                "map_load_time": {
+                    "sec": 0,
+                    "nanosec": 0
+                },
+                "resolution": 0.0,
+                "width": 0,
+                "height": 0,
+                "origin": {
+                    "position": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "orientation": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0,
+                        "w": 0.0
+                    }
+                }
+            },
+            "data": []
+        },
+        "result": 0
+    }
+}

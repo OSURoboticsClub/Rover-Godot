@@ -1,0 +1,17 @@
+{
+    "service": "",
+    "srvType": "nav2_msgs/srv/ManageLifecycleNodes",
+    "request": {
+        "STARTUP": 0,
+        "PAUSE": 0,
+        "RESUME": 0,
+        "RESET": 0,
+        "SHUTDOWN": 0,
+        "CONFIGURE": 0,
+        "CLEANUP": 0,
+        "command": 0
+    },
+    "response": {
+        "success": false
+    }
+}

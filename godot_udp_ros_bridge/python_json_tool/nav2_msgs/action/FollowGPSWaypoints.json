@@ -1,0 +1,57 @@
+{
+    "action": "",
+    "actionType": "visualization_msgs/srv/GetInteractiveMarkers",
+    "goal": {
+        "number_of_loops": 0,
+        "goal_index": 0,
+        "gps_poses": {
+            "position": {
+                "latitude": 0.0,
+                "longitude": 0.0,
+                "altitude": 0.0
+            },
+            "orientation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 0.0
+            }
+        }
+    },
+    "result": {
+        "NONE=0": 0,
+        "UNKNOWN=600": 0,
+        "TASK_EXECUTOR_FAILED=601": 0,
+        "missed_waypoints": {
+            "index": 0,
+            "goal": {
+                "header": {
+                    "stamp": {
+                        "sec": 0,
+                        "nanosec": 0
+                    },
+                    "frame_id": ""
+                },
+                "pose": {
+                    "position": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "orientation": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0,
+                        "w": 0.0
+                    }
+                }
+            },
+            "error_code": 0
+        },
+        "error_code": 0,
+        "error_msg": ""
+    },
+    "feedback": {
+        "current_waypoint": 0
+    }
+}

@@ -1,0 +1,13 @@
+{
+    "topic": "",
+    "msgType": "nav2_msgs/msg/CollisionMonitorState",
+    "data": {
+        "DO_NOTHING=0": 0,
+        "STOP=1": 0,
+        "SLOWDOWN=2": 0,
+        "APPROACH=3": 0,
+        "LIMIT=4": 0,
+        "action_type": 0,
+        "polygon_name": ""
+    }
+}

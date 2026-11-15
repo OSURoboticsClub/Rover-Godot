@@ -1,0 +1,8 @@
+{
+    "topic": "",
+    "msgType": "nav2_msgs/msg/EdgeCost",
+    "data": {
+        "edgeid": 0,
+        "cost": 0.0
+    }
+}

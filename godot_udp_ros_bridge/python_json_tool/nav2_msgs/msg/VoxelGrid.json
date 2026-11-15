@@ -1,0 +1,27 @@
+{
+    "topic": "",
+    "msgType": "nav2_msgs/msg/VoxelGrid",
+    "data": {
+        "header": {
+            "stamp": {
+                "sec": 0,
+                "nanosec": 0
+            },
+            "frame_id": ""
+        },
+        "data": [],
+        "origin": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        },
+        "resolutions": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        },
+        "size_x": 0,
+        "size_y": 0,
+        "size_z": 0
+    }
+}

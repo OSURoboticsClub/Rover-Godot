@@ -1,0 +1,11 @@
+{
+    "service": "",
+    "srvType": "composition_interfaces/srv/UnloadNode",
+    "request": {
+        "unique_id": 0
+    },
+    "response": {
+        "success": false,
+        "error_message": ""
+    }
+}

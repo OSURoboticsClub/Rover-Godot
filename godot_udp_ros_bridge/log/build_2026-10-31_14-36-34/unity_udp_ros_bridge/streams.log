@@ -1,0 +1,62 @@
+[1.365s] Invoking command in '/home/mocha/Rover-Unity/unity_udp_ros_bridge': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/mocha/Rover-Unity/unity_udp_ros_bridge/build/unity_udp_ros_bridge/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/mocha/Rover-Unity/unity_udp_ros_bridge/install/unity_udp_ros_bridge/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base build/unity_udp_ros_bridge build --build-base /home/mocha/Rover-Unity/unity_udp_ros_bridge/build/unity_udp_ros_bridge/build install --record /home/mocha/Rover-Unity/unity_udp_ros_bridge/build/unity_udp_ros_bridge/install.log --install-scripts $base/lib/unity_udp_ros_bridge --single-version-externally-managed install_data
+[1.717s] running egg_info
+[1.717s] creating build/unity_udp_ros_bridge/unity_udp_ros_bridge.egg-info
+[1.746s] writing build/unity_udp_ros_bridge/unity_udp_ros_bridge.egg-info/PKG-INFO
+[1.746s] writing dependency_links to build/unity_udp_ros_bridge/unity_udp_ros_bridge.egg-info/dependency_links.txt
+[1.747s] writing entry points to build/unity_udp_ros_bridge/unity_udp_ros_bridge.egg-info/entry_points.txt
+[1.747s] writing requirements to build/unity_udp_ros_bridge/unity_udp_ros_bridge.egg-info/requires.txt
+[1.747s] writing top-level names to build/unity_udp_ros_bridge/unity_udp_ros_bridge.egg-info/top_level.txt
+[1.747s] writing manifest file 'build/unity_udp_ros_bridge/unity_udp_ros_bridge.egg-info/SOURCES.txt'
+[1.804s] reading manifest file 'build/unity_udp_ros_bridge/unity_udp_ros_bridge.egg-info/SOURCES.txt'
+[1.805s] writing manifest file 'build/unity_udp_ros_bridge/unity_udp_ros_bridge.egg-info/SOURCES.txt'
+[1.805s] running build
+[1.805s] running build_py
+[1.806s] creating /home/mocha/Rover-Unity/unity_udp_ros_bridge/build/unity_udp_ros_bridge/build
+[1.806s] creating /home/mocha/Rover-Unity/unity_udp_ros_bridge/build/unity_udp_ros_bridge/build/lib
+[1.806s] creating /home/mocha/Rover-Unity/unity_udp_ros_bridge/build/unity_udp_ros_bridge/build/lib/unity_udp_ros_bridge
+[1.806s] copying unity_udp_ros_bridge/test_udp.py -> /home/mocha/Rover-Unity/unity_udp_ros_bridge/build/unity_udp_ros_bridge/build/lib/unity_udp_ros_bridge
+[1.806s] copying unity_udp_ros_bridge/UDPServer.py -> /home/mocha/Rover-Unity/unity_udp_ros_bridge/build/unity_udp_ros_bridge/build/lib/unity_udp_ros_bridge
+[1.806s] copying unity_udp_ros_bridge/UDPBridgeSub.py -> /home/mocha/Rover-Unity/unity_udp_ros_bridge/build/unity_udp_ros_bridge/build/lib/unity_udp_ros_bridge
+[1.807s] copying unity_udp_ros_bridge/setbool_server.py -> /home/mocha/Rover-Unity/unity_udp_ros_bridge/build/unity_udp_ros_bridge/build/lib/unity_udp_ros_bridge
+[1.807s] copying unity_udp_ros_bridge/UDPBridgePub.py -> /home/mocha/Rover-Unity/unity_udp_ros_bridge/build/unity_udp_ros_bridge/build/lib/unity_udp_ros_bridge
+[1.807s] copying unity_udp_ros_bridge/UDPBridgeSrv.py -> /home/mocha/Rover-Unity/unity_udp_ros_bridge/build/unity_udp_ros_bridge/build/lib/unity_udp_ros_bridge
+[1.807s] copying unity_udp_ros_bridge/__init__.py -> /home/mocha/Rover-Unity/unity_udp_ros_bridge/build/unity_udp_ros_bridge/build/lib/unity_udp_ros_bridge
+[1.807s] copying unity_udp_ros_bridge/ActionBridge.py -> /home/mocha/Rover-Unity/unity_udp_ros_bridge/build/unity_udp_ros_bridge/build/lib/unity_udp_ros_bridge
+[1.807s] copying unity_udp_ros_bridge/test_udp_server.py -> /home/mocha/Rover-Unity/unity_udp_ros_bridge/build/unity_udp_ros_bridge/build/lib/unity_udp_ros_bridge
+[1.807s] running install
+[1.814s] running install_lib
+[1.844s] creating /home/mocha/Rover-Unity/unity_udp_ros_bridge/install/unity_udp_ros_bridge/lib/python3.12/site-packages/unity_udp_ros_bridge
+[1.844s] copying /home/mocha/Rover-Unity/unity_udp_ros_bridge/build/unity_udp_ros_bridge/build/lib/unity_udp_ros_bridge/test_udp.py -> /home/mocha/Rover-Unity/unity_udp_ros_bridge/install/unity_udp_ros_bridge/lib/python3.12/site-packages/unity_udp_ros_bridge
+[1.844s] copying /home/mocha/Rover-Unity/unity_udp_ros_bridge/build/unity_udp_ros_bridge/build/lib/unity_udp_ros_bridge/UDPServer.py -> /home/mocha/Rover-Unity/unity_udp_ros_bridge/install/unity_udp_ros_bridge/lib/python3.12/site-packages/unity_udp_ros_bridge
+[1.844s] copying /home/mocha/Rover-Unity/unity_udp_ros_bridge/build/unity_udp_ros_bridge/build/lib/unity_udp_ros_bridge/UDPBridgeSub.py -> /home/mocha/Rover-Unity/unity_udp_ros_bridge/install/unity_udp_ros_bridge/lib/python3.12/site-packages/unity_udp_ros_bridge
+[1.844s] copying /home/mocha/Rover-Unity/unity_udp_ros_bridge/build/unity_udp_ros_bridge/build/lib/unity_udp_ros_bridge/setbool_server.py -> /home/mocha/Rover-Unity/unity_udp_ros_bridge/install/unity_udp_ros_bridge/lib/python3.12/site-packages/unity_udp_ros_bridge
+[1.844s] copying /home/mocha/Rover-Unity/unity_udp_ros_bridge/build/unity_udp_ros_bridge/build/lib/unity_udp_ros_bridge/UDPBridgePub.py -> /home/mocha/Rover-Unity/unity_udp_ros_bridge/install/unity_udp_ros_bridge/lib/python3.12/site-packages/unity_udp_ros_bridge
+[1.844s] copying /home/mocha/Rover-Unity/unity_udp_ros_bridge/build/unity_udp_ros_bridge/build/lib/unity_udp_ros_bridge/UDPBridgeSrv.py -> /home/mocha/Rover-Unity/unity_udp_ros_bridge/install/unity_udp_ros_bridge/lib/python3.12/site-packages/unity_udp_ros_bridge
+[1.845s] copying /home/mocha/Rover-Unity/unity_udp_ros_bridge/build/unity_udp_ros_bridge/build/lib/unity_udp_ros_bridge/__init__.py -> /home/mocha/Rover-Unity/unity_udp_ros_bridge/install/unity_udp_ros_bridge/lib/python3.12/site-packages/unity_udp_ros_bridge
+[1.845s] copying /home/mocha/Rover-Unity/unity_udp_ros_bridge/build/unity_udp_ros_bridge/build/lib/unity_udp_ros_bridge/ActionBridge.py -> /home/mocha/Rover-Unity/unity_udp_ros_bridge/install/unity_udp_ros_bridge/lib/python3.12/site-packages/unity_udp_ros_bridge
+[1.845s] copying /home/mocha/Rover-Unity/unity_udp_ros_bridge/build/unity_udp_ros_bridge/build/lib/unity_udp_ros_bridge/test_udp_server.py -> /home/mocha/Rover-Unity/unity_udp_ros_bridge/install/unity_udp_ros_bridge/lib/python3.12/site-packages/unity_udp_ros_bridge
+[1.845s] byte-compiling /home/mocha/Rover-Unity/unity_udp_ros_bridge/install/unity_udp_ros_bridge/lib/python3.12/site-packages/unity_udp_ros_bridge/test_udp.py to test_udp.cpython-312.pyc
+[1.846s] byte-compiling /home/mocha/Rover-Unity/unity_udp_ros_bridge/install/unity_udp_ros_bridge/lib/python3.12/site-packages/unity_udp_ros_bridge/UDPServer.py to UDPServer.cpython-312.pyc
+[1.846s] byte-compiling /home/mocha/Rover-Unity/unity_udp_ros_bridge/install/unity_udp_ros_bridge/lib/python3.12/site-packages/unity_udp_ros_bridge/UDPBridgeSub.py to UDPBridgeSub.cpython-312.pyc
+[1.848s] byte-compiling /home/mocha/Rover-Unity/unity_udp_ros_bridge/install/unity_udp_ros_bridge/lib/python3.12/site-packages/unity_udp_ros_bridge/setbool_server.py to setbool_server.cpython-312.pyc
+[1.848s] byte-compiling /home/mocha/Rover-Unity/unity_udp_ros_bridge/install/unity_udp_ros_bridge/lib/python3.12/site-packages/unity_udp_ros_bridge/UDPBridgePub.py to UDPBridgePub.cpython-312.pyc
+[1.849s] byte-compiling /home/mocha/Rover-Unity/unity_udp_ros_bridge/install/unity_udp_ros_bridge/lib/python3.12/site-packages/unity_udp_ros_bridge/UDPBridgeSrv.py to UDPBridgeSrv.cpython-312.pyc
+[1.851s] byte-compiling /home/mocha/Rover-Unity/unity_udp_ros_bridge/install/unity_udp_ros_bridge/lib/python3.12/site-packages/unity_udp_ros_bridge/__init__.py to __init__.cpython-312.pyc
+[1.851s] byte-compiling /home/mocha/Rover-Unity/unity_udp_ros_bridge/install/unity_udp_ros_bridge/lib/python3.12/site-packages/unity_udp_ros_bridge/ActionBridge.py to ActionBridge.cpython-312.pyc
+[1.853s] byte-compiling /home/mocha/Rover-Unity/unity_udp_ros_bridge/install/unity_udp_ros_bridge/lib/python3.12/site-packages/unity_udp_ros_bridge/test_udp_server.py to test_udp_server.cpython-312.pyc
+[1.854s] running install_data
+[1.854s] creating /home/mocha/Rover-Unity/unity_udp_ros_bridge/install/unity_udp_ros_bridge/share/ament_index
+[1.855s] creating /home/mocha/Rover-Unity/unity_udp_ros_bridge/install/unity_udp_ros_bridge/share/ament_index/resource_index
+[1.855s] creating /home/mocha/Rover-Unity/unity_udp_ros_bridge/install/unity_udp_ros_bridge/share/ament_index/resource_index/packages
+[1.855s] copying resource/unity_udp_ros_bridge -> /home/mocha/Rover-Unity/unity_udp_ros_bridge/install/unity_udp_ros_bridge/share/ament_index/resource_index/packages
+[1.856s] copying package.xml -> /home/mocha/Rover-Unity/unity_udp_ros_bridge/install/unity_udp_ros_bridge/share/unity_udp_ros_bridge
+[1.856s] creating /home/mocha/Rover-Unity/unity_udp_ros_bridge/install/unity_udp_ros_bridge/share/unity_udp_ros_bridge/launch
+[1.856s] copying launch/udp_bridge_launch.py -> /home/mocha/Rover-Unity/unity_udp_ros_bridge/install/unity_udp_ros_bridge/share/unity_udp_ros_bridge/launch
+[1.856s] running install_egg_info
+[1.884s] Copying build/unity_udp_ros_bridge/unity_udp_ros_bridge.egg-info to /home/mocha/Rover-Unity/unity_udp_ros_bridge/install/unity_udp_ros_bridge/lib/python3.12/site-packages/unity_udp_ros_bridge-0.0.0-py3.12.egg-info
+[1.884s] running install_scripts
+[2.061s] Installing udp_bridge_pub script to /home/mocha/Rover-Unity/unity_udp_ros_bridge/install/unity_udp_ros_bridge/lib/unity_udp_ros_bridge
+[2.061s] Installing udp_bridge_srv script to /home/mocha/Rover-Unity/unity_udp_ros_bridge/install/unity_udp_ros_bridge/lib/unity_udp_ros_bridge
+[2.062s] Installing udp_bridge_sub script to /home/mocha/Rover-Unity/unity_udp_ros_bridge/install/unity_udp_ros_bridge/lib/unity_udp_ros_bridge
+[2.062s] writing list of installed files to '/home/mocha/Rover-Unity/unity_udp_ros_bridge/build/unity_udp_ros_bridge/install.log'
+[2.102s] Invoked command in '/home/mocha/Rover-Unity/unity_udp_ros_bridge' returned '0': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/mocha/Rover-Unity/unity_udp_ros_bridge/build/unity_udp_ros_bridge/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/mocha/Rover-Unity/unity_udp_ros_bridge/install/unity_udp_ros_bridge/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base build/unity_udp_ros_bridge build --build-base /home/mocha/Rover-Unity/unity_udp_ros_bridge/build/unity_udp_ros_bridge/build install --record /home/mocha/Rover-Unity/unity_udp_ros_bridge/build/unity_udp_ros_bridge/install.log --install-scripts $base/lib/unity_udp_ros_bridge --single-version-externally-managed install_data

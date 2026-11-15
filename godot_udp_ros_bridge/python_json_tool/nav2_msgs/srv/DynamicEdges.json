@@ -1,0 +1,15 @@
+{
+    "service": "",
+    "srvType": "nav2_msgs/srv/DynamicEdges",
+    "request": {
+        "closed_edges": [],
+        "opened_edges": [],
+        "adjust_edges": {
+            "edgeid": 0,
+            "cost": 0.0
+        }
+    },
+    "response": {
+        "success": false
+    }
+}

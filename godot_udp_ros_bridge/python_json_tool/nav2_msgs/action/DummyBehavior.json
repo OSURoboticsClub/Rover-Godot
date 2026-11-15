@@ -1,0 +1,18 @@
+{
+    "action": "",
+    "actionType": "visualization_msgs/srv/GetInteractiveMarkers",
+    "goal": {
+        "command": {
+            "data": ""
+        }
+    },
+    "result": {
+        "total_elapsed_time": {
+            "sec": 0,
+            "nanosec": 0
+        },
+        "error_code": 0,
+        "error_msg": ""
+    },
+    "feedback": {}
+}

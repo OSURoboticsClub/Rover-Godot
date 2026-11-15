@@ -1,0 +1,7 @@
+{
+    "topic": "",
+    "msgType": "example_interfaces/msg/UInt64",
+    "data": {
+        "data": 0
+    }
+}

@@ -1,0 +1,7 @@
+{
+    "topic": "",
+    "msgType": "example_interfaces/msg/Byte",
+    "data": {
+        "data": 0
+    }
+}

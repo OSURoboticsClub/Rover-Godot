@@ -1,0 +1,11 @@
+{
+    "service": "",
+    "srvType": "example_interfaces/srv/AddTwoInts",
+    "request": {
+        "a": 0,
+        "b": 0
+    },
+    "response": {
+        "sum": 0
+    }
+}

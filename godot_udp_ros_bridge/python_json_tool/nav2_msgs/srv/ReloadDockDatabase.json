@@ -1,0 +1,10 @@
+{
+    "service": "",
+    "srvType": "nav2_msgs/srv/ReloadDockDatabase",
+    "request": {
+        "filepath": ""
+    },
+    "response": {
+        "success": false
+    }
+}

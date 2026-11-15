@@ -1,0 +1,11 @@
+{
+    "service": "",
+    "srvType": "example_interfaces/srv/SetBool",
+    "request": {
+        "data": false
+    },
+    "response": {
+        "success": false,
+        "message": ""
+    }
+}

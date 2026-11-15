@@ -1,0 +1,18 @@
+{
+    "topic": "",
+    "msgType": "nav2_msgs/msg/CostmapUpdate",
+    "data": {
+        "header": {
+            "stamp": {
+                "sec": 0,
+                "nanosec": 0
+            },
+            "frame_id": ""
+        },
+        "x": 0,
+        "y": 0,
+        "size_x": 0,
+        "size_y": 0,
+        "data": []
+    }
+}

@@ -1,0 +1,69 @@
+{
+    "action": "",
+    "actionType": "visualization_msgs/srv/GetInteractiveMarkers",
+    "goal": {
+        "poses": {
+            "header": {
+                "stamp": {
+                    "sec": 0,
+                    "nanosec": 0
+                },
+                "frame_id": ""
+            },
+            "pose": {
+                "position": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "orientation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 0.0
+                }
+            }
+        },
+        "behavior_tree": ""
+    },
+    "result": {
+        "NONE=0": 0,
+        "error_code": 0,
+        "error_msg": ""
+    },
+    "feedback": {
+        "current_pose": {
+            "header": {
+                "stamp": {
+                    "sec": 0,
+                    "nanosec": 0
+                },
+                "frame_id": ""
+            },
+            "pose": {
+                "position": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "orientation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 0.0
+                }
+            }
+        },
+        "navigation_time": {
+            "sec": 0,
+            "nanosec": 0
+        },
+        "estimated_time_remaining": {
+            "sec": 0,
+            "nanosec": 0
+        },
+        "number_of_recoveries": 0,
+        "distance_remaining": 0.0,
+        "number_of_poses_remaining": 0
+    }
+}

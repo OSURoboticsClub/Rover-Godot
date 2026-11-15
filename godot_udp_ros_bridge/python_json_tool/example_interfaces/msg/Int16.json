@@ -1,0 +1,7 @@
+{
+    "topic": "",
+    "msgType": "example_interfaces/msg/Int16",
+    "data": {
+        "data": 0
+    }
+}

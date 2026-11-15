@@ -1,0 +1,52 @@
+{
+    "topic": "",
+    "msgType": "rosgraph_msgs/msg/Topic",
+    "data": {
+        "name": "",
+        "type": {
+            "name": "",
+            "hash": {
+                "version": 0,
+                "value": []
+            }
+        },
+        "qos": {
+            "depth": 0,
+            "deadline": {
+                "sec": 0,
+                "nanosec": 0
+            },
+            "lifespan": {
+                "sec": 0,
+                "nanosec": 0
+            },
+            "HISTORY_SYSTEM_DEFAULT=0": 0,
+            "HISTORY_KEEP_LAST=1": 0,
+            "HISTORY_KEEP_ALL=2": 0,
+            "HISTORY_UNKNOWN=3": 0,
+            "history": 0,
+            "RELIABILITY_SYSTEM_DEFAULT=0": 0,
+            "RELIABILITY_RELIABLE=1": 0,
+            "RELIABILITY_BEST_EFFORT=2": 0,
+            "RELIABILITY_UNKNOWN=3": 0,
+            "RELIABILITY_BEST_AVAILABLE=4": 0,
+            "reliability": 0,
+            "DURABILITY_SYSTEM_DEFAULT=0": 0,
+            "DURABILITY_TRANSIENT_LOCAL=1": 0,
+            "DURABILITY_VOLATILE=2": 0,
+            "DURABILITY_UNKNOWN=3": 0,
+            "DURABILITY_BEST_AVAILABLE=4": 0,
+            "durability": 0,
+            "LIVELINESS_SYSTEM_DEFAULT=0": 0,
+            "LIVELINESS_AUTOMATIC=1": 0,
+            "LIVELINESS_MANUAL_BY_TOPIC=3": 0,
+            "LIVELINESS_UNKNOWN=4": 0,
+            "LIVELINESS_BEST_AVAILABLE=5": 0,
+            "liveliness": 0,
+            "liveliness_lease_duration": {
+                "sec": 0,
+                "nanosec": 0
+            }
+        }
+    }
+}

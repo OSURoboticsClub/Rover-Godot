@@ -1,0 +1,10 @@
+{
+    "service": "",
+    "srvType": "nav2_msgs/srv/SetRouteGraph",
+    "request": {
+        "graph_filepath": ""
+    },
+    "response": {
+        "success": false
+    }
+}

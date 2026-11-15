@@ -1,0 +1,11 @@
+{
+    "topic": "",
+    "msgType": "rosgraph_msgs/msg/InterfaceType",
+    "data": {
+        "name": "",
+        "hash": {
+            "version": 0,
+            "value": []
+        }
+    }
+}

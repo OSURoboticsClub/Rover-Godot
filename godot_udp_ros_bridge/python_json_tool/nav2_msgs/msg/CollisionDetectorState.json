@@ -1,0 +1,8 @@
+{
+    "topic": "",
+    "msgType": "nav2_msgs/msg/CollisionDetectorState",
+    "data": {
+        "polygons": [],
+        "detections": []
+    }
+}

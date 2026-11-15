@@ -1,0 +1,40 @@
+{
+    "action": "",
+    "actionType": "visualization_msgs/srv/GetInteractiveMarkers",
+    "goal": {
+        "pose_topic": "",
+        "tracked_frame": "",
+        "max_duration": {
+            "sec": 0,
+            "nanosec": 0
+        }
+    },
+    "result": {
+        "NONE=0": 0,
+        "TF_ERROR=901": 0,
+        "FAILED_TO_DETECT_OBJECT=902": 0,
+        "FAILED_TO_CONTROL=903": 0,
+        "TIMEOUT=904": 0,
+        "UNKNOWN=999": 0,
+        "total_elapsed_time": {
+            "sec": 0,
+            "nanosec": 0
+        },
+        "error_code": 0,
+        "num_retries": 0,
+        "error_msg": ""
+    },
+    "feedback": {
+        "NONE=0": 0,
+        "INITIAL_PERCEPTION=1": 0,
+        "CONTROLLING=2": 0,
+        "STOPPING=3": 0,
+        "RETRY=4": 0,
+        "state": 0,
+        "following_time": {
+            "sec": 0,
+            "nanosec": 0
+        },
+        "num_retries": 0
+    }
+}
