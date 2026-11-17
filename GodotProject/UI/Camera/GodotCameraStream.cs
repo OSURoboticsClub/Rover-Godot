@@ -39,6 +39,8 @@ public partial class GodotCameraStream : TextureRect
     public int portNum = 5000;
 
     private ulong lastFixTime = 0;
+    private int currentSizeX = 0;
+    private int currentSizeY = 0;
 
 
     public static List<CameraEntry> cameraPortMap = new List<CameraEntry>()
@@ -63,8 +65,12 @@ public partial class GodotCameraStream : TextureRect
 
         // Prepare Godot Image and Texture
         _image = Image.CreateEmpty(Width, Height, false, Image.Format.Rgb8);
+        _image.Resize((int)Size.X, (int)Size.Y, Image.Interpolation.Nearest);
         _texture = ImageTexture.CreateFromImage(_image);
+        
         Texture = _texture;
+        currentSizeX = (int)Size.X;
+        currentSizeY = (int)Size.Y;
     }
     public override void _Process(double delta)
     {
@@ -76,6 +82,8 @@ public partial class GodotCameraStream : TextureRect
         else
         {
             Texture = _texture;
+            currentSizeX = (int)Size.X;
+            currentSizeY = (int)Size.Y;
         }
     }
     
@@ -113,7 +121,11 @@ public partial class GodotCameraStream : TextureRect
         
         // Set the
         _image.SetData(Width, Height, false, Image.Format.Rgb8, mapInfo.Data);
-        _texture.Update(_image);
+        _image.Resize(currentSizeX, currentSizeY, Image.Interpolation.Nearest);
+        if (_texture == null || _texture.GetWidth() != currentSizeX || _texture.GetHeight() != currentSizeY)
+        {
+            _texture = ImageTexture.CreateFromImage(_image);
+        } else _texture.Update(_image);
 
         lastFixTime = Time.GetTicksMsec();
         

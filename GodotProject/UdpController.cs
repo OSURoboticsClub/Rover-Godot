@@ -63,7 +63,7 @@ public partial class UdpController : Node
             GD.PrintErr($"Couldn't configure UDP client for configuring subscription: {err}");
         }
 
-        err = subscriptionReceive.bind(subscriptionReceivePort);
+        err = subscriptionReceive.Bind(subscriptionReceivePort);
         if(err != Error.Ok)
         {
             subscriptionReceive = null;
@@ -77,7 +77,7 @@ public partial class UdpController : Node
             GD.PrintErr($"Couldn't configure UDP client for sending service request: {err}");
         }
 
-        err = serviceReceive.bind(serviceReceivePort);
+        err = serviceReceive.Bind(serviceReceivePort);
         if(err != Error.Ok)
         {
             serviceReceive = null;
@@ -91,7 +91,7 @@ public partial class UdpController : Node
             GD.PrintErr($"Couldn't configure UDP client for sending action request: {err}");
         }
 
-        err = actionReceive.bind(actionReceivePort);
+        err = actionReceive.Bind(actionReceivePort);
         if(err != Error.Ok)
         {
             actionReceive = null;
@@ -134,6 +134,7 @@ public partial class UdpController : Node
                 JObject message = JObject.Parse(jsonString);
 
                 string serviceKey = message["service"]?.ToString();
+                string topic = message["topic"]?.ToString();
                 if(!string.IsNullOrEmpty(topic))
                 {
                     if(showDebugLogs)
@@ -154,6 +155,7 @@ public partial class UdpController : Node
                 byte[] data = actionReceive.GetPacket();
                 string jsonString = Encoding.UTF8.GetString(data);
                 JObject message = JObject.Parse(jsonString);
+                string topic = message["topic"]?.ToString();
 
                 string actionName = message["action"]?.ToString();
                 if(!string.IsNullOrEmpty(actionName))
@@ -176,7 +178,7 @@ public partial class UdpController : Node
         {
             if(latestServiceResponses.TryGetValue(serviceKey, out JObject response))
             {
-                latestServiceReponses.Remove(serviceKey);
+                latestServiceResponses.Remove(serviceKey);
                 if(showDebugLogs)
                     GD.Print($"Found service response for {serviceKey}");
                 return response;
@@ -336,19 +338,19 @@ public partial class UdpController : Node
     public void _Exit_Tree()
     {
         if(publishSend != null)
-            publishSend.close();
+            publishSend.Close();
         if(subscriptionSend != null)
-            subscriptionSend.close();
+            subscriptionSend.Close();
         if(subscriptionReceive != null)
-            subscriptionReceive.close();
+            subscriptionReceive.Close();
         if(serviceSend != null)
-            serviceSend.close();
+            serviceSend.Close();
         if(serviceReceive != null)
-            serviceReceive.close();
+            serviceReceive.Close();
         if(actionSend != null)
-            actionSend.close();
+            actionSend.Close();
         if(actionReceive != null)
-            actionReceive.close();
+            actionReceive.Close();
 
         if(showDebugLogs)
             GD.Print("UdpController closed");

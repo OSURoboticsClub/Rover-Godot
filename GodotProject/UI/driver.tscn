@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://ch41c4i2r4sty"]
 
+[ext_resource type="PackedScene" uid="uid://cs84vvc8run7d" path="res://UI/Camera/CameraFeed.tscn" id="1_tdlda"]
+
 [node name="Driver" type="Control" unique_id=189879333]
 custom_maximum_size = Vector2(1152, 648)
 layout_mode = 3
@@ -8,10 +10,13 @@ offset_right = 1152.0
 offset_bottom = 648.0
 metadata/_tab_index = 0
 
-[node name="Button" type="Button" parent="." unique_id=446472086]
-layout_mode = 0
-offset_left = 82.0
-offset_top = 238.0
-offset_right = 289.0
-offset_bottom = 321.0
-text = "Do smth"
+[node name="CameraFeed2" parent="." unique_id=11654513 instance=ExtResource("1_tdlda")]
+layout_mode = 1
+offset_left = 480.0
+offset_right = -192.0
+offset_bottom = -288.0
+
+[node name="CameraFeed" parent="." unique_id=255272790 instance=ExtResource("1_tdlda")]
+layout_mode = 1
+offset_right = -672.0
+offset_bottom = -288.0
