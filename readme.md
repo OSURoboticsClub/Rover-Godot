@@ -31,3 +31,8 @@ Create a .vscode/launch.json, change the value of "program" to the path to your 
 Open the GodotProject folder inside this directory in Godot
 
 This project is a bit different from the Unity, as Godot sees everything in its base directory, rather than Unity, which only sees inside it's Assets folder, thus to keep the Godot code and backend python code seperate to avoid confusion, we are putting the Godot project in its own folder.
+
+## Step Five:
+Install GST Streamer
+`sudo apt update`
+`sudo apt install libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly gstreamer1.0-libav`
