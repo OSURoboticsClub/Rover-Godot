@@ -12,7 +12,7 @@ public partial class CameraFeed : GodotCameraStream
 {
     private OptionButton dropdown;
     [Export] private Json set_bool_service;
-    CameraFeedHandler handler;
+    CameraFeedCounter handler;
     long lastIndex = -1;
     public void sendCameraEnableMessage(CameraEntry entry, bool state)
     {
@@ -28,7 +28,7 @@ public partial class CameraFeed : GodotCameraStream
     public override void _Ready()
     {
         base._Ready();
-        handler = (CameraFeedHandler)GetParent();        
+        handler = CameraFeedCounter.getInst();      
 
         dropdown = GetNode<OptionButton>("Camera Selector");
         dropdown.ItemSelected += changeStream;
@@ -54,7 +54,7 @@ public partial class CameraFeed : GodotCameraStream
             GD.Print(handler.Listening[(int)lastIndex].Count);
             handler.Listening[(int)lastIndex].Remove(this);
             if(handler.Listening[(int)lastIndex].Count == 0) {
-                sendCameraEnableMessage(entry, false);
+                sendCameraEnableMessage(cameraPortMap[(int)lastIndex], false);
             }
         }
         lastIndex = index;
