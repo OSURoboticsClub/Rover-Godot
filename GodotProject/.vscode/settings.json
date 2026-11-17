@@ -6,7 +6,8 @@
     "**/*.tres":true,
     "**/*.editorconfig":true,
     "project.godot":true,
-    "**/*.*.meta":true
+    "**/*.*.meta":true,
+    "**/*.meta":true
   },
   "dotnet.defaultSolution": "RoverGodot.sln"
 }

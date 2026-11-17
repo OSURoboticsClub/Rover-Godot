@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://ch41c4i2r4sty"]
 
 [ext_resource type="PackedScene" uid="uid://cs84vvc8run7d" path="res://UI/Camera/CameraFeed.tscn" id="1_tdlda"]
+[ext_resource type="Script" uid="uid://cylpbanr35h71" path="res://UI/Camera/CameraFeedHandler.cs" id="1_wlbke"]
 
 [node name="Driver" type="Control" unique_id=189879333]
 custom_maximum_size = Vector2(1152, 648)
@@ -10,13 +11,19 @@ offset_right = 1152.0
 offset_bottom = 648.0
 metadata/_tab_index = 0
 
-[node name="CameraFeed2" parent="." unique_id=11654513 instance=ExtResource("1_tdlda")]
+[node name="Control" type="Control" parent="." unique_id=1523135935]
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+script = ExtResource("1_wlbke")
+
+[node name="CameraFeed2" parent="Control" unique_id=11654513 instance=ExtResource("1_tdlda")]
 layout_mode = 1
 offset_left = 480.0
 offset_right = -192.0
 offset_bottom = -288.0
 
-[node name="CameraFeed" parent="." unique_id=255272790 instance=ExtResource("1_tdlda")]
+[node name="CameraFeed" parent="Control" unique_id=255272790 instance=ExtResource("1_tdlda")]
 layout_mode = 1
 offset_right = -672.0
 offset_bottom = -288.0

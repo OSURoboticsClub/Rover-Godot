@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://td4xind3whae" path="res://Images/no_image.png" id="1_57qra"]
 [ext_resource type="Script" uid="uid://dnffc7n3aqjbx" path="res://UI/Camera/CameraFeed.cs" id="2_57qra"]
+[ext_resource type="JSON" path="res://Templates/std_srvs/srv/SetBool.json" id="3_2vs1m"]
 
 [node name="CameraFeed" type="TextureRect" unique_id=255272790]
 anchors_preset = 15
@@ -14,6 +15,7 @@ grow_vertical = 2
 texture = ExtResource("1_57qra")
 expand_mode = 1
 script = ExtResource("2_57qra")
+set_bool_service = ExtResource("3_2vs1m")
 timeout_image = ExtResource("1_57qra")
 
 [node name="Camera Selector" type="OptionButton" parent="." unique_id=2066373352]

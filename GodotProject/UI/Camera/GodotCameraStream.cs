@@ -55,6 +55,7 @@ public partial class GodotCameraStream : TextureRect
         new CameraEntry("Chassis",       42075, "30/1", "d455"), //Not Used?
         new CameraEntry("Laptop",       5000, "30/1", "d455")
     };
+    public static string ToggleServiceName(CameraEntry entry) => $"/{entry.serviceNamespace}/toggle_camera";
 
     
 
@@ -87,7 +88,7 @@ public partial class GodotCameraStream : TextureRect
         }
     }
     
-    public void StartStream(CameraEntry camera)
+    public virtual void StartStream(CameraEntry camera)
     {
         if(_pipeline != null)
         {
