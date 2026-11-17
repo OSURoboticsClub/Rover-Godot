@@ -17,12 +17,11 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-UdpController="*uid://cok1ro2dfsvxs"
 Udp="*uid://ciyyek6fbnacm"
 
 [display]
 
-window/stretch/mode="canvas_items"
+window/stretch/mode="viewport"
 window/stretch/aspect="expand"
 
 [dotnet]

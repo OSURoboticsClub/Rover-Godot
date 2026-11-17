@@ -12,7 +12,8 @@ metadata/_tab_index = 0
 
 [node name="Control" type="Control" parent="." unique_id=1523135935]
 anchors_preset = 0
-offset_right = 1152.0
+offset_left = -1.0
+offset_right = 1151.0
 offset_bottom = 648.0
 
 [node name="CameraFeed2" parent="Control" unique_id=11654513 instance=ExtResource("1_tdlda")]
