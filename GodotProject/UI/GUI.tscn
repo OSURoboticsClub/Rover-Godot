@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://nhj1twvoxps6"]
 
-[ext_resource type="Script" uid="uid://d1eb3n4y7ockm" path="res://UI/Gui.cs" id="1_dl5f7"]
 [ext_resource type="Theme" uid="uid://blh0ffj3rh4ht" path="res://UI/GUITheme.tres" id="1_yki11"]
 [ext_resource type="PackedScene" uid="uid://ch41c4i2r4sty" path="res://UI/driver.tscn" id="2_dl5f7"]
 
@@ -14,7 +13,6 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-script = ExtResource("1_dl5f7")
 
 [node name="Control" type="Control" parent="." unique_id=71271118]
 layout_mode = 2

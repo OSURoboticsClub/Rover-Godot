@@ -47,7 +47,7 @@ public partial class UdpController : Node
     {
         inst = this;
 
-        Error err = Error.Ok;
+        Error? err = Error.Ok;
 
         err = publishSend.SetDestAddress(serverIP, publishSendPort);
         if(err != Error.Ok)

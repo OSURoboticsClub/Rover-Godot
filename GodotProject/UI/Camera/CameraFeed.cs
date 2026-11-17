@@ -11,6 +11,7 @@ using System.Collections.Generic;
 public partial class CameraFeed : GodotCameraStream
 {
     private OptionButton dropdown;
+    private Label latencyLabel;
     [Export] private Json set_bool_service;
     CameraFeedCounter handler;
     long lastIndex = -1;
@@ -29,11 +30,28 @@ public partial class CameraFeed : GodotCameraStream
     {
         base._Ready();
         handler = CameraFeedCounter.getInst();      
-
         dropdown = GetNode<OptionButton>("Camera Selector");
+        latencyLabel = GetNode<Label>("Latency Label");
+
         dropdown.ItemSelected += changeStream;
-        changeStream(dropdown.GetIndex());
-        
+
+        changeStream(dropdown.GetIndex());       
+    }
+    public override void _Process(double delta)
+    {
+        base._Process(delta);
+        if(latencyMs == null)
+        {
+            latencyLabel.Text = $"No Video";
+            return;
+        }
+        else if(latencyMs < 9999)
+        {
+            latencyLabel.Text = $"Latency: {(int) Math.Round((decimal)latencyMs)} ms";
+        } else
+        {
+            latencyLabel.Text = $"Latency: {Math.Round((decimal)latencyMs/1000, 1)} s";
+        }
     }
 
     private void changeStream(long index)

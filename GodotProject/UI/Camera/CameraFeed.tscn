@@ -4,6 +4,11 @@
 [ext_resource type="Script" uid="uid://dnffc7n3aqjbx" path="res://UI/Camera/CameraFeed.cs" id="2_57qra"]
 [ext_resource type="JSON" path="res://Templates/std_srvs/srv/SetBool.json" id="3_2vs1m"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_bfe0l"]
+font_color = Color(0.7607843, 0.4509804, 0, 1)
+stacked_outline_count = 1
+stacked_outline_0/size = 10
+
 [node name="CameraFeed" type="TextureRect" unique_id=255272790]
 anchors_preset = 15
 anchor_right = 1.0
@@ -42,3 +47,15 @@ popup/item_7/text = "Chassis"
 popup/item_7/id = 7
 popup/item_8/text = "Laptop"
 popup/item_8/id = 8
+
+[node name="Latency Label" type="Label" parent="." unique_id=105563199]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.01
+anchor_right = 0.99
+anchor_bottom = 0.1
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "Latency: 0ms"
+label_settings = SubResource("LabelSettings_bfe0l")
+horizontal_alignment = 2

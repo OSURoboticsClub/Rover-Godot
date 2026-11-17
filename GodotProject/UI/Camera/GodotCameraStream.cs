@@ -4,6 +4,7 @@ using Gst.App;
 using System;
 using System.Runtime.InteropServices;
 using System.Collections.Generic;
+using GLib;
 public class CameraEntry
     {
         public string name;
@@ -41,7 +42,9 @@ public partial class GodotCameraStream : TextureRect
     private ulong lastFixTime = 0;
     private int currentSizeX = 0;
     private int currentSizeY = 0;
-
+    public double? latencyMs = null;
+    [Godot.Signal]
+    public delegate void NewImageRecievedEventHandler();
 
     public static List<CameraEntry> cameraPortMap = new List<CameraEntry>()
     {
@@ -62,7 +65,7 @@ public partial class GodotCameraStream : TextureRect
     public override void _Ready()
     {
         // Initialize GStreamer
-        Application.Init();
+        Gst.Application.Init();
 
         // Prepare Godot Image and Texture
         _image = Image.CreateEmpty(Width, Height, false, Image.Format.Rgb8);
@@ -96,10 +99,16 @@ public partial class GodotCameraStream : TextureRect
         }
         GD.Print("Listening on port:" + camera.port);
         // Build the pipeline
-        string pipelineDesc = $"tcpclientsrc host={"127.0.0.1"} port={camera.port} ! " +
+        string pipelineDesc = 
+            $"udpsrc port={camera.port} ! application/x-rtp,encoding-name=JPEG,payload=26 ! " +
+            $"rtpjpegdepay ! jpegdec ! videoconvert ! video/x-raw,format=RGB,width={Width},height={Height} ! " +
+            $"appsink name=sink emit-signals=true sync=false max-buffers=1 drop=true";
+        
+        
+        /**$"tcpclientsrc host={"127.0.0.1"} port={camera.port} ! " +
             "tsdemux ! h264parse ! avdec_h264 ! videoconvert ! " +
             "video/x-raw,format=RGB ! " +
-            "appsink name=sink emit-signals=true max-buffers=1 drop=true sync=false";
+            "appsink name=sink emit-signals=true max-buffers=1 drop=true sync=false";*/
         _pipeline = (Pipeline)Parse.Launch(pipelineDesc);
 
         Element sinkElement = _pipeline.GetByName("sink");
@@ -113,25 +122,50 @@ public partial class GodotCameraStream : TextureRect
 
     private void OnNewSample(object sender, NewSampleArgs args)
     {
-        GD.Print("Recieved");
         var sink = (AppSink)sender;
 
         using var buffer = sink.PullSample()?.Buffer;
+        
         if (buffer == null) return;
         if (!buffer.Map(out MapInfo mapInfo, MapFlags.Read)) return;
         
         // Set the
-        _image.SetData(Width, Height, false, Image.Format.Rgb8, mapInfo.Data);
-        _image.Resize(currentSizeX, currentSizeY, Image.Interpolation.Nearest);
-        if (_texture == null || _texture.GetWidth() != currentSizeX || _texture.GetHeight() != currentSizeY)
+        Callable.From(() => 
         {
-            _texture = ImageTexture.CreateFromImage(_image);
-        } else _texture.Update(_image);
-
+            if (IsInstanceValid(_texture))
+            {
+                _image.SetData(Width, Height, false, Image.Format.Rgb8, mapInfo.Data);
+                _image.Resize(currentSizeX, currentSizeY, Image.Interpolation.Nearest);
+                if (_texture == null || _texture.GetWidth() != currentSizeX || _texture.GetHeight() != currentSizeY)
+                {
+                    _texture = ImageTexture.CreateFromImage(_image);
+                } else _texture.Update(_image);
+            }
+        }).CallDeferred();
+        
         lastFixTime = Time.GetTicksMsec();
+
+        // Get the camera latency
+        Clock clock = _pipeline.Clock;
+
+        if (clock != null && buffer.Pts != Gst.Constants.CLOCK_TIME_NONE)
+        {
+            // Current running time of the pipeline
+            ulong runningTime = clock.Time - _pipeline.BaseTime;
+            
+            GD.Print("Buffer: " + buffer.Pts, "John: ", clock.Time - _pipeline.BaseTime);
+            // Compare running time against when the frame was captured (Pts)
+    
+            ulong latencyNs = (ulong) Math.Abs((double)(runningTime - buffer.Pts));
+            latencyMs = latencyNs / 1_000_000_000_000.0;
+            
+            GD.Print($"Capture-to-Display Latency: {latencyMs:F2} ms");
+        
+        }
         
         // Unmap the data so that GStreamer knows we are done with it
         buffer.Unmap(mapInfo);
+        //EmitSignal(SignalName.NewImageRecieved);
     }
     
     public void StopGStreamer()
