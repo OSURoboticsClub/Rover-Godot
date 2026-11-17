@@ -43,314 +43,314 @@ public partial class UdpController : Node
     [ExportCategory("Connection Status")]
     [Export] public bool showDebugLogs = true;
 
-    // public override void _Ready()
-    // {
-    //     inst = this;
+    public override void _Ready()
+    {
+        inst = this;
 
-    //     Error err = Error.Ok;
+        Error err = Error.Ok;
 
-    //     err = publishSend.SetDestAddress(serverIP, publishSendPort);
-    //     if(err != Error.Ok)
-    //     {
-    //         publishSend = null;
-    //         GD.PrintErr($"Couldn't configure UDP client for publishing: {err}");
-    //     }
+        err = publishSend.SetDestAddress(serverIP, publishSendPort);
+        if(err != Error.Ok)
+        {
+            publishSend = null;
+            GD.PrintErr($"Couldn't configure UDP client for publishing: {err}");
+        }
 
-    //     err = subscriptionSend.SetDestAddress(serverIP, subscriptionSendPort);
-    //     if(err != Error.Ok)
-    //     {
-    //         subscriptionSend = null;
-    //         GD.PrintErr($"Couldn't configure UDP client for configuring subscription: {err}");
-    //     }
+        err = subscriptionSend.SetDestAddress(serverIP, subscriptionSendPort);
+        if(err != Error.Ok)
+        {
+            subscriptionSend = null;
+            GD.PrintErr($"Couldn't configure UDP client for configuring subscription: {err}");
+        }
 
-    //     err = subscriptionReceive.bind(subscriptionReceivePort);
-    //     if(err != Error.Ok)
-    //     {
-    //         subscriptionReceive = null;
-    //         GD.PrintErr($"Couldn't configure UDP client for receiving subscription: {err}");
-    //     }
+        err = subscriptionReceive.bind(subscriptionReceivePort);
+        if(err != Error.Ok)
+        {
+            subscriptionReceive = null;
+            GD.PrintErr($"Couldn't configure UDP client for receiving subscription: {err}");
+        }
 
-    //     err = serviceSend.SetDestAddress(serverIP, subscriptionSendPort);
-    //     if(err != Error.Ok)
-    //     {
-    //         serviceSend = null;
-    //         GD.PrintErr($"Couldn't configure UDP client for sending service request: {err}");
-    //     }
+        err = serviceSend.SetDestAddress(serverIP, subscriptionSendPort);
+        if(err != Error.Ok)
+        {
+            serviceSend = null;
+            GD.PrintErr($"Couldn't configure UDP client for sending service request: {err}");
+        }
 
-    //     err = serviceReceive.bind(serviceReceivePort);
-    //     if(err != Error.Ok)
-    //     {
-    //         serviceReceive = null;
-    //         GD.PrintErr($"Couldn't configure UDP client for receiving service response: {err}");
-    //     }
+        err = serviceReceive.bind(serviceReceivePort);
+        if(err != Error.Ok)
+        {
+            serviceReceive = null;
+            GD.PrintErr($"Couldn't configure UDP client for receiving service response: {err}");
+        }
 
-    //     err = actionSend.SetDestAddress(serverIP, subscriptionSendPort);
-    //     if(err != Error.Ok)
-    //     {
-    //         actionSend = null;
-    //         GD.PrintErr($"Couldn't configure UDP client for sending action request: {err}");
-    //     }
+        err = actionSend.SetDestAddress(serverIP, subscriptionSendPort);
+        if(err != Error.Ok)
+        {
+            actionSend = null;
+            GD.PrintErr($"Couldn't configure UDP client for sending action request: {err}");
+        }
 
-    //     err = actionReceive.bind(actionReceivePort);
-    //     if(err != Error.Ok)
-    //     {
-    //         actionReceive = null;
-    //         GD.PrintErr($"Couldn't configure UDP client for receiving action response: {err}");
-    //     }
+        err = actionReceive.bind(actionReceivePort);
+        if(err != Error.Ok)
+        {
+            actionReceive = null;
+            GD.PrintErr($"Couldn't configure UDP client for receiving action response: {err}");
+        }
 
-    //     if(showDebugLogs)
-    //         GD.Print("UDP Controller initialized!");
-    // }
+        if(showDebugLogs)
+            GD.Print("UDP Controller initialized!");
+    }
 
-    // public override void _Process(double delta)
-    // {
-    //     while(subscriptionReceive != null && subscriptionReceive.GetAvailablePacketCount() > 0)
-    //     {
-    //         try
-    //         {
-    //             byte[] data = subscriptionReceive.GetPacket();
-    //             string jsonString = Encoding.UTF8.GetString(data);
-    //             JObject message = JObject.Parse(jsonString);
-    //             string topic = message["topic"]?.ToString();
-    //             if(!string.IsNullOrEmpty(topic))
-    //             {
-    //                 if(showDebugLogs)
-    //                     GD.Print($"Received new data for subscription to topic {topic}");
-    //                 latestMessages[topic] = message;
-    //             }
-    //         }
-    //         catch(System.Exception e)
-    //         {
-    //             GD.PrintErr($"Failed to receive/parse UDP message: {e.Message}");
-    //         }
-    //     }
+    public override void _Process(double delta)
+    {
+        while(subscriptionReceive != null && subscriptionReceive.GetAvailablePacketCount() > 0)
+        {
+            try
+            {
+                byte[] data = subscriptionReceive.GetPacket();
+                string jsonString = Encoding.UTF8.GetString(data);
+                JObject message = JObject.Parse(jsonString);
+                string topic = message["topic"]?.ToString();
+                if(!string.IsNullOrEmpty(topic))
+                {
+                    if(showDebugLogs)
+                        GD.Print($"Received new data for subscription to topic {topic}");
+                    latestMessages[topic] = message;
+                }
+            }
+            catch(System.Exception e)
+            {
+                GD.PrintErr($"Failed to receive/parse UDP message: {e.Message}");
+            }
+        }
 
-    //     while(serviceReceive != null && serviceReceive.GetAvailablePacketCount() > 0)
-    //     {
-    //         try
-    //         {
-    //             byte[] data = serviceReceive.GetPacket();
-    //             string jsonString = Encoding.UTF8.GetString(data);
-    //             JObject message = JObject.Parse(jsonString);
+        while(serviceReceive != null && serviceReceive.GetAvailablePacketCount() > 0)
+        {
+            try
+            {
+                byte[] data = serviceReceive.GetPacket();
+                string jsonString = Encoding.UTF8.GetString(data);
+                JObject message = JObject.Parse(jsonString);
 
-    //             string serviceKey = message["service"]?.ToString();
-    //             if(!string.IsNullOrEmpty(topic))
-    //             {
-    //                 if(showDebugLogs)
-    //                     GD.Print($"Updated response for service {serviceKey}");
-    //                 latestServiceResponses[topic] = message;
-    //             }
-    //         }
-    //         catch(System.Exception e)
-    //         {
-    //             GD.PrintErr($"Failed to receive/parse UDP message: {e.Message}");
-    //         }
-    //     }
+                string serviceKey = message["service"]?.ToString();
+                if(!string.IsNullOrEmpty(topic))
+                {
+                    if(showDebugLogs)
+                        GD.Print($"Updated response for service {serviceKey}");
+                    latestServiceResponses[topic] = message;
+                }
+            }
+            catch(System.Exception e)
+            {
+                GD.PrintErr($"Failed to receive/parse UDP message: {e.Message}");
+            }
+        }
 
-    //     while(actionReceive != null && actionReceive.GetAvailablePacketCount() > 0)
-    //     {
-    //         try
-    //         {
-    //             byte[] data = actionReceive.GetPacket();
-    //             string jsonString = Encoding.UTF8.GetString(data);
-    //             JObject message = JObject.Parse(jsonString);
+        while(actionReceive != null && actionReceive.GetAvailablePacketCount() > 0)
+        {
+            try
+            {
+                byte[] data = actionReceive.GetPacket();
+                string jsonString = Encoding.UTF8.GetString(data);
+                JObject message = JObject.Parse(jsonString);
 
-    //             string actionName = message["action"]?.ToString();
-    //             if(!string.IsNullOrEmpty(actionName))
-    //             {
-    //                 if(showDebugLogs)
-    //                     GD.Print($"Updated response for action {actionName}");
-    //                 latestActionResponses[topic] = message;
-    //             }
-    //         }
-    //         catch(System.Exception e)
-    //         {
-    //             GD.PrintErr($"Failed to receive/parse UDP message: {e.Message}");
-    //         }
-    //     }
-    // }
+                string actionName = message["action"]?.ToString();
+                if(!string.IsNullOrEmpty(actionName))
+                {
+                    if(showDebugLogs)
+                        GD.Print($"Updated response for action {actionName}");
+                    latestActionResponses[topic] = message;
+                }
+            }
+            catch(System.Exception e)
+            {
+                GD.PrintErr($"Failed to receive/parse UDP message: {e.Message}");
+            }
+        }
+    }
 
-    // public async Task<JObject> WaitForServiceResponse(string serviceKey, int maxAttempts = 50, float delayBetweenAttempts = 0.1f)
-    // {
-    //     for(int i = 0; i < maxAttempts; i++)
-    //     {
-    //         if(latestServiceResponses.TryGetValue(serviceKey, out JObject response))
-    //         {
-    //             latestServiceReponses.Remove(serviceKey);
-    //             if(showDebugLogs)
-    //                 GD.Print($"Found service response for {serviceKey}");
-    //             return response;
-    //         }
-    //         await ToSignal(GetTree().CreateTimer(delayBetweenAttempts), SceneTreeTimer.SignalName.Timeout);
-    //     }
+    public async Task<JObject> WaitForServiceResponse(string serviceKey, int maxAttempts = 50, float delayBetweenAttempts = 0.1f)
+    {
+        for(int i = 0; i < maxAttempts; i++)
+        {
+            if(latestServiceResponses.TryGetValue(serviceKey, out JObject response))
+            {
+                latestServiceReponses.Remove(serviceKey);
+                if(showDebugLogs)
+                    GD.Print($"Found service response for {serviceKey}");
+                return response;
+            }
+            await ToSignal(GetTree().CreateTimer(delayBetweenAttempts), SceneTreeTimer.SignalName.Timeout);
+        }
 
-    //     GD.PrintErr($"WaitForServiceResponse timed out for {serviceKey}");
-    //     return new JObject();
-    // }
+        GD.PrintErr($"WaitForServiceResponse timed out for {serviceKey}");
+        return new JObject();
+    }
 
-    // public void ConfigureSubscription(string topic, string msgType)
-    // {
-    //     string message = topic + ";" + msgType;
+    public void ConfigureSubscription(string topic, string msgType)
+    {
+        string message = topic + ";" + msgType;
 
-    //     if(subscriptionSend == null)
-    //     {
-    //         GD.PrintErr($"Connection for configuring subscriptions not established");
-    //         return;
-    //     }
+        if(subscriptionSend == null)
+        {
+            GD.PrintErr($"Connection for configuring subscriptions not established");
+            return;
+        }
 
-    //     try
-    //     {
-    //         byte[] data = Encoding.UTF8.GetBytes(message);
-    //         subscriptionSend.PutPacket(data);
+        try
+        {
+            byte[] data = Encoding.UTF8.GetBytes(message);
+            subscriptionSend.PutPacket(data);
             
-    //         if(showDebugLogs)
-    //             GD.Print($"Configured subscription for {topic}");
-    //     }
-    //     catch(System.Exception e)
-    //     {
-    //         GD.PrintErr($"Failed to configure subscription for {topic}: {e.Message}");
-    //     }
-    // }
+            if(showDebugLogs)
+                GD.Print($"Configured subscription for {topic}");
+        }
+        catch(System.Exception e)
+        {
+            GD.PrintErr($"Failed to configure subscription for {topic}: {e.Message}");
+        }
+    }
 
-    // public void PublishMessage(string message)
-    // {
-    //     if(publishSend == null)
-    //     {
-    //         GD.PrintErr($"Connection for publishing not established");
-    //         return;
-    //     }
+    public void PublishMessage(string message)
+    {
+        if(publishSend == null)
+        {
+            GD.PrintErr($"Connection for publishing not established");
+            return;
+        }
 
-    //     try
-    //     {
-    //         byte[] data = Encoding.UTF8.GetBytes(message);
-    //         publishSend.PutPacket(data);
+        try
+        {
+            byte[] data = Encoding.UTF8.GetBytes(message);
+            publishSend.PutPacket(data);
 
-    //         if(showDebugLogs)
-    //             GD.Print($"Published: {message}");
-    //     }
-    //     catch(System.Exception e)
-    //     {
-    //         GD.PrintErr($"Failed to publish data: {e.Message}");
-    //     }
-    // }
+            if(showDebugLogs)
+                GD.Print($"Published: {message}");
+        }
+        catch(System.Exception e)
+        {
+            GD.PrintErr($"Failed to publish data: {e.Message}");
+        }
+    }
 
-    // public async Task<JObject> PublishClientReq(string message, string serviceKey = null)
-    // {
-    //     JObject response = new JObject();
+    public async Task<JObject> PublishClientReq(string message, string serviceKey = null)
+    {
+        JObject response = new JObject();
 
-    //     if(serviceSend == null)
-    //     {
-    //         GD.PrintErr("Connection for making service requests not established");
-    //         return response;
-    //     }
+        if(serviceSend == null)
+        {
+            GD.PrintErr("Connection for making service requests not established");
+            return response;
+        }
 
-    //     try
-    //     {
-    //         if(string.IsNullOrEmpty(serviceKey))
-    //         {
-    //             JObject messageObject = JObject.Parse(message);
-    //             serviceKey = messageObject["service"].ToString();
-    //         }
+        try
+        {
+            if(string.IsNullOrEmpty(serviceKey))
+            {
+                JObject messageObject = JObject.Parse(message);
+                serviceKey = messageObject["service"].ToString();
+            }
 
-    //         byte[] data = Encoding.UTF8.GetBytes(message);
-    //         serviceSend.PutPacket(data);
+            byte[] data = Encoding.UTF8.GetBytes(message);
+            serviceSend.PutPacket(data);
 
-    //         if(showDebugLogs)
-    //             GD.Print($"Made service request for {serviceKey} (will wait for response)");
+            if(showDebugLogs)
+                GD.Print($"Made service request for {serviceKey} (will wait for response)");
 
-    //         response = await WaitForServiceResponse(serviceKey);
-    //     }
-    //     catch(System.Exception e)
-    //     {
-    //         GD.PrintErr($"Failed to make service request: {e.Message}");
-    //     }
+            response = await WaitForServiceResponse(serviceKey);
+        }
+        catch(System.Exception e)
+        {
+            GD.PrintErr($"Failed to make service request: {e.Message}");
+        }
 
-    //     return response;
-    // }
+        return response;
+    }
 
-    // public void SendClientReq(string message)
-    // {
-    //     if(serviceSend == null)
-    //     {
-    //         GD.PrintErr("Connection for making service requests not established");
-    //         return;
-    //     }
+    public void SendClientReq(string message)
+    {
+        if(serviceSend == null)
+        {
+            GD.PrintErr("Connection for making service requests not established");
+            return;
+        }
 
-    //     try
-    //     {
-    //         byte[] data = Encoding.UTF8.GetBytes(message);
-    //         serviceSend.PutPacket(data);
-    //     }
-    //     catch(System.Exception e)
-    //     {
-    //         GD.PrintErr($"Failed to make service request: {e.Message}");
-    //     }
-    // }
+        try
+        {
+            byte[] data = Encoding.UTF8.GetBytes(message);
+            serviceSend.PutPacket(data);
+        }
+        catch(System.Exception e)
+        {
+            GD.PrintErr($"Failed to make service request: {e.Message}");
+        }
+    }
 
-    // public void PublishActionReq(string message, string actionName = null)
-    // {
-    //     if(actionSend == null)
-    //     {
-    //         GD.PrintErr("Connection for making service requests not established");
-    //         return;
-    //     }
+    public void PublishActionReq(string message, string actionName = null)
+    {
+        if(actionSend == null)
+        {
+            GD.PrintErr("Connection for making service requests not established");
+            return;
+        }
 
-    //     try
-    //     {
-    //         if(string.IsNullOrEmpty(actionName))
-    //         {
-    //             JObject messageObject = JObject.Parse(message);
-    //             actionName = messageObject["action"].ToString();
-    //         }
+        try
+        {
+            if(string.IsNullOrEmpty(actionName))
+            {
+                JObject messageObject = JObject.Parse(message);
+                actionName = messageObject["action"].ToString();
+            }
 
-    //         byte[] data = Encoding.UTF8.GetBytes(message);
-    //         actionSend.PutPacket(data);
+            byte[] data = Encoding.UTF8.GetBytes(message);
+            actionSend.PutPacket(data);
 
-    //         if(showDebugLogs)
-    //             GD.Print($"Made action request for {actionName}");
-    //     }
-    //     catch(System.Exception e)
-    //     {
-    //         GD.PrintErr($"Failed to make action request: {e.Message}");
-    //     }
-    // }
+            if(showDebugLogs)
+                GD.Print($"Made action request for {actionName}");
+        }
+        catch(System.Exception e)
+        {
+            GD.PrintErr($"Failed to make action request: {e.Message}");
+        }
+    }
 
-    // public JObject GetLatestMessage(string topic)
-    // {
-    //     latestMessages.TryGetValue(topic, out JObject msg);
-    //     return msg;
-    // }
+    public JObject GetLatestMessage(string topic)
+    {
+        latestMessages.TryGetValue(topic, out JObject msg);
+        return msg;
+    }
 
-    // public JObject GetLatestServiceResponse(string serviceKey)
-    // {
-    //     latestServiceResponses.TryGetValue(serviceKey, out JObject msg);
-    //     return msg;
-    // }
+    public JObject GetLatestServiceResponse(string serviceKey)
+    {
+        latestServiceResponses.TryGetValue(serviceKey, out JObject msg);
+        return msg;
+    }
 
-    // public JObject GetLatestActionResponse(string actionName)
-    // {
-    //     latestActionResponses.TryGetValue(actionName, out JObject msg);
-    //     return msg;
-    // }
+    public JObject GetLatestActionResponse(string actionName)
+    {
+        latestActionResponses.TryGetValue(actionName, out JObject msg);
+        return msg;
+    }
 
-    // public void _Exit_Tree()
-    // {
-    //     if(publishSend != null)
-    //         publishSend.close();
-    //     if(subscriptionSend != null)
-    //         subscriptionSend.close();
-    //     if(subscriptionReceive != null)
-    //         subscriptionReceive.close();
-    //     if(serviceSend != null)
-    //         serviceSend.close();
-    //     if(serviceReceive != null)
-    //         serviceReceive.close();
-    //     if(actionSend != null)
-    //         actionSend.close();
-    //     if(actionReceive != null)
-    //         actionReceive.close();
+    public void _Exit_Tree()
+    {
+        if(publishSend != null)
+            publishSend.close();
+        if(subscriptionSend != null)
+            subscriptionSend.close();
+        if(subscriptionReceive != null)
+            subscriptionReceive.close();
+        if(serviceSend != null)
+            serviceSend.close();
+        if(serviceReceive != null)
+            serviceReceive.close();
+        if(actionSend != null)
+            actionSend.close();
+        if(actionReceive != null)
+            actionReceive.close();
 
-    //     if(showDebugLogs)
-    //         GD.Print("UdpController closed");
-    // }
+        if(showDebugLogs)
+            GD.Print("UdpController closed");
+    }
 }
