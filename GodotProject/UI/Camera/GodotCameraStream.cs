@@ -27,7 +27,7 @@ public partial class GodotCameraStream : TextureRect
 {
     private Pipeline _pipeline;
     private AppSink _appSink;
-    private Image _image;
+    public Image _image;
     private ImageTexture _texture;
     [Export] private Texture2D timeout_image { get; set; }
 
@@ -144,24 +144,6 @@ public partial class GodotCameraStream : TextureRect
         }).CallDeferred();
         
         lastFixTime = Time.GetTicksMsec();
-
-        // Get the camera latency
-        Clock clock = _pipeline.Clock;
-
-        if (clock != null && buffer.Pts != Gst.Constants.CLOCK_TIME_NONE)
-        {
-            // Current running time of the pipeline
-            ulong runningTime = clock.Time - _pipeline.BaseTime;
-            
-            GD.Print("Buffer: " + buffer.Pts, "John: ", clock.Time - _pipeline.BaseTime);
-            // Compare running time against when the frame was captured (Pts)
-    
-            ulong latencyNs = (ulong) Math.Abs((double)(runningTime - buffer.Pts));
-            latencyMs = latencyNs / 1_000_000_000_000.0;
-            
-            GD.Print($"Capture-to-Display Latency: {latencyMs:F2} ms");
-        
-        }
         
         // Unmap the data so that GStreamer knows we are done with it
         buffer.Unmap(mapInfo);

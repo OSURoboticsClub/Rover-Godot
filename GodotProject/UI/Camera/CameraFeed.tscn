@@ -3,6 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://td4xind3whae" path="res://Images/no_image.png" id="1_57qra"]
 [ext_resource type="Script" uid="uid://dnffc7n3aqjbx" path="res://UI/Camera/CameraFeed.cs" id="2_57qra"]
 [ext_resource type="JSON" path="res://Templates/std_srvs/srv/SetBool.json" id="3_2vs1m"]
+[ext_resource type="Texture2D" uid="uid://3qo4ixvkxw35" path="res://Images/kenney_game-icons/PNG/White/1x/forward.png" id="4_3k7li"]
+[ext_resource type="Texture2D" uid="uid://b073ajvdo6uhe" path="res://Images/kenney_game-icons/PNG/White/1x/pause.png" id="5_du0hq"]
+[ext_resource type="Texture2D" uid="uid://csgqitn30j3dr" path="res://Images/kenney_game-icons/PNG/White/1x/save.png" id="6_du0hq"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_bfe0l"]
 font_color = Color(0.7607843, 0.4509804, 0, 1)
@@ -21,6 +24,8 @@ texture = ExtResource("1_57qra")
 expand_mode = 1
 script = ExtResource("2_57qra")
 set_bool_service = ExtResource("3_2vs1m")
+PlayIcon = ExtResource("4_3k7li")
+PauseIcon = ExtResource("5_du0hq")
 timeout_image = ExtResource("1_57qra")
 
 [node name="Camera Selector" type="OptionButton" parent="." unique_id=2066373352]
@@ -59,3 +64,26 @@ grow_horizontal = 2
 text = "Latency: 0ms"
 label_settings = SubResource("LabelSettings_bfe0l")
 horizontal_alignment = 2
+
+[node name="Pause_Play" type="Button" parent="." unique_id=680914685]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -58.0
+offset_top = -58.0
+grow_horizontal = 0
+grow_vertical = 0
+icon = ExtResource("4_3k7li")
+
+[node name="Photo" type="Button" parent="." unique_id=241664099]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -58.0
+offset_right = 58.0
+grow_vertical = 0
+icon = ExtResource("6_du0hq")

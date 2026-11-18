@@ -7,14 +7,23 @@ using System;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 /** Code generated partially by Gemini */
 public partial class CameraFeed : GodotCameraStream
 {
     private OptionButton dropdown;
     private Label latencyLabel;
     [Export] private Json set_bool_service;
+    [ExportCategory("Button Icons")]
+    [Export] Texture2D PlayIcon;
+    [Export] Texture2D PauseIcon;
     CameraFeedCounter handler;
+    Button PausePlayButton;
+    Button PhotoButton;
+
     long lastIndex = -1;
+    [Export] bool playing = false;
+
     public void sendCameraEnableMessage(CameraEntry entry, bool state)
     {
         JObject msg = JObject.Parse(Json.Stringify(set_bool_service.Data));
@@ -23,7 +32,8 @@ public partial class CameraFeed : GodotCameraStream
         msg["request"]["data"] = state;
 
         GD.Print($"[{entry.serviceNamespace}] toggle_camera({state}) sent (no wait).");
-        UdpController.inst.SendClientReq(msg.ToString());
+        try {UdpController.inst.SendClientReq(msg.ToString());}
+        finally {}
     }
 
     public override void _Ready()
@@ -32,10 +42,41 @@ public partial class CameraFeed : GodotCameraStream
         handler = CameraFeedCounter.getInst();      
         dropdown = GetNode<OptionButton>("Camera Selector");
         latencyLabel = GetNode<Label>("Latency Label");
+        PausePlayButton = GetNode<Button>("Pause_Play");
+        PhotoButton = GetNode<Button>("Photo");
+
+
 
         dropdown.ItemSelected += changeStream;
+        PausePlayButton.Pressed += Pause_Play_Fun;
+        PhotoButton.Pressed += Photo;
 
-        changeStream(dropdown.GetIndex());       
+        if(playing) {
+            changeStream(dropdown.GetIndex());
+            PausePlayButton.Icon = PauseIcon;
+        } else
+        {
+            PausePlayButton.Icon = PlayIcon;
+        }
+    }
+    public void Photo()
+    {
+        _image.SavePng("/home/ozy/Documents/Programenheimer/Github/rover-godot/GodotProject/ScreenShots/screenshot.png");
+        GD.Print("Image Saved !");
+    }
+    public void Pause_Play_Fun()
+    {
+        if(playing)
+        {
+            playing = false;
+            PausePlayButton.Icon = PlayIcon;
+            pauseStream();
+            return;
+        }
+        
+        playing = true;
+        PausePlayButton.Icon = PauseIcon;
+        changeStream(dropdown.Selected);
     }
     public override void _Process(double delta)
     {
@@ -53,9 +94,22 @@ public partial class CameraFeed : GodotCameraStream
             latencyLabel.Text = $"Latency: {Math.Round((decimal)latencyMs/1000, 1)} s";
         }
     }
+    private void pauseStream()
+    {
+        
+        StopGStreamer();
+        handler.Listening[(int)lastIndex].Remove(this);
+        if(handler.Listening[(int)lastIndex].Count == 0) {
+            sendCameraEnableMessage(cameraPortMap[(int)lastIndex], false);
+        }
+        lastIndex = -1;
+        return;
+        
+    }
 
     private void changeStream(long index)
     {
+        if(!playing) return;
         CameraEntry entry = cameraPortMap[(int) index];
         StartStream(entry);
         if(handler == null) return;
