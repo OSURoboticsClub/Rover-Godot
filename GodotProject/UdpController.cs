@@ -1,5 +1,6 @@
 using Godot;
 using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
@@ -70,7 +71,7 @@ public partial class UdpController : Node
             GD.PrintErr($"Couldn't configure UDP client for receiving subscription: {err}");
         }
 
-        err = serviceSend.SetDestAddress(serverIP, subscriptionSendPort);
+        err = serviceSend.SetDestAddress(serverIP, serviceSendPort);
         if(err != Error.Ok)
         {
             serviceSend = null;
@@ -84,7 +85,7 @@ public partial class UdpController : Node
             GD.PrintErr($"Couldn't configure UDP client for receiving service response: {err}");
         }
 
-        err = actionSend.SetDestAddress(serverIP, subscriptionSendPort);
+        err = actionSend.SetDestAddress(serverIP, actionSendPort);
         if(err != Error.Ok)
         {
             actionSend = null;
@@ -100,6 +101,8 @@ public partial class UdpController : Node
 
         if(showDebugLogs)
             GD.Print("UDP Controller initialized!");
+        
+        PublishActionReq("{\"action\": \"fibonacci\", \"actionType\": \"action_tutorials_interfaces/action/Fibonacci\", \"request\": {\"order\": 6}}");
     }
 
     public override void _Process(double delta)
@@ -153,16 +156,18 @@ public partial class UdpController : Node
             try
             {
                 byte[] data = actionReceive.GetPacket();
+                if (data == null || data.Length == 0)
+                    continue;
                 string jsonString = Encoding.UTF8.GetString(data);
                 JObject message = JObject.Parse(jsonString);
-                string topic = message["topic"]?.ToString();
 
                 string actionName = message["action"]?.ToString();
                 if(!string.IsNullOrEmpty(actionName))
                 {
                     if(showDebugLogs)
                         GD.Print($"Updated response for action {actionName}");
-                    latestActionResponses[topic] = message;
+                    latestActionResponses[actionName] = message;
+                    GD.Print($"AAAA: {message.ToString()}");
                 }
             }
             catch(System.Exception e)
