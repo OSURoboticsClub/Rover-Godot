@@ -11,16 +11,16 @@ public partial class UdpController : Node
 {
     public static UdpController inst { get; private set; }
 
-    private PacketPeerUdp publishSend;
+    private PacketPeerUdp publishSend = new PacketPeerUdp();
 
-    private PacketPeerUdp subscriptionSend;
-    private PacketPeerUdp subscriptionReceive;
+    private PacketPeerUdp subscriptionSend = new PacketPeerUdp();
+    private PacketPeerUdp subscriptionReceive = new PacketPeerUdp();
 
-    private PacketPeerUdp serviceSend;
-    private PacketPeerUdp serviceReceive;
+    private PacketPeerUdp serviceSend = new PacketPeerUdp();
+    private PacketPeerUdp serviceReceive = new PacketPeerUdp();
 
-    private PacketPeerUdp actionSend;
-    private PacketPeerUdp actionReceive;
+    private PacketPeerUdp actionSend = new PacketPeerUdp();
+    private PacketPeerUdp actionReceive = new PacketPeerUdp();
 
     private Dictionary<string, JObject> latestMessages         = new Dictionary<string, JObject>();
     private Dictionary<string, JObject> latestServiceResponses = new Dictionary<string, JObject>();
