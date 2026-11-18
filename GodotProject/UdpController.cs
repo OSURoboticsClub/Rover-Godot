@@ -102,7 +102,6 @@ public partial class UdpController : Node
         if(showDebugLogs)
             GD.Print("UDP Controller initialized!");
         
-        PublishActionReq("{\"action\": \"fibonacci\", \"actionType\": \"action_tutorials_interfaces/action/Fibonacci\", \"request\": {\"order\": 6}}");
     }
 
     public override void _Process(double delta)
@@ -167,7 +166,6 @@ public partial class UdpController : Node
                     if(showDebugLogs)
                         GD.Print($"Updated response for action {actionName}");
                     latestActionResponses[actionName] = message;
-                    GD.Print($"AAAA: {message.ToString()}");
                 }
             }
             catch(System.Exception e)

@@ -71,16 +71,28 @@ public partial class CameraFeed : GodotCameraStream
             playing = false;
             PausePlayButton.Icon = PlayIcon;
             pauseStream();
+            
             return;
         }
         
         playing = true;
+        if(Texture != timeout_image) _texture.Update(_image);
         PausePlayButton.Icon = PauseIcon;
         changeStream(dropdown.Selected);
     }
     public override void _Process(double delta)
     {
         base._Process(delta);
+        if(!playing)
+        {
+            Image newImage = (Image)_image.Duplicate();
+            if (_image.IsCompressed())
+            {
+                newImage.Decompress();
+            }
+            newImage.AdjustBcs(0.8f, 1.0f, 0.0f);
+            if(Texture != timeout_image) _texture.Update(newImage);
+        }
         if(latencyMs == null)
         {
             latencyLabel.Text = $"No Video";

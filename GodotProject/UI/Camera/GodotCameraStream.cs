@@ -28,8 +28,8 @@ public partial class GodotCameraStream : TextureRect
     private Pipeline _pipeline;
     private AppSink _appSink;
     public Image _image;
-    private ImageTexture _texture;
-    [Export] private Texture2D timeout_image { get; set; }
+    public ImageTexture _texture;
+    [Export] public Texture2D timeout_image { get; set; }
 
     [ExportCategory("Resolution")]
     [Export] private int Width = 640;
