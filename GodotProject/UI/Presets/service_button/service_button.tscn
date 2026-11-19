@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://dwv05sa52xwy5"]
+
+[ext_resource type="Script" uid="uid://bpd0upu6dlvsq" path="res://UI/Presets/service_button/service_button.cs" id="1_b2q4g"]
+[ext_resource type="Script" uid="uid://ckt64pyqb4vug" path="res://ROS2MessageConstructors/Cs/rover2_status_interface/srv/NodeLog.cs" id="2_dymqo"]
+[ext_resource type="Script" uid="uid://dq0e0w7a11ium" path="res://ROS2MessageConstructors/ServiceSelector.cs" id="3_oo5ku"]
+
+[sub_resource type="Resource" id="Resource_jrw0v"]
+script = ExtResource("2_dymqo")
+service = "Hello"
+enable = true
+hz = 2.0
+node = "20"
+metadata/_custom_type_script = "uid://tqo54c0q371x"
+
+[sub_resource type="Resource" id="Resource_bfe0l"]
+script = ExtResource("3_oo5ku")
+Type = 4
+Message = SubResource("Resource_jrw0v")
+metadata/_custom_type_script = "uid://dq0e0w7a11ium"
+
+[node name="ServiceButton" type="Button" unique_id=1489809686]
+text = "Run Service"
+script = ExtResource("1_b2q4g")
+ServiceConfig = SubResource("Resource_bfe0l")

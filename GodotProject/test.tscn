@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://dt22yhohwcpqd"]
+
+[ext_resource type="Script" uid="uid://3kowf2j8y3qa" path="res://UI/test.cs" id="1_ppyta"]
+[ext_resource type="Resource" uid="uid://dt1f47bsthyn1" path="res://new_resource.tres" id="2_ykrsh"]
+[ext_resource type="Script" uid="uid://bpd0upu6dlvsq" path="res://UI/Presets/service_button/service_button.cs" id="3_g14j6"]
+[ext_resource type="Script" uid="uid://dq0e0w7a11ium" path="res://ROS2MessageConstructors/ServiceSelector.cs" id="4_vbegm"]
+
+[sub_resource type="Resource" id="Resource_60vcd"]
+script = ExtResource("4_vbegm")
+Type = 6
+metadata/_custom_type_script = "uid://dq0e0w7a11ium"
+
+[node name="Test" type="Control" unique_id=1709504961]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_right = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ppyta")
+Hello = ExtResource("2_ykrsh")
+
+[node name="Control" type="Control" parent="." unique_id=168919624]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("3_g14j6")
+ServiceConfig = SubResource("Resource_60vcd")

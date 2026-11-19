@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="SetBool" format=3 uid="uid://dt1f47bsthyn1"]
+
+[ext_resource type="Script" uid="uid://c6dwvdueje4vm" path="res://ROS2MessageConstructors/Cs/std_srvs/srv/SetBool.cs" id="1_g5ko2"]
+
+[resource]
+script = ExtResource("1_g5ko2")
+service = "Test"
+metadata/_custom_type_script = "uid://c6dwvdueje4vm"
