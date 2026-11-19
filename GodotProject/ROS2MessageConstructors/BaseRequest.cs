@@ -8,4 +8,5 @@ namespace ROS2Messages;
 [GlobalClass]
 public abstract partial class BaseRequest : Resource {
     public abstract JObject toJson();
+    public abstract BaseRequest loadJson(JObject json);
 }

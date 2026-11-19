@@ -9,7 +9,7 @@ public partial class service_button : Button
 	public override void _Ready()
 	{
 		Pressed += on_press_fun;
-		GD.Print(((ROS2Messages.rover2_status_interface.srv.NodeLog)ServiceConfig.Message).enable);
+		GD.Print(((ROS2Messages.rover2_status_interface.srv.NodeLog)ServiceConfig.Message).request_enable);
 		string msg = ServiceConfig.Message.toJson().ToString();
 		GD.Print(msg);
 	}

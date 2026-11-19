@@ -12,8 +12,10 @@ public partial class Empty : ROS2Messages.BaseRequest {
   public string service {get; set; }= "";
   public override JObject toJson() {
     JObject returnValue = JObject.Parse(jsonstring);
-    returnValue["service"] = service;
-    return returnValue;
+    return  returnValue;
+  }
+  public override Empty loadJson(JObject json) {
+    return  this;
   }
   Empty() {}
 }
