@@ -17,19 +17,21 @@ public partial class AntennaControlService : ROS2Messages.BaseRequest {
   [Export] public string response_msg{get; set; }= "";
   public override JObject toJson() {
     JObject returnValue = JObject.Parse(jsonstring);
-    returnValue["request"]["mode"] = request_mode;
+    returnValue["service"] = service;
     returnValue["request"]["mode"] = request_mode;
     returnValue["response"]["success"] = response_success;
-    returnValue["response"]["success"] = response_success;
-    returnValue["response"]["msg"] = response_msg;
     returnValue["response"]["msg"] = response_msg;
     return  returnValue;
   }
   public override AntennaControlService loadJson(JObject json) {
+    service = (string)json["service"];
     request_mode = (int)json["request"]["mode"];
     response_success = (bool)json["response"]["success"];
     response_msg = (string)json["response"]["msg"];
     return  this;
+  }
+  public static explicit operator AntennaControlService(JObject json){
+    return new AntennaControlService().loadJson(json);
   }
   AntennaControlService() {}
 }

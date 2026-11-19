@@ -17,19 +17,21 @@ public partial class SetBool : ROS2Messages.BaseRequest {
   [Export] public string response_message{get; set; }= "";
   public override JObject toJson() {
     JObject returnValue = JObject.Parse(jsonstring);
-    returnValue["request"]["data"] = request_data;
+    returnValue["service"] = service;
     returnValue["request"]["data"] = request_data;
     returnValue["response"]["success"] = response_success;
-    returnValue["response"]["success"] = response_success;
-    returnValue["response"]["message"] = response_message;
     returnValue["response"]["message"] = response_message;
     return  returnValue;
   }
   public override SetBool loadJson(JObject json) {
+    service = (string)json["service"];
     request_data = (bool)json["request"]["data"];
     response_success = (bool)json["response"]["success"];
     response_message = (string)json["response"]["message"];
     return  this;
+  }
+  public static explicit operator SetBool(JObject json){
+    return new SetBool().loadJson(json);
   }
   SetBool() {}
 }

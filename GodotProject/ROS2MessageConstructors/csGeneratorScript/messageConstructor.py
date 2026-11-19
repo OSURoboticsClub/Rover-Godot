@@ -5,6 +5,7 @@ from csGeneratorScript.common import *
 
 _jsonFunBase = tabs(1) + "public override JObject toJson() {\n" + tabs(2) + "JObject returnValue = JObject.Parse(jsonstring);\n"
 
+
 def variableDef(indent, type, name, default = None, getset = False, export = True):
     """Returns a constructed variable string given the inputs"""
     returnValue = ""
@@ -22,26 +23,28 @@ def buildVariables(data : json, idx : list[str]):
     """Given an index for the dictionary data, returns the variables section, and all required function sections, as strings"""
     variables = ""
     toJsonFun = ""
+    fromJsonFun = ""
     dictToUse : dict = data
     for i in idx:
         print(i)
         dictToUse = dictToUse[i]
     if(len(dictToUse.keys()) == 0):
-        return "", ""
+        return "", "", ""
         
     name_prefix = ""
-    for i in idx:
+    for i in idx[1:]:
         name_prefix += i + "_"
-    if len(idx) == 1:
-        variables += tabs(1) + f"[ExportGroup(\"{idx[0]}\")]\n"
-    elif len(idx) == 2:
+    if len(idx) == 2:
+        variables += tabs(1) + f"[ExportGroup(\"{idx[-1]}\")]\n"
+    elif len(idx) == 3:
         variables += tabs(1) + f"[ExportSubgroup(\"{idx[-1]}\")]\n"
     for key in dictToUse.keys():
         if(type(dictToUse[key]) == dict):
             # If it is a dictionary, recursively
-            v1, tjf2 = buildVariables(data, idx + [key])
+            v1, tjf2, fjf2 = buildVariables(data, idx + [key])
             variables += v1
             toJsonFun += tjf2
+            fromJsonFun += fjf2
             continue
 
         typeOfVar = csTypeFromItem(dictToUse[key])
@@ -61,28 +64,31 @@ def buildVariables(data : json, idx : list[str]):
         for i in idx:
             toJsonFun += f"[\"{i}\"]"
         toJsonFun += f"[\"{key}\"] = {name_prefix + key};\n"
+
+        fromJsonFun += tabs(2) + f"{name_prefix + key} = ({typeOfVar})json"
+        for i in idx:
+            fromJsonFun += f"[\"{i}\"]"
+        fromJsonFun += f"[\"{key}\"];\n"
     
-    return variables, toJsonFun
+    return variables, toJsonFun, fromJsonFun
           
 def getClassFile(data: json, item : Path):
     variables = ""
     toJsonFun = ""
     fromJsonFun = ""
 
-    v2, tjf2 = buildVariables(data, ["request"])
+    v2, tjf2, fjf2 = buildVariables(data, ["data"])
     variables += v2
     toJsonFun += tjf2
-    v2, tjf2 = buildVariables(data, ["response"])
-    variables += v2
-    toJsonFun += tjf2
+    fromJsonFun += fjf2
 
-    toJsonFun += tabs(1) + "return  returnValue;\n" + tabs(1) + "}\n"
-    toJsonFun += tabs(1) + "return  this;\n" + tabs(1) + "}\n"
-    return variables, toJsonFun
+    toJsonFun += tabs(2) + "return  returnValue;\n" + tabs(1) + "}\n"
+    fromJsonFun += tabs(2) + "return  this;\n" + tabs(1) + "}\n"
+    return variables, toJsonFun, fromJsonFun
 
      
-requests = {}
-def parseServices(folder : Path, recursion = 0):
+messages = {}
+def parseMessages(folder : Path, recursion = 0):
     """Given a folder full of services, will create a Service CsClass for each json entry"""
 
     header, namespace = getHeaderFromPath(folder)
@@ -90,23 +96,29 @@ def parseServices(folder : Path, recursion = 0):
     for item in folder.iterdir():
         if item.is_dir(): continue
         if(not item.name.endswith(".json")): continue
+        className = item.name[:-5]
         newClass = ""
         toJsonFun = tabs(1) + "public override JObject toJson() {\n" + tabs(2) + "JObject returnValue = JObject.Parse(jsonstring);\n"
+        fromJsonFun = tabs(1) + f"public override {className} loadJson(JObject json) "+"{\n"
         # Open the json
         with open("./"+str(folder)+"/" + item.name , "r", encoding="utf-8") as file:
                 data = json.load(file)
         single_line_json = json.dumps(data, separators=(",", ":"))
         single_line_json = single_line_json.replace('"', "\\\"")
-        className = item.name[:-5]
-        requests[className] = namespace + "." + className
         
-        newClass += f"[Tool]\n[GlobalClass]\npublic partial class {className} : ROS2Messages.BaseRequest " + "{\n" 
+        messages[className] = namespace + "." + className
+        
+        newClass += f"[Tool]\n[GlobalClass]\npublic partial class {className} : ROS2Messages.BaseMessage " + "{\n" 
         newClass += tabs(1) + f"public static string jsonstring = " + "\"" + single_line_json + "\"" + ";" + "\n" 
-        newClass += tabs(1) + "[Export]" + "\n" + tabs(1) + "public string service " + getsetstr + "= \"\";\n"
+        newClass += tabs(1) + "[Export]" + "\n" + tabs(1) + "public string topic " + getsetstr + "= \"\";\n"
         
-        variables, toJsonFun = getClassFile(data, folder)
-        newClass += variables + toJsonFun
-        
+        variables, tjf, fjf = getClassFile(data, folder)
+        toJsonFun += tjf
+        fromJsonFun += fjf
+        newClass += variables + toJsonFun + fromJsonFun
+
+        newClass += tabs(1) + f"public static explicit operator {className}(JObject json)" + "{\n" 
+        newClass += tabs(2) + f"return new {className}().loadJson(json);\n" +tabs(1)+ "}\n"
         
         newClass += tabs(1) + f"{className}() " + "{" + "}" +"\n"
         newClass += "}" + "\n"

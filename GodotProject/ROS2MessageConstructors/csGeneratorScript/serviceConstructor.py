@@ -65,11 +65,6 @@ def buildVariables(data : json, idx : list[str]):
             toJsonFun += f"[\"{i}\"]"
         toJsonFun += f"[\"{key}\"] = {name_prefix + key};\n"
 
-        toJsonFun += tabs(2) + f"returnValue"
-        for i in idx:
-            toJsonFun += f"[\"{i}\"]"
-        toJsonFun += f"[\"{key}\"] = {name_prefix + key};\n"
-
         fromJsonFun += tabs(2) + f"{name_prefix + key} = ({typeOfVar})json"
         for i in idx:
             fromJsonFun += f"[\"{i}\"]"
@@ -79,8 +74,8 @@ def buildVariables(data : json, idx : list[str]):
           
 def getClassFile(data: json, item : Path):
     variables = ""
-    toJsonFun = ""
-    fromJsonFun = ""
+    toJsonFun = tabs(2) + "returnValue[\"service\"] = service;\n"
+    fromJsonFun =tabs(2) + f"service = (string)json[\"service\"];\n" 
 
     v2, tjf2, fjf2 = buildVariables(data, ["request"])
     variables += v2
@@ -125,6 +120,8 @@ def parseServices(folder : Path, recursion = 0):
         toJsonFun += tjf
         fromJsonFun += fjf
         newClass += variables + toJsonFun + fromJsonFun
+        newClass += tabs(1) + f"public static explicit operator {className}(JObject json)" + "{\n" 
+        newClass += tabs(2) + f"return new {className}().loadJson(json);\n" +tabs(1)+ "}\n"
         
         
         newClass += tabs(1) + f"{className}() " + "{" + "}" +"\n"

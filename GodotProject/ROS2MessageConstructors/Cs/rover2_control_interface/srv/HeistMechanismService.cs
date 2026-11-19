@@ -18,22 +18,23 @@ public partial class HeistMechanismService : ROS2Messages.BaseRequest {
   [Export] public string response_result_msg{get; set; }= "";
   public override JObject toJson() {
     JObject returnValue = JObject.Parse(jsonstring);
-    returnValue["request"]["command"] = request_command;
+    returnValue["service"] = service;
     returnValue["request"]["command"] = request_command;
     returnValue["request"]["message"] = request_message;
-    returnValue["request"]["message"] = request_message;
     returnValue["response"]["success"] = response_success;
-    returnValue["response"]["success"] = response_success;
-    returnValue["response"]["result_msg"] = response_result_msg;
     returnValue["response"]["result_msg"] = response_result_msg;
     return  returnValue;
   }
   public override HeistMechanismService loadJson(JObject json) {
+    service = (string)json["service"];
     request_command = (int)json["request"]["command"];
     request_message = (string)json["request"]["message"];
     response_success = (bool)json["response"]["success"];
     response_result_msg = (string)json["response"]["result_msg"];
     return  this;
+  }
+  public static explicit operator HeistMechanismService(JObject json){
+    return new HeistMechanismService().loadJson(json);
   }
   HeistMechanismService() {}
 }

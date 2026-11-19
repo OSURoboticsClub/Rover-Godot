@@ -20,21 +20,17 @@ public partial class CamParams : ROS2Messages.BaseRequest {
   [Export] public string response_ack{get; set; }= "";
   public override JObject toJson() {
     JObject returnValue = JObject.Parse(jsonstring);
-    returnValue["request"]["preset_level"] = request_preset_level;
+    returnValue["service"] = service;
     returnValue["request"]["preset_level"] = request_preset_level;
     returnValue["request"]["bitrate"] = request_bitrate;
-    returnValue["request"]["bitrate"] = request_bitrate;
-    returnValue["request"]["stream_width"] = request_stream_width;
     returnValue["request"]["stream_width"] = request_stream_width;
     returnValue["request"]["stream_height"] = request_stream_height;
-    returnValue["request"]["stream_height"] = request_stream_height;
     returnValue["request"]["fec_percentage"] = request_fec_percentage;
-    returnValue["request"]["fec_percentage"] = request_fec_percentage;
-    returnValue["response"]["ack"] = response_ack;
     returnValue["response"]["ack"] = response_ack;
     return  returnValue;
   }
   public override CamParams loadJson(JObject json) {
+    service = (string)json["service"];
     request_preset_level = (int)json["request"]["preset_level"];
     request_bitrate = (int)json["request"]["bitrate"];
     request_stream_width = (int)json["request"]["stream_width"];
@@ -42,6 +38,9 @@ public partial class CamParams : ROS2Messages.BaseRequest {
     request_fec_percentage = (int)json["request"]["fec_percentage"];
     response_ack = (string)json["response"]["ack"];
     return  this;
+  }
+  public static explicit operator CamParams(JObject json){
+    return new CamParams().loadJson(json);
   }
   CamParams() {}
 }

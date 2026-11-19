@@ -18,22 +18,23 @@ public partial class NodeLog : ROS2Messages.BaseRequest {
   [Export] public bool response_acknowledge{get; set; }= false;
   public override JObject toJson() {
     JObject returnValue = JObject.Parse(jsonstring);
-    returnValue["request"]["enable"] = request_enable;
+    returnValue["service"] = service;
     returnValue["request"]["enable"] = request_enable;
     returnValue["request"]["hz"] = request_hz;
-    returnValue["request"]["hz"] = request_hz;
     returnValue["request"]["node"] = request_node;
-    returnValue["request"]["node"] = request_node;
-    returnValue["response"]["acknowledge"] = response_acknowledge;
     returnValue["response"]["acknowledge"] = response_acknowledge;
     return  returnValue;
   }
   public override NodeLog loadJson(JObject json) {
+    service = (string)json["service"];
     request_enable = (bool)json["request"]["enable"];
     request_hz = (double)json["request"]["hz"];
     request_node = (string)json["request"]["node"];
     response_acknowledge = (bool)json["response"]["acknowledge"];
     return  this;
+  }
+  public static explicit operator NodeLog(JObject json){
+    return new NodeLog().loadJson(json);
   }
   NodeLog() {}
 }

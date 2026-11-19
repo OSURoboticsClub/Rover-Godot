@@ -3,6 +3,8 @@ from pathlib import Path
 import shutil
 from csGeneratorScript.common import csTypeFromItem, csPathFromJsonPath, getNamespaceFromPath, tabs
 from csGeneratorScript.serviceConstructor import requests, parseServices
+from csGeneratorScript.messageConstructor import messages, parseMessages
+
 
 # separators=(",", ":") removes extra whitespace after commas and colons
 
@@ -27,6 +29,8 @@ def iterThroughFolder(folder, recursion = 0):
             Path(csPathFromJsonPath(item)).mkdir(exist_ok=True)
             if(item.name == "srv"):
                 parseServices(Path(str(folder) +f"/{item.name}"), recursion + 1)
+            elif(item.name == "msg"):
+                parseMessages(Path(str(folder) +f"/{item.name}"), recursion + 1)
             else:
                 iterThroughFolder(Path(str(folder) +f"/{item.name}"), recursion + 1)
             print(f"Subfolder: {item.name}")

@@ -18,19 +18,21 @@ public partial class LatencySize : ROS2Messages.BaseRequest {
   [Export] public int response_receivetime_nanosec{get; set; }= 0;
   public override JObject toJson() {
     JObject returnValue = JObject.Parse(jsonstring);
-    returnValue["request"]["dummydata"] = request_dummydata;
+    returnValue["service"] = service;
     returnValue["request"]["dummydata"] = request_dummydata;
     returnValue["response"]["receivetime"]["sec"] = response_receivetime_sec;
-    returnValue["response"]["receivetime"]["sec"] = response_receivetime_sec;
-    returnValue["response"]["receivetime"]["nanosec"] = response_receivetime_nanosec;
     returnValue["response"]["receivetime"]["nanosec"] = response_receivetime_nanosec;
     return  returnValue;
   }
   public override LatencySize loadJson(JObject json) {
+    service = (string)json["service"];
     request_dummydata = (string)json["request"]["dummydata"];
     response_receivetime_sec = (int)json["response"]["receivetime"]["sec"];
     response_receivetime_nanosec = (int)json["response"]["receivetime"]["nanosec"];
     return  this;
+  }
+  public static explicit operator LatencySize(JObject json){
+    return new LatencySize().loadJson(json);
   }
   LatencySize() {}
 }

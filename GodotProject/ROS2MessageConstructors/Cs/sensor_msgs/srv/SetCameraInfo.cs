@@ -34,47 +34,30 @@ public partial class SetCameraInfo : ROS2Messages.BaseRequest {
   [Export] public string response_status_message{get; set; }= "";
   public override JObject toJson() {
     JObject returnValue = JObject.Parse(jsonstring);
-    returnValue["request"]["camera_info"]["header"]["stamp"]["sec"] = request_camera_info_header_stamp_sec;
+    returnValue["service"] = service;
     returnValue["request"]["camera_info"]["header"]["stamp"]["sec"] = request_camera_info_header_stamp_sec;
     returnValue["request"]["camera_info"]["header"]["stamp"]["nanosec"] = request_camera_info_header_stamp_nanosec;
-    returnValue["request"]["camera_info"]["header"]["stamp"]["nanosec"] = request_camera_info_header_stamp_nanosec;
-    returnValue["request"]["camera_info"]["header"]["frame_id"] = request_camera_info_header_frame_id;
     returnValue["request"]["camera_info"]["header"]["frame_id"] = request_camera_info_header_frame_id;
     returnValue["request"]["camera_info"]["height"] = request_camera_info_height;
-    returnValue["request"]["camera_info"]["height"] = request_camera_info_height;
-    returnValue["request"]["camera_info"]["width"] = request_camera_info_width;
     returnValue["request"]["camera_info"]["width"] = request_camera_info_width;
     returnValue["request"]["camera_info"]["distortion_model"] = request_camera_info_distortion_model;
-    returnValue["request"]["camera_info"]["distortion_model"] = request_camera_info_distortion_model;
-    returnValue["request"]["camera_info"]["d"] = request_camera_info_d;
     returnValue["request"]["camera_info"]["d"] = request_camera_info_d;
     returnValue["request"]["camera_info"]["k"] = request_camera_info_k;
-    returnValue["request"]["camera_info"]["k"] = request_camera_info_k;
-    returnValue["request"]["camera_info"]["r"] = request_camera_info_r;
     returnValue["request"]["camera_info"]["r"] = request_camera_info_r;
     returnValue["request"]["camera_info"]["p"] = request_camera_info_p;
-    returnValue["request"]["camera_info"]["p"] = request_camera_info_p;
-    returnValue["request"]["camera_info"]["binning_x"] = request_camera_info_binning_x;
     returnValue["request"]["camera_info"]["binning_x"] = request_camera_info_binning_x;
     returnValue["request"]["camera_info"]["binning_y"] = request_camera_info_binning_y;
-    returnValue["request"]["camera_info"]["binning_y"] = request_camera_info_binning_y;
-    returnValue["request"]["camera_info"]["roi"]["x_offset"] = request_camera_info_roi_x_offset;
     returnValue["request"]["camera_info"]["roi"]["x_offset"] = request_camera_info_roi_x_offset;
     returnValue["request"]["camera_info"]["roi"]["y_offset"] = request_camera_info_roi_y_offset;
-    returnValue["request"]["camera_info"]["roi"]["y_offset"] = request_camera_info_roi_y_offset;
-    returnValue["request"]["camera_info"]["roi"]["height"] = request_camera_info_roi_height;
     returnValue["request"]["camera_info"]["roi"]["height"] = request_camera_info_roi_height;
     returnValue["request"]["camera_info"]["roi"]["width"] = request_camera_info_roi_width;
-    returnValue["request"]["camera_info"]["roi"]["width"] = request_camera_info_roi_width;
-    returnValue["request"]["camera_info"]["roi"]["do_rectify"] = request_camera_info_roi_do_rectify;
     returnValue["request"]["camera_info"]["roi"]["do_rectify"] = request_camera_info_roi_do_rectify;
     returnValue["response"]["success"] = response_success;
-    returnValue["response"]["success"] = response_success;
-    returnValue["response"]["status_message"] = response_status_message;
     returnValue["response"]["status_message"] = response_status_message;
     return  returnValue;
   }
   public override SetCameraInfo loadJson(JObject json) {
+    service = (string)json["service"];
     request_camera_info_header_stamp_sec = (int)json["request"]["camera_info"]["header"]["stamp"]["sec"];
     request_camera_info_header_stamp_nanosec = (int)json["request"]["camera_info"]["header"]["stamp"]["nanosec"];
     request_camera_info_header_frame_id = (string)json["request"]["camera_info"]["header"]["frame_id"];
@@ -95,6 +78,9 @@ public partial class SetCameraInfo : ROS2Messages.BaseRequest {
     response_success = (bool)json["response"]["success"];
     response_status_message = (string)json["response"]["status_message"];
     return  this;
+  }
+  public static explicit operator SetCameraInfo(JObject json){
+    return new SetCameraInfo().loadJson(json);
   }
   SetCameraInfo() {}
 }
