@@ -4,6 +4,7 @@ gst-launch-1.0 v4l2src device=/dev/video0 ! \
     x265enc tune=zerolatency speed-preset=ultrafast bitrate=2000 ! \
     h265parse ! \
     rtph265pay config-interval=1 mtu=1400 ! \
+    rtpstreampay ! \
     udpsink host=127.0.0.1 port=5000 sync=false
 
 #gst-launch-1.0 v4l2src device=/dev/video0 ! videoconvert ! videoscale ! video/x-raw,width=640,height=480,framerate=30/1 ! jpegenc quality=80 ! rtpjpegpay ! udpsink host=127.0.0.1 port=5000

@@ -45,8 +45,9 @@ public partial class GodotCameraStream : TextureRect
     private ulong lastFixTime = 0;
     // TODO: find some way to calculate latency (Might not be possible without sending more informatin which we dont want to do.)
     public double? latencyMs = null;
-    [Godot.Signal]
-    public delegate void NewImageRecievedEventHandler();
+
+    private readonly object _bufferLock = new object();
+    byte[] _frameBuffer;
 
     /// <summary>
     /// A list of all CameraEntries that we want to listen to on the robot (In order of how they appear on the dropdown)
@@ -80,6 +81,8 @@ public partial class GodotCameraStream : TextureRect
         _texture = ImageTexture.CreateFromImage(_image);
         
         Texture = _texture;
+
+        _frameBuffer = new byte[Width * Height * 3];
     }
     /// <summary>
     /// Check whether a timeout has occured
@@ -88,6 +91,7 @@ public partial class GodotCameraStream : TextureRect
     public override void _Process(double delta)
     {
         if(_pipeline == null) return;
+        
         if(Time.GetTicksMsec()- lastFixTime > timeout)
         {
             Texture = timeout_image;
@@ -111,19 +115,26 @@ public partial class GodotCameraStream : TextureRect
         GD.Print("Listening on port:" + camera.port);
         // Configure pipeline (TODO: Once we get it on working on rover, just use fromJetson always )
         string pipelineDesc;
-        if(camera.fromJetson)
-        {
-                pipelineDesc = $"udpsrc port={camera.port} caps=\"application/x-rtp,media=video,clock-rate=90000,encoding-name=H265,payload=96\" ! " +
-                //"rtpjitterbuffer latency=50 drop-on-latency=true ! " +
-                $"rtph265depay ! h265parse ! avdec_h265 ! videoconvert ! " +
-                $"video/x-raw,format=RGB,width={Width},height={Height} ! " +
-                $"appsink name=sink emit-signals=true sync=false max-buffers=1 drop=true";
-        } else
-        {
-                pipelineDesc = $"udpsrc port={camera.port} ! application/x-rtp,encoding-name=JPEG,payload=26 ! " +
-                $"rtpjpegdepay ! jpegdec ! videoconvert ! video/x-raw,format=RGB,width={Width},height={Height} ! " +
-                $"appsink name=sink emit-signals=true sync=false max-buffers=1 drop=true";
-        }
+
+        string rtpCaps = "application/x-rtp,media=(string)video,clock-rate=(int)90000,encoding-name=(string)RAW,sampling=(string)BGR,depth=(string)8,width=(string)640,height=(string)480,colorimetry=(string)SMPTE240M,payload=(int)96";
+     
+        pipelineDesc = $"udpsrc port={camera.port} caps=\"{rtpCaps}\" ! " +
+            $"rtpvrawdepay ! " +
+            $"videoconvert ! " +
+            $"video/x-raw,format=RGB,width={Width},height={Height} ! " +
+            $"appsink name=sink emit-signals=true max-buffers=1 drop=true";
+                
+        // $"udpsrc port={camera.port} caps=\"{rtpCaps}\" ! " +
+        // //"rtpjitterbuffer latency=50 drop-on-latency=true ! " +
+        // //$"rtph265depay ! h265parse ! avdec_h265 ! videoconvert ! " +
+        // "rtpvrawdepay" +
+        // $"video/x-raw,format=RGB,width={Width},height={Height} ! " +
+        // $"appsink name=sink emit-signals=true sync=false max-buffers=1 drop=true";
+
+        // pipelineDesc = $"udpsrc port={camera.port} ! application/x-rtp,encoding-name=JPEG,payload=26 ! " +
+        // $"rtpjpegdepay ! jpegdec ! videoconvert ! video/x-raw,format=RGB,width={Width},height={Height} ! " +
+        // $"appsink name=sink emit-signals=true sync=false max-buffers=1 drop=true";
+        
             
         _pipeline = (Pipeline)Parse.Launch(pipelineDesc);
 
@@ -136,6 +147,8 @@ public partial class GodotCameraStream : TextureRect
         _pipeline.SetState(State.Playing);
         lastFixTime = Time.GetTicksMsec();
     }
+    
+    
     /// <summary>
     /// On recieving a new GSTreamer sample, update the texture
     /// </summary>
@@ -150,27 +163,42 @@ public partial class GodotCameraStream : TextureRect
         if (buffer == null) return;
         if (!buffer.Map(out MapInfo mapInfo, MapFlags.Read)) return;
         
-        // Set the
-        Callable.From(() => 
+        int copyLen = Math.Min((int)mapInfo.Size, _frameBuffer.Length);
+
+        // Lock the buffer to ensure we are not reading and writing at the same time
+        lock (_bufferLock)
         {
-            if (IsInstanceValid(_texture))
-            {
-                _image.SetData(Width, Height, false, Image.Format.Rgb8, mapInfo.Data);
-                _image.Resize((int)Size.X, (int)Size.Y, Image.Interpolation.Nearest);
-                if (_texture == null || _texture.GetWidth() != (int)Size.X || _texture.GetHeight() != (int)Size.Y)
-                {
-                    _texture = ImageTexture.CreateFromImage(_image);
-                } else _texture.Update(_image);
-            }
-        }).CallDeferred();
+            // Copy the new frame onto our buffer
+            Marshal.Copy(mapInfo.DataPtr, _frameBuffer, 0, copyLen);
+        }
+        // Call the update texture function later on the main thread
+        CallDeferred(MethodName.UpdateTextureDeferred);
         
         lastFixTime = Time.GetTicksMsec();
         
         // Unmap the data so that GStreamer knows we are done with it
         buffer.Unmap(mapInfo);
-        //EmitSignal(SignalName.NewImageRecieved);
+    }
+
+    /// <summary>
+    /// Loads the current _frameBuffer as a texture on the node
+    /// </summary>
+    private void UpdateTextureDeferred()
+    {
+        if (!IsInsideTree() || _texture == null) return;
+        lock (_bufferLock) {
+            _image.SetData(Width, Height, false, Image.Format.Rgb8, _frameBuffer);
+        }
+        _image.Resize((int)Size.X, (int)Size.Y, Image.Interpolation.Nearest);
+        if (_texture == null || _texture.GetWidth() != (int)Size.X || _texture.GetHeight() != (int)Size.Y)
+        {
+            _texture = ImageTexture.CreateFromImage(_image);
+        } else _texture.Update(_image);
     }
     
+    /// <summary>
+    /// Kills the current pipeline
+    /// </summary>
     public void StopGStreamer()
     {
         if (_pipeline != null)
@@ -182,6 +210,9 @@ public partial class GodotCameraStream : TextureRect
             
         }
     }
+    /// <summary>
+    /// Kill the gstreamer on program exit (or scene exit)
+    /// </summary>
     public override void _ExitTree()
     {
         StopGStreamer();
