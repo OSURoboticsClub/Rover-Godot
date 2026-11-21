@@ -6,6 +6,10 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+
+/// <summary>
+/// A static class so that different instances of CameraFeed can communicate which camera feeds they are looking at, so that one wont "close the door" on another which switching streams
+/// </summary>
 public class CameraFeedCounter
 {
     public static CameraFeedCounter inst;
