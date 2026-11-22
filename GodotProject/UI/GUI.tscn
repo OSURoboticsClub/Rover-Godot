@@ -14,6 +14,10 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="InputPublisherTimer" type="Timer" parent="." unique_id=452992926]
+wait_time = 0.033
+autostart = true
+
 [node name="Control" type="Control" parent="." unique_id=71271118]
 layout_mode = 2
 offset_transform_position = Vector2(-576, -324)
