@@ -72,7 +72,7 @@ public partial class CameraFeed : GodotCameraStream
     /// </summary>
     public void Photo()
     {
-        _image.SavePng("/home/ozy/Documents/Programenheimer/Github/rover-godot/GodotProject/ScreenShots/screenshot.png");
+        _image.SavePng("/home/ozy/Documents/Programenheimer/Github/rover-godot/ScreenShots/screenshot.png");
         GD.Print("Image Saved !");
     }
     /// <summary>
