@@ -30,6 +30,113 @@ project/assembly_name="RoverGodot"
 
 [input]
 
+ui_accept={
+"deadzone": 0.5,
+"events": []
+}
+ui_select={
+"deadzone": 0.5,
+"events": []
+}
+ui_focus_next={
+"deadzone": 0.5,
+"events": []
+}
+ui_focus_prev={
+"deadzone": 0.5,
+"events": []
+}
+ui_left={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":16,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":4194319,"physical_keycode":0,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+]
+}
+ui_right={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":16,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":4194321,"physical_keycode":0,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+]
+}
+ui_up={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":16,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":4194320,"physical_keycode":0,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+]
+}
+ui_down={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":16,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":4194322,"physical_keycode":0,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+]
+}
+ui_cut={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":16,"window_id":0,"command_or_control_autoremap":true,"alt_pressed":false,"shift_pressed":false,"pressed":false,"keycode":88,"physical_keycode":0,"key_label":0,"unicode":88,"location":0,"echo":false,"script":null)
+]
+}
+ui_paste={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":16,"window_id":0,"command_or_control_autoremap":true,"alt_pressed":false,"shift_pressed":false,"pressed":false,"keycode":86,"physical_keycode":0,"key_label":0,"unicode":86,"location":0,"echo":false,"script":null)
+]
+}
+ui_text_completion_query={
+"deadzone": 0.5,
+"events": []
+}
+ui_text_completion_accept={
+"deadzone": 0.5,
+"events": []
+}
+ui_text_completion_replace={
+"deadzone": 0.5,
+"events": []
+}
+ui_text_newline={
+"deadzone": 0.5,
+"events": []
+}
+ui_text_newline_blank={
+"deadzone": 0.5,
+"events": []
+}
+ui_text_newline_above={
+"deadzone": 0.5,
+"events": []
+}
+ui_text_indent={
+"deadzone": 0.5,
+"events": []
+}
+ui_text_dedent={
+"deadzone": 0.5,
+"events": []
+}
+ui_text_backspace={
+"deadzone": 0.5,
+"events": []
+}
+ui_text_backspace_word={
+"deadzone": 0.5,
+"events": []
+}
+ui_text_backspace_word.macos={
+"deadzone": 0.5,
+"events": []
+}
+ui_text_backspace_all_to_left.macos={
+"deadzone": 0.5,
+"events": []
+}
+ui_text_submit={
+"deadzone": 0.5,
+"events": []
+}
+ui_filedialog_up_one_level={
+"deadzone": 0.5,
+"events": []
+}
+ui_colorpicker_delete_preset={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":16,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":4194312,"physical_keycode":0,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+]
+}
 leftJoystickLeft={
 "deadzone": 0.2,
 "events": [Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":0,"axis_value":-1.0,"script":null)

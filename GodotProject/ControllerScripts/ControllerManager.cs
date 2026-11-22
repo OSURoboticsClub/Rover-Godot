@@ -89,8 +89,8 @@ public partial class ControllerManager : Node
 
     public override void _Process(double delta)
     {
-        Vector2 leftJoystick = Input.GetVector("leftJoystickLeft", "leftJoystickRight", "leftJoystickUp", "leftJoystickDown");
-        Vector2 rightJoystick = Input.GetVector("rightJoystickLeft", "rightJoystickRight", "rightJoystickUp", "rightJoystickDown");
+        Vector2 leftJoystick = Input.GetVector("leftJoystickLeft", "leftJoystickRight", "leftJoystickDown", "leftJoystickUp");
+        Vector2 rightJoystick = Input.GetVector("rightJoystickLeft", "rightJoystickRight", "rightJoystickDown", "rightJoystickUp");
 
         float leftTrigger = Input.GetActionStrength("leftTrigger");
         float rightTrigger = Input.GetActionStrength("rightTrigger");
