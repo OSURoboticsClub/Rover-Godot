@@ -4,6 +4,9 @@ using System;
 using System.Diagnostics;
 using System.Linq;
 
+/**
+ * Handles reading controller input and relaying the way the rover should drive / arm should move to ROS
+ */
 public partial class ControllerManager : Node
 {
     public enum ControlMode
@@ -41,6 +44,9 @@ public partial class ControllerManager : Node
     private Godot.Collections.Array<Slider> armSpeedSliders = [];
 
 
+    /**
+     * Finds the UI nodes related to drive and arm control and starts 30hz timer for publishing inputs
+     */
     public override void _Ready() {
         modeButton = GetNode<OptionButton>(modeButtonPath);
         timer = GetNode<Timer>(timerPath);
@@ -87,6 +93,9 @@ public partial class ControllerManager : Node
         timer.Timeout += PublishInputs; 
     }
 
+    /**
+     * Updates UI elements
+     */
     public override void _Process(double delta)
     {
         Vector2 leftJoystick = Input.GetVector("leftJoystickLeft", "leftJoystickRight", "leftJoystickDown", "leftJoystickUp");
@@ -169,6 +178,9 @@ public partial class ControllerManager : Node
         }
     }
 
+    /**
+     * Checks controller inputs and calls a handler method depending on the current control mode
+     */
     public void PublishInputs()
     {
         Vector2 leftJoystick = Input.GetVector("leftJoystickLeft", "leftJoystickRight", "leftJoystickDown", "leftJoystickUp");
@@ -217,13 +229,33 @@ public partial class ControllerManager : Node
         }
     }
 
+    /**
+     * Publishes drive information to the 'cmd_vel' ROS topic
+     *
+     * @param leftJoy input from the left joystick's axes
+     * @param rightJoy input from the right joystick's axes
+     * @param leftTrigger how far the left trigger is pushed (0 - 1)
+     * @param rightTrigger how far the right trigger is pushed (0 - 1)
+     * @param buttonSouth the south button (Cross on Playstation,    A on Xbox)
+     * @param buttonEast the east button   (Circle on Playstation,   B on Xbox)
+     * @param buttonWest the west button   (Square on Playstation,   X on Xbox)
+     * @param buttonNorth the north button (Triangle on Playstation, Y on Xbox)
+     * @param dpadSouth the south dpad button
+     * @param dpadEast the east dpad button
+     * @param dpadWest the west dpad button
+     * @param dpadNorth the north dpad button
+     * @param start the start button   (Menu on Xbox)
+     * @param select the select button (Select on Playstation, Back on Xbox)
+     * @param leftShoulder the left shoulder button   (Left Shoulder on Playstation,  LB on Xbox)
+     * @param rightShoulder the right shoulder button (Right Shoulder on Playstation, RB on Xbox)
+     */
     void HandleDrive(
         Vector2 leftJoy, Vector2 rightJoy,
         float leftTrigger, float rightTrigger,
         bool buttonSouth, bool buttonEast, bool buttonWest, bool buttonNorth,
         bool dpadEast, bool dpadWest, bool dpadNorth, bool dpadSouth,
         bool start, bool select,
-        bool shoulderWest, bool shoulderEast
+        bool leftShoulder, bool rightShoulder
     )
     {
         foreach(Slider i in driveSpeedSliders)
@@ -268,12 +300,12 @@ public partial class ControllerManager : Node
 
         bool panTiltHasInput = (start) ||
                     (buttonWest || buttonEast) ||
-                    (shoulderWest || shoulderEast) ||
+                    (leftShoulder || rightShoulder) ||
                     (buttonNorth || buttonSouth) ||
                     (dpadEast || dpadWest);
         if(panTiltHasInput)
         {
-            float yaw = ((buttonWest ? 1.0f : 0.0f) - (buttonEast ? 1.0f : 0.0f)) + ((shoulderWest ? 1.0f : 0.0f) - (shoulderEast ? 1.0f : 0.0f));
+            float yaw = ((buttonWest ? 1.0f : 0.0f) - (buttonEast ? 1.0f : 0.0f)) + ((leftShoulder ? 1.0f : 0.0f) - (rightShoulder ? 1.0f : 0.0f));
             float pitch = (buttonNorth ? 1.0f : 0.0f) - (buttonSouth ? 1.0f : 0.0f);
             float roll = (dpadEast ? 1.0f : 0.0f) - (dpadWest ? 1.0f : 0.0f);
             tiltMessage = new JObject
@@ -326,13 +358,33 @@ public partial class ControllerManager : Node
         }
     }
 
+    /**
+     * Publishes arm movement information to the 'joy' ROS topic
+     *
+     * @param leftJoy input from the left joystick's axes
+     * @param rightJoy input from the right joystick's axes
+     * @param leftTrigger how far the left trigger is pushed (0 - 1)
+     * @param rightTrigger how far the right trigger is pushed (0 - 1)
+     * @param buttonSouth the south button (Cross on Playstation,    A on Xbox)
+     * @param buttonEast the east button   (Circle on Playstation,   B on Xbox)
+     * @param buttonWest the west button   (Square on Playstation,   X on Xbox)
+     * @param buttonNorth the north button (Triangle on Playstation, Y on Xbox)
+     * @param dpadSouth the south dpad button
+     * @param dpadEast the east dpad button
+     * @param dpadWest the west dpad button
+     * @param dpadNorth the north dpad button
+     * @param start the start button   (Menu on Xbox)
+     * @param select the select button (Select on Playstation, Back on Xbox)
+     * @param leftShoulder the left shoulder button   (Left Shoulder on Playstation,  LB on Xbox)
+     * @param rightShoulder the right shoulder button (Right Shoulder on Playstation, RB on Xbox)
+     */
     void HandleArm(
         Vector2 leftJoy, Vector2 rightJoy,
         float leftTrigger, float rightTrigger,
         bool buttonSouth, bool buttonEast, bool buttonWest, bool buttonNorth,
         bool dpadEast, bool dpadWest, bool dpadNorth, bool dpadSouth,
         bool start, bool select,
-        bool shoulderWest, bool shoulderEast)
+        bool leftShoulder, bool rightShoulder)
     {
         foreach(Slider i in armSpeedSliders)
         {
@@ -353,7 +405,7 @@ public partial class ControllerManager : Node
             buttonSouth ? 1 : 0, buttonEast ? 1 : 0, buttonWest ? 1 : 0, buttonNorth ? 1 : 0,
             0, 0,
             start ? 1 : 0, select ? 1 : 0,
-            0, 0, shoulderEast ? 1 : 0, shoulderWest ? 1 : 0, shoulderWest ? 1 : 0,
+            0, 0, rightShoulder ? 1 : 0, leftShoulder ? 1 : 0, leftShoulder ? 1 : 0,
         };
 
         joyMessage = new JObject
@@ -372,6 +424,9 @@ public partial class ControllerManager : Node
         UdpController.inst.PublishMessage(joyMessage.ToString());
     }
 
+    /**
+     * Callback for when the mode dropdown changes, updates the mode
+     */
     void UpdateMode(long index)
     {
         // bounds check against the size of the modes enum
