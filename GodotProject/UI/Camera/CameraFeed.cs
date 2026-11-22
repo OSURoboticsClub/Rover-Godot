@@ -9,6 +9,9 @@ using System.Runtime.InteropServices;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 /** Code generated partially by Gemini */
+/// <summary>
+/// A CameraStream variant for reading from Gstreamer, with additional functionality for the CameraFeed scene, like switching streams, pausing, and taking photos
+/// </summary>
 public partial class CameraFeed : GodotCameraStream
 {
     private OptionButton dropdown;
@@ -24,7 +27,12 @@ public partial class CameraFeed : GodotCameraStream
     long lastIndex = -1;
     [Export] bool playing = false;
 
-    public void sendCameraEnableMessage(CameraEntry entry, bool state)
+    /// <summary>
+    /// Function for sending a service to the UDP controller to turn off the camera
+    /// </summary>
+    /// <param name="entry"> The camera entry to toggle</param>
+    /// <param name="state"> Whether to enable or disable the camera</param>
+    public void sendCameraToggleMessage(CameraEntry entry, bool state)
     {
         JObject msg = JObject.Parse(Json.Stringify(set_bool_service.Data));
 
@@ -59,11 +67,17 @@ public partial class CameraFeed : GodotCameraStream
             PausePlayButton.Icon = PlayIcon;
         }
     }
+    /// <summary>
+    /// Save the current _image on the attached GodotCameraStream object
+    /// </summary>
     public void Photo()
     {
-        _image.SavePng("/home/ozy/Documents/Programenheimer/Github/rover-godot/GodotProject/ScreenShots/screenshot.png");
+        _image.SavePng("/home/ozy/Documents/Programenheimer/Github/rover-godot/ScreenShots/screenshot.png");
         GD.Print("Image Saved !");
     }
+    /// <summary>
+    /// Toggle whether the camera should be paused or playing
+    /// </summary>
     public void Pause_Play_Fun()
     {
         if(playing)
@@ -80,6 +94,10 @@ public partial class CameraFeed : GodotCameraStream
         PausePlayButton.Icon = PauseIcon;
         changeStream(dropdown.Selected);
     }
+    /// <summary>
+    /// Sets the image to grayscale when the camera is paused, TODO: handle latency
+    /// </summary>
+    /// <param name="delta"></param>
     public override void _Process(double delta)
     {
         base._Process(delta);
@@ -106,19 +124,25 @@ public partial class CameraFeed : GodotCameraStream
             latencyLabel.Text = $"Latency: {Math.Round((decimal)latencyMs/1000, 1)} s";
         }
     }
+    /// <summary>
+    /// Stop the GStreamer, and tell the CameraCounter that wed have stopped listening
+    /// </summary>
     private void pauseStream()
     {
         
         StopGStreamer();
         handler.Listening[(int)lastIndex].Remove(this);
         if(handler.Listening[(int)lastIndex].Count == 0) {
-            sendCameraEnableMessage(cameraPortMap[(int)lastIndex], false);
+            sendCameraToggleMessage(cameraPortMap[(int)lastIndex], false);
         }
         lastIndex = -1;
         return;
         
     }
 
+    /// <summary>
+    /// Stop the previus GStreamer, and tell the CameraCounter that wed have stopped listening, then start the new GSTreamer, and tell the counter we have started listening
+    /// </summary>
     private void changeStream(long index)
     {
         if(!playing) return;
@@ -130,7 +154,7 @@ public partial class CameraFeed : GodotCameraStream
 
         if(handler.Listening[(int)index].Count == 0)
         {
-            sendCameraEnableMessage(entry, true);
+            sendCameraToggleMessage(entry, true);
         }
         handler.Listening[(int)index].Add(this);
         
@@ -138,7 +162,7 @@ public partial class CameraFeed : GodotCameraStream
             GD.Print(handler.Listening[(int)lastIndex].Count);
             handler.Listening[(int)lastIndex].Remove(this);
             if(handler.Listening[(int)lastIndex].Count == 0) {
-                sendCameraEnableMessage(cameraPortMap[(int)lastIndex], false);
+                sendCameraToggleMessage(cameraPortMap[(int)lastIndex], false);
             }
         }
         lastIndex = index;

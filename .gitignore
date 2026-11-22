@@ -9,7 +9,7 @@ GodotProject/.vscode/launch.json
 #   ROS package sources under ros2_ws/src/ and godot_udp_ros_bridge/
 
 .vscode/
-
+/Screenshots/
 # Unity generated folders
 /[Ll]ibrary/
 /[Tt]emp/
