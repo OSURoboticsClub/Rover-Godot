@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://ch41c4i2r4sty"]
 
 [ext_resource type="PackedScene" uid="uid://cs84vvc8run7d" path="res://UI/Camera/CameraFeed.tscn" id="1_tdlda"]
+[ext_resource type="Script" uid="uid://dgvaedgkstn3v" path="res://ControllerScripts/ControllerManager.cs" id="1_wlbke"]
 
 [node name="Driver" type="Control" unique_id=189879333]
 custom_maximum_size = Vector2(1152, 648)
@@ -9,6 +10,17 @@ anchors_preset = 0
 offset_right = 1152.0
 offset_bottom = 648.0
 metadata/_tab_index = 0
+
+[node name="ControllerManager" type="Node2D" parent="." unique_id=17115416]
+script = ExtResource("1_wlbke")
+modeButtonPath = NodePath("../Control/Mode Dropdown")
+timerPath = NodePath("InputPublisherTimer")
+driveSpeedSliderPaths = Array[NodePath]([NodePath("../Control/DriveSpeed")])
+armSpeedSliderPaths = Array[NodePath]([NodePath("../Control/ArmSpeed")])
+
+[node name="InputPublisherTimer" type="Timer" parent="ControllerManager" unique_id=1100493797]
+wait_time = 0.033
+autostart = true
 
 [node name="Control" type="Control" parent="." unique_id=1523135935]
 anchors_preset = 0
@@ -26,3 +38,30 @@ offset_bottom = -288.0
 layout_mode = 1
 offset_right = -672.0
 offset_bottom = -288.0
+
+[node name="DriveSpeed" type="VSlider" parent="Control" unique_id=65186482]
+layout_mode = 0
+offset_left = 1000.0
+offset_right = 1016.0
+offset_bottom = 364.0
+
+[node name="ArmSpeed" type="VSlider" parent="Control" unique_id=1998758384]
+layout_mode = 0
+offset_left = 1072.0
+offset_right = 1088.0
+offset_bottom = 364.0
+
+[node name="Mode Dropdown" type="OptionButton" parent="Control" unique_id=1237390957]
+layout_mode = 0
+offset_left = 999.0
+offset_top = 381.0
+offset_right = 1102.0
+offset_bottom = 422.0
+selected = 0
+item_count = 3
+popup/item_0/text = "Off"
+popup/item_0/id = 0
+popup/item_1/text = "Drive"
+popup/item_1/id = 1
+popup/item_2/text = "Arm"
+popup/item_2/id = 2

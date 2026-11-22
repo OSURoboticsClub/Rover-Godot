@@ -2,6 +2,7 @@ using Godot;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Diagnostics;
+using System.Linq;
 
 public partial class ControllerManager : Node
 {
@@ -14,8 +15,8 @@ public partial class ControllerManager : Node
 
     public ControlMode mode = ControlMode.Off;
 
-    public float driveSpeed = 0.5f;
-    public float armSpeed = 0.5f;
+    public double driveSpeed = 0.5f;
+    public double armSpeed = 0.5f;
     public double gimbalSpeedScale = 0.3;
 
     public float publishRate = 1f/30f; // 30 hz
@@ -29,20 +30,56 @@ public partial class ControllerManager : Node
 
     private JObject joy2Message;
 
-    [Export] private NodePath driveButtonPath;
-    private Node driveButton;
-    [Export] private NodePath armButtonPath;
-    private Node armButton;
-    [Export] private NodePath offButtonPath;
-    private Node offButton;
-    [Export] private NodePath timerPath;
+    [ExportCategory("UI Elements")]
+    [Export] public NodePath modeButtonPath;
+    private OptionButton modeButton;
+    [Export] public NodePath timerPath;
     private Timer timer;
+    [Export] public NodePath[] driveSpeedSliderPaths;
+    private Godot.Collections.Array<Slider> driveSpeedSliders = [];
+    [Export] public NodePath[] armSpeedSliderPaths;
+    private Godot.Collections.Array<Slider> armSpeedSliders = [];
+
 
     public override void _Ready() {
-        driveButton = GetNode<Node>(driveButtonPath);
-        armButton = GetNode<Node>(armButtonPath);
-        offButton = GetNode<Node>(offButtonPath);
+        modeButton = GetNode<OptionButton>(modeButtonPath);
         timer = GetNode<Timer>(timerPath);
+
+        foreach(NodePath i in driveSpeedSliderPaths)
+        {
+            try
+            {
+                Slider slider = GetNode<Slider>(i);
+                slider.MinValue = 0f;
+                slider.MaxValue = 1f;
+                slider.Step = 0.05f;
+                slider.Value = driveSpeed;
+                driveSpeedSliders.Add(slider);
+            }
+            catch(Exception e)
+            {
+                GD.PrintErr($"{i} could not be loaded as a slider: {e.Message}");
+            }
+        }
+
+        foreach(NodePath i in armSpeedSliderPaths)
+        {
+            try
+            {
+                Slider slider = GetNode<Slider>(i);
+                slider.MinValue = 0f;
+                slider.MaxValue = 1f;
+                slider.Step = 0.05f;
+                slider.Value = armSpeed;
+                armSpeedSliders.Add(slider);
+            }
+            catch(Exception e)
+            {
+                GD.PrintErr($"{i} could not be loaded as a slider: {e.Message}");
+            }
+        }
+
+        modeButton.ItemSelected += UpdateMode;
 
         timer.Autostart = true;
         timer.OneShot = false;
@@ -52,11 +89,8 @@ public partial class ControllerManager : Node
 
     public override void _Process(double delta)
     {
-        // TODO synchronize drive speed sliders
-        // TODO synchronize arm speed sliders
-
         Vector2 leftJoystick = Input.GetVector("leftJoystickLeft", "leftJoystickRight", "leftJoystickUp", "leftJoystickDown");
-        Vector2 rightJoystick = Input.GetVector("rightJoystickright", "rightJoystickRight", "rightJoystickUp", "rightJoystickDown");
+        Vector2 rightJoystick = Input.GetVector("rightJoystickLeft", "rightJoystickRight", "rightJoystickUp", "rightJoystickDown");
 
         float leftTrigger = Input.GetActionStrength("leftTrigger");
         float rightTrigger = Input.GetActionStrength("rightTrigger");
@@ -77,6 +111,31 @@ public partial class ControllerManager : Node
         bool shoulderRight = Input.IsActionPressed("rightShoulder");
 
         bool rightJoystickButton = Input.IsActionPressed("rightJoystickButton");
+
+        foreach(Slider i in driveSpeedSliders)
+        {
+            if(i.Value != driveSpeed)
+            {
+                driveSpeed = i.Value;
+                foreach(Slider j in driveSpeedSliders)
+                {
+                    j.Value = driveSpeed;
+                }
+                break;
+            }
+        }
+        foreach(Slider i in armSpeedSliders)
+        {
+            if(i.Value != armSpeed)
+            {
+                armSpeed = i.Value;
+                foreach(Slider j in armSpeedSliders)
+                {
+                    j.Value = armSpeed;
+                }
+                break;
+            }
+        }
 
         if(rightJoystickButton)
         {
@@ -110,7 +169,7 @@ public partial class ControllerManager : Node
     public void PublishInputs()
     {
         Vector2 leftJoystick = Input.GetVector("leftJoystickLeft", "leftJoystickRight", "leftJoystickUp", "leftJoystickDown");
-        Vector2 rightJoystick = Input.GetVector("rightJoystickright", "rightJoystickRight", "rightJoystickUp", "rightJoystickDown");
+        Vector2 rightJoystick = Input.GetVector("rightJoystickLeft", "rightJoystickRight", "rightJoystickUp", "rightJoystickDown");
 
         float leftTrigger = Input.GetActionStrength("leftTrigger");
         float rightTrigger = Input.GetActionStrength("rightTrigger");
@@ -164,8 +223,11 @@ public partial class ControllerManager : Node
         bool shoulderWest, bool shoulderEast
     )
     {
-        // TODO: update / check drive speed slider
-        // TOOD: update drive speed
+        foreach(Slider i in driveSpeedSliders)
+        {
+            i.Value += (leftTrigger - rightTrigger) * 0.025;
+        }
+        driveSpeed = driveSpeedSliders[0].Value;
 
         driveMessage = new()
         {
@@ -249,16 +311,19 @@ public partial class ControllerManager : Node
         bool start, bool select,
         bool shoulderWest, bool shoulderEast)
     {
-        // TODO: update / check arm speed slider
-        // TOOD: update arm speed
+        foreach(Slider i in armSpeedSliders)
+        {
+            i.Value += ((buttonNorth ? 1.0f : 0.0f) - (buttonSouth ? 1.0f : 0.0f)) * 0.025;
+        }
+        armSpeed = armSpeedSliders[0].Value;
 
         // we add the very tiny float because if we sending a 0 joint velocity for every joint after switching controllers
         // and moving, the arm would rapidly swing back to the pose the original controller put it in
         float[] axes = new float[] {
-            -leftJoy.X * armSpeed, leftJoy.Y * armSpeed, leftTrigger * armSpeed,
-            -rightJoy.X * armSpeed, rightJoy.Y * armSpeed, rightTrigger * armSpeed,
-            ((dpadEast ? 1.0f : 0.0f) * armSpeed) - ((dpadWest ? 1.0f : 0.0f) * armSpeed + 0.0000000000001f),
-            ((dpadNorth ? 1.0f : 0.0f) * armSpeed) - ((dpadSouth ? 1.0f : 0.0f) * armSpeed)
+            -leftJoy.X * (float)armSpeed, leftJoy.Y * (float)armSpeed, leftTrigger * (float)armSpeed,
+            -rightJoy.X * (float)armSpeed, rightJoy.Y * (float)armSpeed, rightTrigger * (float)armSpeed,
+            ((dpadEast ? 1.0f : 0.0f) * (float)armSpeed) - ((dpadWest ? 1.0f : 0.0f) * (float)armSpeed + 0.0000000000001f),
+            ((dpadNorth ? 1.0f : 0.0f) * (float)armSpeed) - ((dpadSouth ? 1.0f : 0.0f) * (float)armSpeed)
         };
 
         int[] buttons = new int[] {
@@ -279,27 +344,13 @@ public partial class ControllerManager : Node
         UdpController.inst.PublishMessage(joyMessage.ToString());
     }
 
-    void SetOffMode()
+    void UpdateMode(long index)
     {
-        mode = ControlMode.Off;
-        GD.Print("Switched to OFF mode");
-        UpdateButtonColors();
-    }
-    void SetDriveMode()
-    {
-        mode = ControlMode.Drive;
-        GD.Print("Switched to DRIVE mode");
-        UpdateButtonColors();
-    }
-    void SetArmMode()
-    {
-        mode = ControlMode.Arm;
-        GD.Print("Switched to ARM mode");
-        UpdateButtonColors();
-    }
+        // bounds check against the size of the modes enum
+        if(index > 2)
+            return;
 
-    void UpdateButtonColors()
-    {
-        // TODO update button colors once the buttons exist
+        mode = (ControlMode)index;
+        GD.Print($"Switch to {mode.ToString().ToUpper()} mode");
     }
 }
