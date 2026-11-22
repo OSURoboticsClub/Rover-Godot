@@ -22,13 +22,13 @@ public partial class ControllerManager : Node
     public float publishRate = 1f/30f; // 30 hz
 
     bool useChassisPanTilt = false;
-    private JObject driveMessage;
+    private JObject driveMessage = [];
 
-    private JObject tiltMessage;
+    private JObject tiltMessage = [];
 
-    private JObject joyMessage;
+    private JObject joyMessage = [];
 
-    private JObject joy2Message;
+    private JObject joy2Message = [];
 
     [ExportCategory("UI Elements")]
     [Export] public NodePath modeButtonPath;
@@ -148,11 +148,14 @@ public partial class ControllerManager : Node
 
             joy2Message = new()
             {
-                ["topic"] = "joy",
-                ["msgType"] = "sensor_msgs/msg/Joy",
-                    ["data"] = {
-                    ["axes"] = new JArray(axes),
-                    ["button"] = new JArray(buttons)
+                {"topic", "joy"},
+                {"msgType", "sensor_msgs/msg/Joy"},
+                {
+                    "data", new JObject
+                    {
+                        {"axes", new JArray(axes)},
+                        {"buttons", new JArray(buttons)}
+                    }
                 }
             };
             UdpController.inst.PublishMessage(joy2Message.ToString());
@@ -229,23 +232,33 @@ public partial class ControllerManager : Node
         }
         driveSpeed = driveSpeedSliders[0].Value;
 
-        driveMessage = new()
+        driveMessage = new JObject
         {
-            ["topic"] = "cmd_vel",
-            ["msgType"] = "geometry_msgs/msg/Twist",
-            ["data"] = {
-                ["linear"] = {
-                    ["x"] = leftJoy.Y * driveSpeed,
-                    ["y"] = 0.0,
-                    ["z"] = 0.0,
-                },
-                ["angular"] = {
-                    ["x"] = 0.0,
-                    ["y"] = 0.0,
-                    ["z"] = rightJoy.X * driveSpeed * -1,
-                },
+            { "topic", "cmd_vel" },
+            { "msgType", "geometry_msgs/msg/Twist" },
+            {
+                "data", new JObject
+                {
+                    {
+                        "linear", new JObject
+                        {
+                            {"x", leftJoy.Y * driveSpeed},
+                            {"y", 0.0},
+                            {"z", 0.0}
+                        }
+                    },
+                    {
+                        "angular", new JObject
+                        {
+                            {"x", 0.0},
+                            {"y", 0.0},
+                            {"z", rightJoy.X * driveSpeed * -1}
+                        }
+                    }
+                }
             }
         };
+
         UdpController.inst.PublishMessage(driveMessage.ToString());
 
         if(select)
@@ -263,41 +276,51 @@ public partial class ControllerManager : Node
             float yaw = ((buttonWest ? 1.0f : 0.0f) - (buttonEast ? 1.0f : 0.0f)) + ((shoulderWest ? 1.0f : 0.0f) - (shoulderEast ? 1.0f : 0.0f));
             float pitch = (buttonNorth ? 1.0f : 0.0f) - (buttonSouth ? 1.0f : 0.0f);
             float roll = (dpadEast ? 1.0f : 0.0f) - (dpadWest ? 1.0f : 0.0f);
-            tiltMessage = new(){
-                ["topic"] = useChassisPanTilt ? "chassis_pan_tilt/control" : "tower_gimbal/control",
-                ["data"] = {
-                    ["go_home"] = start,
-                    ["is_angle"] = false,
-                    ["stabalize"] = false,
-                    ["yaw"] = gimbalSpeedScale * yaw,
-                    ["pitch"] = gimbalSpeedScale * pitch,
-                    ["roll"] = gimbalSpeedScale * roll,
-                },
+            tiltMessage = new JObject
+            {
+                {"topic", useChassisPanTilt ? "chassis_pan_tilt/control" : "tower_gimbal/control"},
+                {
+                    "data", new JObject
+                    {
+                        {"go_home", start},
+                        {"is_angle", false},
+                        {"stabalize", false},
+                        {"yaw", gimbalSpeedScale * yaw},
+                        {"pitch", gimbalSpeedScale * pitch},
+                        {"roll", gimbalSpeedScale * roll}
+                    }
+                }
             };
             UdpController.inst.PublishMessage(tiltMessage.ToString());
         }
 
         if(dpadNorth)
         {
-            JObject msg = new()
+            JObject msg = new JObject
             {
-                ["topic"] = "/tower/light/control",
-                ["msgType"] = "std_msgs/msg/UInt8",
-                ["data"] = {
-                    ["data"] = 2,
-                },
+                {"topic", "/tower/light/control"},
+                {"msgType", "std_msgs/msg/UInt8"},
+                {
+                    "data", new JObject
+                    {
+                        {"data", 2}
+                    }
+                }
             };
             UdpController.inst.PublishMessage(msg.ToString());
         }
         else if(dpadSouth)
         {
-            JObject msg = new()
+            JObject msg = new JObject
             {
-                ["topic"] = "/tower/light/control",
-                ["msgType"] = "std_msgs/msg/UInt8",
-                ["data"] = {
-                    ["data"] = 0,
-                },
+                {"topic", "/tower/light/control"},
+                {"msgType", "std_msgs/msg/UInt8"},
+                {
+                    "data", new JObject
+                    {
+                        {"data", 0}
+                    }
+                }
             };
             UdpController.inst.PublishMessage(msg.ToString());
         }
@@ -333,14 +356,19 @@ public partial class ControllerManager : Node
             0, 0, shoulderEast ? 1 : 0, shoulderWest ? 1 : 0, shoulderWest ? 1 : 0,
         };
 
-        joyMessage = new(){
-            ["topic"] = "joy",
-            ["msgType"] = "sensor_msgs/msg/Joy",
-            ["data"] = {
-                ["axes"] = new JArray(axes),
-                ["button"] = new JArray(buttons)
+        joyMessage = new JObject
+        {
+            {"topic", "joy"},
+            {"msgType", "sensor_msgs/msg/Joy"},
+            {
+                "data", new JObject
+                {
+                    {"axes", new JArray(axes)},
+                    {"buttons", new JArray(buttons)},
+                }
             }
         };
+
         UdpController.inst.PublishMessage(joyMessage.ToString());
     }
 
