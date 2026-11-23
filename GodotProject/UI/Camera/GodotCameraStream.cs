@@ -116,13 +116,25 @@ public partial class GodotCameraStream : TextureRect
         // Configure pipeline (TODO: Once we get it on working on rover, just use fromJetson always )
         string pipelineDesc;
 
-        string rtpCaps = "application/x-rtp,media=(string)video,clock-rate=(int)90000,encoding-name=(string)RAW,sampling=(string)BGR,depth=(string)8,width=(string)640,height=(string)480,colorimetry=(string)SMPTE240M,payload=(int)96";
      
-        pipelineDesc = $"udpsrc port={camera.port} caps=\"{rtpCaps}\" ! " +
-            $"rtpvrawdepay ! " +
-            $"videoconvert ! " +
-            $"video/x-raw,format=RGB,width={Width},height={Height} ! " +
-            $"appsink name=sink emit-signals=true max-buffers=1 drop=true";
+        pipelineDesc = $"tcpclientsrc host=127.0.0.1 port={camera.port} ! " +
+            "application/x-rtp-stream,media=video,encoding-name=H265,clock-rate=90000 ! " +
+            "rtpstreamdepay ! " +
+            "application/x-rtp,media=video,encoding-name=H265,clock-rate=90000 ! " +
+            "rtpulpfecdec ! " +
+            "rtph265depay ! h265parse ! avdec_h265 ! " +
+            $"videoconvert ! video/x-raw,format=RGB,width={Width},height={Height} ! " +
+            "appsink name=sink emit-signals=true sync=false max-buffers=1 drop=true";
+        
+        
+        
+        // string rtpCaps = "application/x-rtp,media=(string)video,clock-rate=(int)90000,encoding-name=(string)RAW,sampling=(string)BGR,depth=(string)8,width=(string)640,height=(string)480,colorimetry=(string)SMPTE240M,payload=(int)96";
+        
+        // $"udpsrc port={camera.port} caps=\"{rtpCaps}\" ! " +
+        //     $"rtpvrawdepay ! " +
+        //     $"videoconvert ! " +
+        //     $"video/x-raw,format=RGB,width={Width},height={Height} ! " +
+        //     $"appsink name=sink emit-signals=true max-buffers=1 drop=true";
                 
         // $"udpsrc port={camera.port} caps=\"{rtpCaps}\" ! " +
         // //"rtpjitterbuffer latency=50 drop-on-latency=true ! " +
