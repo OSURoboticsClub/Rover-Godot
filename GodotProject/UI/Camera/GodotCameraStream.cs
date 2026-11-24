@@ -115,6 +115,11 @@ public partial class GodotCameraStream : TextureRect
             StopGStreamer();
         }
         GD.Print("Listening on port:" + camera.port);
+        
+        _image = Image.CreateEmpty(Width, Height, false, Image.Format.Rgb8);
+        _image.Resize((int)Size.X, (int)Size.Y, Image.Interpolation.Nearest);
+        _texture = ImageTexture.CreateFromImage(_image);
+
         // Configure pipeline (TODO: Once we get it on working on rover, just use fromJetson always )
         string pipelineDesc;
 
