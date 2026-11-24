@@ -117,7 +117,7 @@ public partial class GodotCameraStream : TextureRect
         string pipelineDesc;
 
      
-        pipelineDesc = $"tcpclientsrc host=127.0.0.1 port={camera.port} ! " +
+        pipelineDesc = $"tcpclientsrc host=192.168.1.11 port={camera.port} ! " +
             "application/x-rtp-stream,media=video,encoding-name=H265,clock-rate=90000 ! " +
             "rtpstreamdepay ! " +
             "application/x-rtp,media=video,encoding-name=H265,clock-rate=90000 ! " +
