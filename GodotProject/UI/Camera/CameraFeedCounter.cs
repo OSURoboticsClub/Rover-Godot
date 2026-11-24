@@ -25,6 +25,11 @@ public class CameraFeedCounter
         }
         return inst;
     }
+    private int cameraCount = 0;
+    public int getCameraFeedID()
+    {
+        return cameraCount++;
+    }
     
 
 }

@@ -34,6 +34,7 @@ public partial class GodotCameraStream : TextureRect
     private AppSink _appSink;
     public Image _image;
     public ImageTexture _texture;
+    private int feedID = 0;
     [Export] public Texture2D timeout_image { get; set; }
 
     [ExportCategory("Resolution")]
@@ -83,6 +84,7 @@ public partial class GodotCameraStream : TextureRect
         Texture = _texture;
 
         _frameBuffer = new byte[Width * Height * 3];
+        feedID = CameraFeedCounter.getInst().getCameraFeedID();
     }
     /// <summary>
     /// Check whether a timeout has occured
@@ -117,40 +119,20 @@ public partial class GodotCameraStream : TextureRect
         string pipelineDesc;
 
      
-        pipelineDesc = $"tcpclientsrc host=192.168.1.11 port={camera.port} ! " +
+        pipelineDesc = $"tcpclientsrc host=192.168.1.11 port={camera.port} ! " + //192.168.1.11
             "application/x-rtp-stream,media=video,encoding-name=H265,clock-rate=90000 ! " +
             "rtpstreamdepay ! " +
             "application/x-rtp,media=video,encoding-name=H265,clock-rate=90000 ! " +
             "rtpulpfecdec ! " +
             "rtph265depay ! h265parse ! avdec_h265 ! " +
             $"videoconvert ! video/x-raw,format=RGB,width={Width},height={Height} ! " +
-            "appsink name=sink emit-signals=true sync=false max-buffers=1 drop=true";
+            $"appsink name=sink{feedID} emit-signals=true sync=false max-buffers=1 drop=true";
         
-        
-        
-        // string rtpCaps = "application/x-rtp,media=(string)video,clock-rate=(int)90000,encoding-name=(string)RAW,sampling=(string)BGR,depth=(string)8,width=(string)640,height=(string)480,colorimetry=(string)SMPTE240M,payload=(int)96";
-        
-        // $"udpsrc port={camera.port} caps=\"{rtpCaps}\" ! " +
-        //     $"rtpvrawdepay ! " +
-        //     $"videoconvert ! " +
-        //     $"video/x-raw,format=RGB,width={Width},height={Height} ! " +
-        //     $"appsink name=sink emit-signals=true max-buffers=1 drop=true";
-                
-        // $"udpsrc port={camera.port} caps=\"{rtpCaps}\" ! " +
-        // //"rtpjitterbuffer latency=50 drop-on-latency=true ! " +
-        // //$"rtph265depay ! h265parse ! avdec_h265 ! videoconvert ! " +
-        // "rtpvrawdepay" +
-        // $"video/x-raw,format=RGB,width={Width},height={Height} ! " +
-        // $"appsink name=sink emit-signals=true sync=false max-buffers=1 drop=true";
-
-        // pipelineDesc = $"udpsrc port={camera.port} ! application/x-rtp,encoding-name=JPEG,payload=26 ! " +
-        // $"rtpjpegdepay ! jpegdec ! videoconvert ! video/x-raw,format=RGB,width={Width},height={Height} ! " +
-        // $"appsink name=sink emit-signals=true sync=false max-buffers=1 drop=true";
         
             
         _pipeline = (Pipeline)Parse.Launch(pipelineDesc);
 
-        Element sinkElement = _pipeline.GetByName("sink");
+        Element sinkElement = _pipeline.GetByName("sink" + feedID);
         _appSink = new AppSink(sinkElement.Handle);
         // Set it to call our function when we recieve a new gstreamer sampl
         _appSink.NewSample += OnNewSample;
